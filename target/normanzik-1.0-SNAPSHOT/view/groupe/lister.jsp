@@ -55,7 +55,8 @@
           <div class="card mt-4">
             <div class="card-body">
               <h4 class="mb-0">
-                <a href="/evenement/52/" class="text-decoration-none text-dark fw-bold mb-0">
+                  
+                <a href="../ServletGroupe/consulter?idGroupe=<% out.println(unGroupe.getId()); %>"" class="text-decoration-none text-dark fw-bold mb-0">
                   <% out.println(unGroupe.getNom()); %>
                 </a>
               </h4>                
