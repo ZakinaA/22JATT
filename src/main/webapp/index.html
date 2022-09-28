@@ -1,10 +1,93 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Start Page</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+    <link href="http://185.163.126.183/2JATT/libs/css/NormanZikStyle.css" rel="stylesheet">
+    <link href="http://185.163.126.183/2JATT/libs/css/bootstrap.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/e43d5fbf75.js" crossorigin="anonymous"></script>
+  </head>
+  <style>
+    .bgOrange2 {
+    background: #E14D2A;
+}
+  </style>
+  <body class="body">
+    <div class="card rounded-0 border-0 mb-0 SpaceText tipo" style="height: 3em;background-color: #FD841F; text-transform: uppercase;text-align: center;"><div style="margin-top: 3.5%;text-shadow: 3px 5px 0px rgb(0 0 0 / 10%);">Norman'Zik</div></div>
+    <nav class="navbar navbar-expand-lg bg-light shadow-sm">
+        <div class="container-fluid">
+          <button class="navbar-toggler border-0 w-100 rounded-0 text-dark" style="color: #000" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <i class="fa-solid fa-down-left-and-up-right-to-center"></i>
+        </button>
+          <div class="collapse navbar-collapse" id="navbarMain">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="index.html">Accueil</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="./ServletGroupe/lister">Les Groupes</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Les Festivales</a>
+              </li>
+            </ul>
+            <!--<div class="btn-group">
+              <button type="button" class="btn border-0 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                Accès organisation
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><button class="dropdown-item" type="button">Management des concerts</button></li>
+                <li><button class="dropdown-item" type="button">Management des festivales</button></li>
+                <li><button class="dropdown-item" type="button">Management des groupes</button></li>
+              </ul>
+            </div>-->
+            <button type="button" class="btn ml-2 btn-light border rounded-pill btnConnexion" data-bs-toggle="modal" data-bs-target="#exampleModal">Connexion</button>
+          </div>
+        </div>
+      </nav>
+
+      <footer>
+        Lorem Ipsum
+        </div>
+        <div class="container-fluid" style="width: 85%;bottom: 0;top: 1">
+          <h3 class="text-center mt-4">Nos partenaires</h3>
+          <div class="row mt-4">
+            <div class="col-md-3">
+              <div class="card bgOrange2 py-5">
+              </div>
+            </div>
+            <div class="col-md-3"><div class="card bgOrange2 py-5 border-0"></div></div>
+            <div class="col-md-3"><div class="card bgOrange2 py-5 border-0"></div></div>
+            <div class="col-md-3"><div class="card bgOrange2 py-5 border-0"></div></div>
+          </div>
+        </div>
+      </footer>
+
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-body">
+              <form>
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Adresse mail</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">Mot de passe</label>
+                  <input type="password" class="form-control" id="exampleInputPassword1">
+                </div>
+                <button type="submit" class="btn btn-primary">Me connecter</button>
+                <button type="submit" class="btn btn-light float-end">Inscription</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+  </body>
 </html>
