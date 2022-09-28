@@ -23,7 +23,7 @@
   </head>
 <body class="body">
       <body class="body">
-    <div class="card mb-0 SpaceText tipo rounded-0 border-0" style="font-size: 2em;height: 3em;background-color: #FD841F; text-transform: uppercase; "><div style="margin-top: 1.3%; padding-left: 3em;">Norman'Zik</div></div>
+    <div class="card mb-0 SpaceText tipo rounded-0 border-0" style="font-size: 2em;height: 3em;background-color: #FD841F; text-transform: uppercase; "><div style="margin-top: 1.3%; padding-left: 3em;"><img src="http://185.163.126.183/2JATT/libs/images/Logo_Normazk.png" width="60">Norman'Zik</div></div>
     <nav class="navbar navbar-expand-lg bg-light shadow-sm">
       <div class="container-fluid">
         <button class="navbar-toggler border-0 w-100 rounded-0 text-dark" style="color: #000" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -113,7 +113,8 @@
     </div>
 <br/>
 
-
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+  
 
 </body>
 </html>
