@@ -96,6 +96,16 @@ public class ServletMembre extends HttpServlet {
         
         System.out.println("servlermembre url="+url);
 
+        
+        if(url.equals("/normanzik/ServletMembre/lister"))
+        {
+            /*int idMembre = Integer.parseInt(request.getParameter("idMembre"));  
+            
+            Membre leMembre = DaoMembre.getLeMembre(connection, idMembre);
+
+            request.setAttribute("pMembre", leMembre);*/
+            this.getServletContext().getRequestDispatcher("/view/membre/lister.jsp" ).forward( request, response );
+        }
         if(url.equals("/normanzik/ServletMembre/consulter"))
         {
             int idMembre = Integer.parseInt(request.getParameter("idMembre"));  

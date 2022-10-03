@@ -110,6 +110,9 @@ public class ServletGroupe extends HttpServlet {
             Groupe leGroupe = DaoGroupe.getLeGroupe(connection, idGroupe);
             request.setAttribute("pGroupe", leGroupe);
             
+            Membre leMembreContact = DaoGroupe.getLeMembreContact(connection, idGroupe);
+            request.setAttribute("pMembreContact", leMembreContact);
+            
             ArrayList<Membre> lesMembres = DaoGroupe.getLesMembresGroupe(connection, idGroupe);
             request.setAttribute("pMembreGroupe", lesMembres);
             

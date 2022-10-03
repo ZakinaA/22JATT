@@ -3,8 +3,11 @@
 <%@page import="java.util.ArrayList"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@page import="model.Groupe"%>
+
 <%
+    String pageID = "consulterGroupe"; 
     Groupe unGroupe = (Groupe)request.getAttribute("pGroupe");
+    Membre leMembreContact = (Membre)request.getAttribute("pMembreContact");
     ArrayList<Titre> lesTitres = (ArrayList) request.getAttribute("pTitreGroupe");    
     ArrayList<Membre> lesMembresGroupe = (ArrayList) request.getAttribute("pMembreGroupe");    
 %>
@@ -23,32 +26,10 @@
   </head>
 <body class="body">
       <body class="body">
-    <div class="card mb-0 SpaceText tipo rounded-0 border-0" style="font-size: 2em;height: 3em;background-color: #FD841F; text-transform: uppercase; "><div style="margin-top: 1.3%; padding-left: 3em;"><img src="http://185.163.126.183/2JATT/libs/images/Logo_Normazk.png" width="60">Norman'Zik</div></div>
-    <nav class="navbar navbar-expand-lg bg-light shadow-sm">
-      <div class="container-fluid">
-        <button class="navbar-toggler border-0 w-100 rounded-0 text-dark" style="color: #000" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <i class="fa-solid fa-down-left-and-up-right-to-center"></i>
-      </button>
-        <div class="collapse navbar-collapse" id="navbarMain">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Accueil</a>
-            </li>
-          </ul>
-          <div class="btn-group">
-            <button type="button" class="btn border-0 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-              Accès organisation
-            </button>
-            <ul class="dropdown-menu dropdown-menu-end">
-              <li><button class="dropdown-item" type="button">Management des concerts</button></li>
-              <li><button class="dropdown-item" type="button">Management des festivales</button></li>
-              <li><button class="dropdown-item" type="button">Management des groupes</button></li>
-            </ul>
-          </div>
-          <!--<button type="button" class="btn ml-2 btn-light border rounded-pill btnConnexion" data-bs-toggle="modal" data-bs-target="#exampleModal">Connexion</button>-->
-        </div>
-      </div>
-    </nav>
+          
+
+    <%@ include file="../inclus/header.jsp" %>
+    <%@ include file="../inclus/menu.jsp" %>
     <div class="container-fluid" style="width: 85%;bottom: 0;top: 1">
         <div class="card card-body border-0 shadow-sm py-5 mt-4">
             <h1 class="mb-0" style="margin-left: 3%;"><% out.println(unGroupe.getNom()); %></h1>
@@ -62,7 +43,7 @@
                     </tr>
                     <tr>
                         <td>Membre Contact</td>
-                        <td><% out.println(unGroupe.getMembreContact().getPrenom()); %> <% out.println(unGroupe.getMembreContact().getNom()); %></td>
+                        <td><% out.println(leMembreContact.getPrenom()); %> <% out.println(leMembreContact.getNom()); %></td>
                     </tr>
                     <tr>
                         <td>Date de création</td>
@@ -112,8 +93,7 @@
 </table>
     </div>
 <br/>
-
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
+    <%@ include file="../inclus/footer.jsp" %>
   
 
 </body>

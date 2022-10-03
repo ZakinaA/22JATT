@@ -38,6 +38,10 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ServletMembre</servlet-name>
+        <url-pattern>/ServletMembre/lister</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletMembre</servlet-name>
         <url-pattern>/ServletMembre/ajouter</url-pattern>
     </servlet-mapping>
     <servlet-mapping>

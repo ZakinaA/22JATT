@@ -54,13 +54,29 @@ public class DaoGroupe {
                 leGenre.setId(rs.getInt("genre_musical.id"));
                 leGenre.setLibelle(rs.getString("genre_musical.libelle"));
                 
-                /*Membre leMembreContact = new Membre();
-                leMembreContact.setId(rs.getInt("membre.id"));
-                leMembreContact.setNom(rs.getString("membre.nom"));
-                leMembreContact.setPrenom(rs.getString("membre.prenom"));*/
+                
+                //preparation de la requete
+                requeteMembreGroupe=connection.prepareStatement("select * from membre where id = ?");
+                requeteMembreGroupe.setInt(1, rs.getInt("groupe.contactMembreID"));
+                //System.out.println("Requete" + requete);
+
+                //executer la requete
+                rsMembreGroupe=requeteMembreGroupe.executeQuery();
+                if (rsMembreGroupe.next()) {
+                    Membre leMembreContact = new Membre();
+                    leMembreContact.setId(rsMembreGroupe.getInt("membre.id"));
+                    leMembreContact.setNom(rsMembreGroupe.getString("membre.nom"));
+                    leMembreContact.setPrenom(rsMembreGroupe.getString("membre.prenom")); 
+                    leGroupe.setMembreContact(leMembreContact);
+                } else {
+                    Membre leMembreContact = new Membre();
+                    leMembreContact.setNom("Null");
+                    leMembreContact.setPrenom("Null"); 
+                    leGroupe.setMembreContact(leMembreContact);
+                }
                 
                 leGroupe.setGenre(leGenre);
-                //leGroupe.setMembreContact(leMembreContact);
+                
                 lesGroupes.add(leGroupe);
             }
         }
@@ -73,12 +89,11 @@ public class DaoGroupe {
     }
     
     public static Groupe getLeGroupe(Connection connection, int idGroupe){
-
         Groupe leGroupe = new Groupe();
         try
         {
             //preparation de la requete
-            requete=connection.prepareStatement("select * from groupe, genre_musical,membre where groupe.genreID = genre_musical.id  and groupe.id=? ");
+            requete=connection.prepareStatement("select * from groupe, genre_musical,membre where groupe.genreID = genre_musical.id  and groupe.id=?");
             requete.setInt(1, idGroupe);
             //System.out.println("Requete" + requete);
 
@@ -112,6 +127,31 @@ public class DaoGroupe {
             //out.println("Erreur lors de l’établissement de la connexion");
         }
         return leGroupe ;
+    }
+    
+    public static Membre getLeMembreContact(Connection connection, int idGroupe){
+        Membre leMembreContact = new Membre();
+        try
+        {   
+            //preparation de la requete
+            requete=connection.prepareStatement("select membre.nom,membre.prenom FROM membre, groupe WHERE membre.id = groupe.contactMembreID and groupe.id = ?");
+            requete.setInt(1, idGroupe);
+            
+            //executer la requete
+            rs=requete.executeQuery();
+
+            //On hydrate l'objet métier Groupe et sa relation Genre avec les résultats de la requête
+            if ( rs.next() ) {
+                leMembreContact.setPrenom(rs.getString("membre.prenom"));
+                leMembreContact.setNom(rs.getString("membre.nom"));                
+            }
+        }    
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+            //out.println("Erreur lors de l’établissement de la connexion");
+        }
+        return leMembreContact;
     }
 
     public static ArrayList<Titre> getLesTitresDuGroupe(Connection connection, int idGroupe) {
