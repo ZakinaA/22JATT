@@ -17,9 +17,9 @@ import model.Statut;
  */
 public class FormMembre {
     private String resultat;
-    private Map<String, String> erreurs      = new HashMap<String, String>(); 
+    private Map<String, String> erreurs = new HashMap<String, String>(); 
     
-        public String getResultat() {
+    public String getResultat() {
         return resultat;
     }
 
@@ -48,6 +48,12 @@ public class FormMembre {
         }
     }
     
+    private void validationMotDePasse( String MotDePasse, String verifMotDePasse ) throws Exception {
+        if (MotDePasse != verifMotDePasse) {
+            throw new Exception( "Le nom du membre doit contenir au moins 3 caractères." );
+        }
+    }
+    
     private void setErreur( String champ, String message ) {
         erreurs.put(champ, message );
     }
@@ -71,6 +77,8 @@ public class FormMembre {
         //récupération dans des variables des données saisies dans les champs de formulaire
         String nom = getDataForm( request, "nom" );
         String prenom = getDataForm( request, "prenom");
+        String motDePasse = getDataForm( request, "motdePasse");
+        String verifMotDePasse = getDataForm( request, "verifMotDePasse");
         int instrumentPrincipalID = Integer.parseInt(getDataForm( request, "instrumentPrincipalID" ));
         int statutID = Integer.parseInt(getDataForm( request, "statutID" ));
         try {
@@ -79,13 +87,21 @@ public class FormMembre {
             setErreur( "nom", e.getMessage() );
         }
         unMembre.setNom(nom);
+        
+        try {
+            validationNom( nom );
+        } catch ( Exception e ) {
+            setErreur( "nom", e.getMessage() );
+        }
+        unMembre.setNom(nom);
          
         try {
-            validationPrenom( prenom );
+            validationMotDePasse( motDePasse, verifMotDePasse );
         } catch ( Exception e ) {
-            setErreur( "dateCreation", e.getMessage() );
+            setErreur( "motDePasse", e.getMessage() );
         }
-        unMembre.setPrenom(prenom);
+        
+        //unMembre.setMotDePasse(motDePasse);
         
         if ( erreurs.isEmpty() ) {
             resultat = "Succès de l'ajout.";

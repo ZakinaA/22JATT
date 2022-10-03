@@ -34,12 +34,12 @@
                 <div class="mb-3">
                     <label for="prenomInput" class="form-label">Mot de passe : </label>
                     <input id="prenomInput" type="password" name="motdePasse"  size="70" maxlength="70" class="form-control">
-                    <span style="color: blue;">${form.erreurs['motdePasse']}</span>     
+                    <span style="color: blue;">${form.erreurs['motDePasse']}</span>     
                 </div>
                 <div class="mb-3">
                     <label for="prenomInput" class="form-label">Vérification du mot de passe : </label>
                     <input id="prenomInput" type="password" name="verifMotDePasse"  size="70" maxlength="70" class="form-control">
-                    <span style="color: blue;">${form.erreurs['verifMotDePasse']}</span>     
+                    <span style="color: blue;">${form.erreurs['motDePasse']}</span>     
                 </div>
                 <div class="mb-3">
                     <label for="genre" class="form-label">Instrument principal : </label>

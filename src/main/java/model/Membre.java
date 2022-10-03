@@ -13,18 +13,20 @@ public class Membre {
     private int id;
     private String nom;
     private String prenom;
+    private String motDePasse;
     private ArrayList<Groupe> lesGroupes;
     private Instrument instrumentPrincipal; // On récupère l'instrument principal du membre
     private Statut StatutMembre;
     
     public Membre() {
     }
-    public Membre(int id, String nom, String prenom, Instrument instrumentPrincipal, Statut StatutMembre) {
+    public Membre(int id, String nom, String prenom, Instrument instrumentPrincipal, Statut StatutMembre, String motDePasse) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.instrumentPrincipal = instrumentPrincipal;
         this.StatutMembre = StatutMembre;
+        this.motDePasse = motDePasse;
     }
 
     public int getId() {
@@ -49,6 +51,14 @@ public class Membre {
 
     public void setPrenom(String prenom) {
         this.prenom = prenom;
+    }
+    
+    public String getMotDePasse() {
+        return prenom;
+    }
+
+    public void setMotDePasse(String motDePasse) {
+        this.motDePasse = motDePasse;
     }
 
      public ArrayList<Groupe> getLesGroupes() {

@@ -23,24 +23,19 @@
 	transform: scale(1.053);
         margin-top: 1.7em;
         box-shadow: 0 1rem 1.7rem rgba(0, 0, 0, 0.055) !important;
-    }
-    
-    
-
-}
-  </style>
-    <div class="container-fluid" style="width: 85%;bottom: 0;top: 1">
+    } 
+    </style>
+    <div class="container-fluid mb-4" style="width: 85%;bottom: 0;top: 1">
         <div class="row">
         <%
-            for (Groupe unGroupe : lesGroupes) {
-            
+            for (Groupe unGroupe : lesGroupes) {            
         %>
         <div class="col-md-3">
           <div class="card mt-4 testCard">
             <div class="card-body">
                 <img src="https://raw.githubusercontent.com/ZakinaA/22JATT/c5777d15cccd206839c4e50a09539670f7c48441/placeholder_default.png" class="rounded img-fluid">
                 <h4 class="mt-2">                  
-                    <a href="../ServletGroupe/consulter?idGroupe=<% out.println(unGroupe.getId()); %>"" class="text-decoration-none text-dark fw-bold mb-0">
+                    <a href="../ServletGroupe/consulter?idGroupe=<% out.println(unGroupe.getId()); %>" class="text-decoration-none text-dark fw-bold mb-0">
                       <% out.println(unGroupe.getNom()); %>
                     </a>
                 </h4>             
@@ -80,7 +75,7 @@
                     </tbody>
                   </table>
                 </div>
-                <a href="#" class="btn mt-2 text-white w-100 btnHover" style="background: #FD841F;text-transform: uppercase; text-align: center">VOIR PLUS</a>          
+                <a href="../ServletGroupe/consulter?idGroupe=<% out.println(unGroupe.getId()); %>" class="btn mt-2 text-white w-100 btnHover" style="background: #FD841F;text-transform: uppercase; text-align: center">VOIR PLUS</a>          
                </div>
             </div>
         </div>  
