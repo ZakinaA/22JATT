@@ -3,7 +3,7 @@
     <head>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
-      <title>Norman'Zik <% if(pageName != "") { out.println(": "+pageName); } else { out.println("NULL"); } %></title>
+      <title>Norman'Zik <% if(pageName != "") { out.println(": "+pageName); } %></title>
       <link href="http://185.163.126.183/2JATT/libs/css/NormanZikStyle.css" rel="stylesheet">
       <link href="http://185.163.126.183/2JATT/libs/css/bootstrap.css" rel="stylesheet">
       <link rel="preconnect" href="https://fonts.googleapis.com">

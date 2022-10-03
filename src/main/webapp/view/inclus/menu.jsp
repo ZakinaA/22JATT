@@ -6,7 +6,7 @@
         <div class="collapse navbar-collapse" id="navbarMain">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                  <a class="nav-link <% if(pageID == "") { out.println("active"); } %>" aria-current="page" href="/normanzik/index.html" style="margin-left: 0.4em">Accueil</a>
+                  <a class="nav-link <% if(pageID == "") { out.println("active"); } %>" aria-current="page" href="/normanzik/ServletIndex/index" style="margin-left: 0.4em">Accueil</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link <% if(pageID == "listesGroupes") { out.println("active"); } %>" aria-current="page" href="/normanzik/ServletGroupe/lister">Les Groupes</a>
