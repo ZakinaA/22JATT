@@ -8,6 +8,7 @@
       <link href="http://185.163.126.183/2JATT/libs/css/bootstrap.css" rel="stylesheet">
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
       <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
       <script src="https://kit.fontawesome.com/e43d5fbf75.js" crossorigin="anonymous"></script>
     </head>
