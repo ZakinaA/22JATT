@@ -16,3 +16,11 @@ Liste des membres :
 Accès aux users stories : 
 
 **https://github.com/users/JLEGit/projects/4/views/1**
+
+**En cas de problème sur le commmit avec Visual Studio Code** : 
+*Renseigner ces informations dans le terminal de Visual Studio Code*
+
+```
+git config --global user.name "votreusernameGithub" 
+git config --global user.email "votremailducompteGithub"
+```

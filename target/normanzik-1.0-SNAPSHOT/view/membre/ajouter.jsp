@@ -9,29 +9,18 @@
 <%@page import="java.util.ArrayList"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%
+    String pageName = "Création d'un compte membre";
     String pageID = "inscriptionMembre"; 
 %>
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bootstrap demo</title>
-    <link href="http://185.163.126.183/2JATT/libs/css/NormanZikStyle.css" rel="stylesheet">
-    <link href="http://185.163.126.183/2JATT/libs/css/bootstrap.css" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/e43d5fbf75.js" crossorigin="anonymous"></script>
-  </head>
-<body class="body">        
+    
+    <%@ include file="../inclus/head.jsp" %>
     <%@ include file="../inclus/header.jsp" %>
     <%@ include file="../inclus/menu.jsp" %>
     <div class="container-fluid" style="width: 85%;bottom: 0;top: 1">
         <div class="card card-body mt-4 shadow-sm">
             
             <form class="form-inline" action="ajouter" method="POST">
-                <h3>Création d'un espace membre</h3>
+                <h3>Création d'un compte membre</h3>
                 <div class="mb-3">
                     <label for="nomInput" class="form-label">Nom : </label>
                     <input id="nomInput" type="text" name="nom"  class="form-control">
@@ -54,7 +43,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="genre" class="form-label">Instrument principal : </label>
-                    <select name="instrumentPrincipalID" class="form-select">
+                    <select id="instrumentPrincipalID" name="instrumentPrincipalID" class="form-select" onchange="selectInstrumentPrincipal()">
                     <%
                         ArrayList<Instrument> lesInstruments = (ArrayList)request.getAttribute("pLesInstruments");
                         for (int i=0; i<lesInstruments.size();i++){
@@ -62,6 +51,7 @@
                             out.println("<option value='" + ins.getId()+"'>" + ins.getLibelle()+"</option>" );
                         }
                     %>
+                    <option value="instrumentNotExist">Ajouter un instrument</option>
                     </select>
                 </div>
                 <div class="mb-3">                    
@@ -76,8 +66,30 @@
                         %>
                     </select>
                 </div>
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">Téleversement d'une image de profil</label>
+                    <input class="form-control" type="file" id="formFile">
+                </div>
                 <button type="submit" class="btn btn-light float-end">Valider mon inscription</button>  
             </form> 
-        </div>   
+                    
+                    
+
+                        
+                  
+        </div>
+        <!-- A SUPPRIMER AVANT PUSH EN PROD -->            
+        <script>
+            function selectInstrumentPrincipal() {
+                let optionSelected = $('#instrumentPrincipalID').find(":selected").val();                           
+                
+                if(optionSelected == "instrumentNotExist") {
+                    $("#modalBody").html('');
+                    $("#modalBody").append('<form class="form-inline" action="ajouter" method="POST"><div class="mt-2 mb-2"><label for="dateCreation" class="form-label">Intitule instrument : </label><input id="dateCreation"  type="text" class="form-control" name="dateCreation" size="10" maxlength="10"></div><button class="btn btn-light float-end">Créer</button></form>');
+                    $("#exampleModal").modal('show'); 
+                }
+            }
+        </script>           
+        <%@ include file="../inclus/footer.jsp" %>            
     </body>
 </html>
