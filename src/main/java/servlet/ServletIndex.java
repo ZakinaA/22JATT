@@ -123,7 +123,7 @@ public class ServletIndex extends HttpServlet {
             Connexion faireConnexion = DaoConnexion.getCompte(connection,laConnexion);
             
             if(faireConnexion != null) {
-                System.out.println("No erreur oui");
+                System.out.println("No erreur oui " + faireConnexion.getId());
                 this.getServletContext().getRequestDispatcher("/view/index/index.jsp" ).forward( request, response );
             }
         }
