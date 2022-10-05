@@ -34,13 +34,13 @@ public class FormConnexion {
     }
     
     private void validationLogin( String login ) throws Exception {
-        if (login.contains("@")) {
+        if (login.contains("@") == false) {
             throw new Exception( "Merci de saisir une adresse mail valide <i>adresse@domaine</i>" );
         }
     }
     
     private void validationPassword( String password ) throws Exception {
-        if (password != null) {
+        if (password == null) {
             throw new Exception( "Merci de saisir un mot de passe valide" );
         }
     }
