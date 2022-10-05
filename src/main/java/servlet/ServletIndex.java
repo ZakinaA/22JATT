@@ -99,6 +99,12 @@ public class ServletIndex extends HttpServlet {
         {
             this.getServletContext().getRequestDispatcher("/view/index/index.jsp" ).forward( request, response );
         }
+        
+        if(url.equals("/normanzik/ServletIndex/logout")){ 
+            HttpSession session = request.getSession();
+            session.invalidate();
+            this.getServletContext().getRequestDispatcher("/view/index/index.jsp" ).forward( request, response );          
+        }
     }
 
     /**
@@ -123,7 +129,8 @@ public class ServletIndex extends HttpServlet {
             Connexion faireConnexion = DaoConnexion.getCompte(connection,laConnexion);
             
             if(faireConnexion != null) {
-                System.out.println("No erreur oui " + faireConnexion.getId());
+                HttpSession session = request.getSession();
+                session.setAttribute("NormanzikAuthID", faireConnexion.getId());
                 this.getServletContext().getRequestDispatcher("/view/index/index.jsp" ).forward( request, response );
             }
         }

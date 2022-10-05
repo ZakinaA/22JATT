@@ -21,12 +21,14 @@
             <% if (session.getAttribute("NormanzikAuthID") != null) { // Permet de vérifier si l'utilisateur est connecté ou non %>
                 <div class="btn-group" style="margin-right: 0.7em">
                   <button type="button" class="btn border-0 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    Accès organisation <% out.print(session.getAttribute("username")); %>
+                    Accès organisation <% out.print(session.getAttribute("NormanzikAuthID")); %>
                   </button>
                   <ul class="dropdown-menu dropdown-menu-end">
                     <li><button class="dropdown-item" type="button">Management des concerts</button></li>
                     <li><button class="dropdown-item" type="button">Management des festivales</button></li>
                     <li><button class="dropdown-item" type="button">Management des groupes</button></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a href="/normanzik/ServletIndex/logout" class="dropdown-item">Déconnexion</a></li>
                   </ul>
                 </div>
             <% } else { %>

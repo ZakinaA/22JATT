@@ -57,6 +57,10 @@
         <url-pattern>/ServletIndex/index</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>ServletIndex</servlet-name>
+        <url-pattern>/ServletIndex/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ServletDispositif</servlet-name>
         <url-pattern>/ServletDispositif/lister</url-pattern>
     </servlet-mapping>
