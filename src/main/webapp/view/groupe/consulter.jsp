@@ -5,7 +5,7 @@
 <%@page import="model.Groupe"%>
 <%
     String pageName = "Liste des groupes";
-    String pageID = "consulterGroupe"; 
+    String pageID = "groupeSection"; 
     Groupe unGroupe = (Groupe)request.getAttribute("pGroupe");
     Membre leMembreContact = (Membre)request.getAttribute("pMembreContact");
     ArrayList<Titre> lesTitres = (ArrayList) request.getAttribute("pTitreGroupe");    

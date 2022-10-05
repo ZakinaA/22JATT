@@ -4,7 +4,7 @@
 <%
     int cardOrder = 0;
     String pageName = "Liste des groupes";
-    String pageID = "listesGroupes"; 
+    String pageID = "groupeSection"; 
     ArrayList<Groupe> lesGroupes = (ArrayList)request.getAttribute("pLesGroupes");    
     %>
     <%@ include file="../inclus/head.jsp" %>
