@@ -97,7 +97,6 @@ public class ServletGroupe extends HttpServlet {
 
         //Affichage de tous les groupes (en indiquant le libellé du genre musical)
         if(url.equals("/normanzik/ServletGroupe/lister")){
-             System.out.println("servlergroupe LISTER");
             ArrayList<Groupe> lesGroupes = DaoGroupe.getLesGroupes(connection);
             request.setAttribute("pLesGroupes", lesGroupes);
             this.getServletContext().getRequestDispatcher("/view/groupe/lister.jsp" ).forward( request, response );
@@ -159,6 +158,16 @@ public class ServletGroupe extends HttpServlet {
 
             if (groupeAjoute != null ){
                 request.setAttribute("pGroupe", groupeAjoute);
+                
+                Membre leMembreContact = DaoGroupe.getLeMembreContact(connection, groupeAjoute.getId());
+                request.setAttribute("pMembreContact", leMembreContact);
+                
+                ArrayList<Membre> lesMembres = DaoGroupe.getLesMembresGroupe(connection, groupeAjoute.getId());
+                request.setAttribute("pMembreGroupe", lesMembres);
+            
+                ArrayList<Titre> lesTitres = DaoGroupe.getLesTitresDuGroupe(connection, groupeAjoute.getId());
+                request.setAttribute("pTitreGroupe", lesTitres);
+                
                 this.getServletContext().getRequestDispatcher("/view/groupe/consulter.jsp" ).forward( request, response );
             }
             else

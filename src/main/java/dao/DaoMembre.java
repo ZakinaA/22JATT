@@ -8,7 +8,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import model.Membre;
+import model.Statut;
 
 /**
  *
@@ -90,5 +92,44 @@ public class DaoMembre {
             //out.println("Erreur lors de l’établissement de la connexion");
         }
         return leMembre ;
+    }    
+    
+    public static ArrayList<Membre> getLesMembres(Connection connection) {
+        ArrayList<Membre> lesMembres = new  ArrayList<Membre>();
+        try
+        {
+            //preparation de la requete
+            requete=connection.prepareStatement("select * from membre,  statut where statut.id = membre.statutID");
+            //System.out.println("Requete" + requete);
+
+            //executer la requete
+            rs=requete.executeQuery();
+
+            //On hydrate l'objet métier Groupe et sa relation Genre avec les résultats de la requête
+            while ( rs.next() ) {
+
+
+                Membre leMembre = new Membre();
+                leMembre.setId(rs.getInt("membre.id"));
+                leMembre.setNom(rs.getString("membre.nom"));
+                leMembre.setPrenom(rs.getString("membre.prenom"));
+                
+                Statut leStatut = new Statut();
+                leStatut.setId(rs.getInt("statut.id")); 
+                leStatut.setLibelleStatut(rs.getString("statut.libelle"));
+                
+                leMembre.setStatutMembre(leStatut);
+                
+                
+                
+                lesMembres.add(leMembre);
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+            //out.println("Erreur lors de l’établissement de la connexion");
+        }
+        return lesMembres ;
     }    
 }

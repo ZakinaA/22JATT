@@ -66,30 +66,14 @@
                         %>
                     </select>
                 </div>
+                    
                 <div class="mb-3">
                     <label for="formFile" class="form-label">Téleversement d'une image de profil</label>
                     <input class="form-control" type="file" id="formFile">
                 </div>
                 <button type="submit" class="btn btn-light float-end">Valider mon inscription</button>  
-            </form> 
-                    
-                    
-
-                        
-                  
-        </div>
-        <!-- A SUPPRIMER AVANT PUSH EN PROD -->            
-        <script>
-            function selectInstrumentPrincipal() {
-                let optionSelected = $('#instrumentPrincipalID').find(":selected").val();                           
-                
-                if(optionSelected == "instrumentNotExist") {
-                    $("#modalBody").html('');
-                    $("#modalBody").append('<form class="form-inline" action="ajouter" method="POST"><div class="mt-2 mb-2"><label for="dateCreation" class="form-label">Intitule instrument : </label><input id="dateCreation"  type="text" class="form-control" name="dateCreation" size="10" maxlength="10"></div><button class="btn btn-light float-end">Créer</button></form>');
-                    $("#exampleModal").modal('show'); 
-                }
-            }
-        </script>           
+            </form>                  
+        </div>    
+   
         <%@ include file="../inclus/footer.jsp" %>            
-    </body>
-</html>
+

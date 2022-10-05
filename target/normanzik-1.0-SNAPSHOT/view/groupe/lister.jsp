@@ -10,21 +10,6 @@
     <%@ include file="../inclus/head.jsp" %>
     <%@ include file="../inclus/header.jsp" %>
     <%@ include file="../inclus/menu.jsp" %>
-      <style>
-    .bgOrange2 {
-    background: #E14D2A;
-    }
-    .btnHover:hover {
-        font-weight: 900;
-    }
-    
-    .testCard:hover {
-	transition: 0.66s;
-	transform: scale(1.053);
-        margin-top: 1.7em;
-        box-shadow: 0 1rem 1.7rem rgba(0, 0, 0, 0.055) !important;
-    } 
-    </style>
     <div class="container-fluid mb-4" style="width: 85%;bottom: 0;top: 1">
         <div class="row">
         <%
@@ -84,7 +69,3 @@
         </div>
     </div>
     <%@ include file="../inclus/footer.jsp" %>
-
-
-</body>
-</html>

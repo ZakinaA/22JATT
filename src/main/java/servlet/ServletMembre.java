@@ -99,6 +99,8 @@ public class ServletMembre extends HttpServlet {
         
         if(url.equals("/normanzik/ServletMembre/lister"))
         {
+            ArrayList<Membre> lesMembres = DaoMembre.getLesMembres(connection);
+            request.setAttribute("pLesMembres", lesMembres);
             /*int idMembre = Integer.parseInt(request.getParameter("idMembre"));  
             
             Membre leMembre = DaoMembre.getLeMembre(connection, idMembre);

@@ -28,7 +28,7 @@
                 <li><button class="dropdown-item" type="button">Management des groupes</button></li>
               </ul>
             </div>-->
-            <button type="button" class="btn ml-2 btn-light border rounded-pill btnConnexion" data-bs-toggle="modal" data-bs-target="#exampleModal">Connexion</button>
+            <button type="button" class="btn ml-2 btn-light border rounded-pill btnConnexion" onclick="openModalConnexion()">Connexion</button>
         </div>
     </div>
 </nav>
