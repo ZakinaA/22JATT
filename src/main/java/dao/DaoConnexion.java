@@ -19,18 +19,18 @@ public class DaoConnexion {
     static PreparedStatement requete=null;
     static ResultSet rs=null;
     
-    public static Connexion getCompte (Connection connection, String login, String mdp){
-        Connexion uneConnexion = new Connexion();
+    public static Connexion getCompte (Connection connection, Connexion uneConnexion){
+        Connexion laConnexion = new Connexion();
         try
         {
             //preparation de la requete
             requete=connection.prepareStatement("SELECT id,gradeID FROM membre WHERE mail = ? && password = ?");
-            requete.setString(1, login);
-            requete.setString(2, mdp); // A mettre en md5 pour le futur
+            requete.setString(1, uneConnexion.getLoginMail());
+            requete.setString(2, uneConnexion.getLoginPassword()); // A mettre en md5 pour le futur
             rs=requete.executeQuery();  
             if ( rs.next() ) {
-                uneConnexion.setId(rs.getInt("id"));
-                uneConnexion.setGradeID(rs.getInt("gradeID"));
+                laConnexion.setId(rs.getInt("id"));
+                laConnexion.setGradeID(rs.getInt("gradeID"));
             }
         }
         catch (SQLException e)
@@ -38,7 +38,7 @@ public class DaoConnexion {
             e.printStackTrace();
             //out.println("Erreur lors de l’établissement de la connexion");
         }
-        return uneConnexion;
+        return laConnexion;
     }
 }
 

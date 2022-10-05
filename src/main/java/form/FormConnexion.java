@@ -61,8 +61,7 @@ public class FormConnexion {
     public Connexion uneConnexion(HttpServletRequest request) {
         Connexion uneConnexion = new Connexion();
         String loginMail = getDataForm( request, "loginMail" );
-        String loginPassword = getDataForm( request, "loginPassword");
-        
+        String loginPassword = getDataForm( request, "loginPassword");        
         
         try {
             validationLogin( loginMail );

@@ -17,7 +17,7 @@ public class TestDaoConnexion {
     
     public static void main(String[] args) throws SQLException { 
         Connection con = ConnexionBdd.ouvrirConnexion();
-        Connexion uneConnexion = DaoConnexion.getCompte(con,"test@live.fr", "testPassword");
+        Connexion uneConnexion = DaoConnexion.getCompte(con);
        
         System.out.print("test compte id :  "+uneConnexion.getId() +  " get grade : "+uneConnexion.getGradeID());
     }

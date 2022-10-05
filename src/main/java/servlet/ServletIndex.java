@@ -4,7 +4,9 @@
  */
 package servlet;
 
+import dao.DaoConnexion;
 import dao.Utilitaire;
+import form.FormConnexion;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -17,6 +19,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.Connexion;
 import static test.ConnexionBdd.connection;
 
 /**
@@ -110,8 +113,20 @@ public class ServletIndex extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        
-
+        FormConnexion form = new FormConnexion(); 
+        Connexion laConnexion = form.uneConnexion(request);
+        request.setAttribute("form", form);        
+        request.setAttribute("pConnexion", laConnexion);        
+        System.out.println("ServletPost");
+        if (form.getErreurs().isEmpty()){
+            System.out.println("No erreur");
+            Connexion faireConnexion = DaoConnexion.getCompte(connection,laConnexion);
+            
+            if(faireConnexion != null) {
+                System.out.println("No erreur oui");
+                this.getServletContext().getRequestDispatcher("/view/index/index.jsp" ).forward( request, response );
+            }
+        }
     }
 
     /**
