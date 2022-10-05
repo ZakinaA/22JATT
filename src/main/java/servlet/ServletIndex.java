@@ -16,6 +16,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import static test.ConnexionBdd.connection;
 
 /**
@@ -46,7 +47,7 @@ public class ServletIndex extends HttpServlet {
     static PreparedStatement requete=null;
     static ResultSet rs=null;
     
-     @Override
+    @Override
     public void init()
     {
         
@@ -89,6 +90,7 @@ public class ServletIndex extends HttpServlet {
                 String url = request.getRequestURI();
         
                 System.out.println("ServletIndex url="+url);
+                
 
         if(url.equals("/normanzik/ServletIndex/index"))
         {

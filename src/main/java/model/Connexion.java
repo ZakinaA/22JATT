@@ -4,39 +4,41 @@
  */
 package model;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author sio2
  */
-public class Connexion {
-    
+public class Connexion {    
     private int id;
-    private String nom_utilisateur;
+    private String mail_utilisateur;
     private String mdp;
     private String type;
-    private ArrayList<Pompier> lesPompiers;
+    private ArrayList<Membre> lesMembres;
 
-    public Compte(int id, String nom_utilisateur, String mdp, String type) {
-        this.id = id;
-        this.nom_utilisateur = nom_utilisateur;
+    
+    public Connexion(String mail_utilisateur, String mdp) {
+        //this.id = id;
+        this.mail_utilisateur = mail_utilisateur;
         this.mdp = mdp;
-        this.type = type;
+       // this.type = type;
     }
     
     
-    public ArrayList<Pompier> getLesPompiers() {
-        return lesPompiers;
+    public ArrayList<Membre> getLesMembres() {
+        return lesMembres;
     }
 
-    public void setLesPompiers(ArrayList<Pompier> lesPompiers) {
-        this.lesPompiers = lesPompiers;
+    public void setLesMembres(ArrayList<Membre> lesMembres) {
+        this.lesMembres = lesMembres;
     }
 
-    public void addUnPompier (Pompier pUnPompier) {
-        if (lesPompiers == null){
-            lesPompiers = new ArrayList<Pompier>();
+    public void addUnMembre (Membre pUnMembre) {
+        if (lesMembres == null){
+            lesMembres = new ArrayList<Membre>();
         }
-        lesPompiers.add(pUnPompier);
+        lesMembres.add(pUnMembre);
     }
 
     public String getType() {
@@ -48,8 +50,7 @@ public class Connexion {
     }
 
 
-    public Compte() {
-    }
+
 
     public int getId() {
         return id;
@@ -59,12 +60,12 @@ public class Connexion {
         this.id = id;
     }
 
-    public String getNom_utilisateur() {
-        return nom_utilisateur;
+    public String getMail_Utilisateur() {
+        return mail_utilisateur;
     }
 
-    public void setNom_utilisateur(String nom_utilisateur) {
-        this.nom_utilisateur = nom_utilisateur;
+    public void setMail_utilisateur(String mail_utilisateur) {
+        this.mail_utilisateur = mail_utilisateur;
     }
 
     public String getMdp() {
