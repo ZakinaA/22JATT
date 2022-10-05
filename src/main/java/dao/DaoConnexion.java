@@ -7,7 +7,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import model.Connexion;
+import java.sql.SQLException;
 
 /**
  *
@@ -18,17 +18,25 @@ public class DaoConnexion {
     static PreparedStatement requete=null;
     static ResultSet rs=null;
     
-    public static Connexion getCompte (Connection connection, String login, String mdp) {
-    int idGenere = -1;
+    public static int getCompte (Connection connection, String login, String mdp){
+    int NormanzikAuthID = -1;
         try
         {
-
-            // preparation de la requete
-            requete.SetString (1, login);
-            requete.setString (2, mdp);
-            //executer la requete
-            rs=requete.execute.Query();   
+            //preparation de la requete
+            requete=connection.prepareStatement("SELECT id FROM membre WHERE mail = ? && password = ?");
+            requete.setString(1, login);
+            requete.setString(2, mdp); // A mettre en md5 pour le futur
+            rs=requete.executeQuery();  
+            if ( rs.next() ) {
+                NormanzikAuthID = rs.getInt("id");
+            }
         }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+            //out.println("Erreur lors de l’établissement de la connexion");
+        }
+        return NormanzikAuthID;
     }
 }
 

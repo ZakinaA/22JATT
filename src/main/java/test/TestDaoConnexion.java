@@ -6,7 +6,7 @@ package test;
 
 import dao.DaoConnexion;
 import java.sql.Connection;
-import model.Connexion;
+import java.sql.SQLException;
 
 /**
  *
@@ -14,10 +14,10 @@ import model.Connexion;
  */
 public class TestDaoConnexion {
     
-    public static void main(String[] args) { 
+    public static void main(String[] args) throws SQLException { 
         Connection con = ConnexionBdd.ouvrirConnexion();
-        Connexion uneConnexion = DaoConnexion.getCompte("test@live.fr", "test");
+        int uneConnexion = DaoConnexion.getCompte(con,"test@live.fr", "testPassword");
        
-        System.out.print("test compte"+uneConnexion.getId());
+        System.out.print("test compte id :  "+uneConnexion);
     }
 }

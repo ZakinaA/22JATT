@@ -19,7 +19,7 @@
               </li>
             </ul>
             <% if (session.getAttribute("NormanzikAuthID") != null) { // Permet de vérifier si l'utilisateur est connecté ou non %>
-                <div class="btn-group">
+                <div class="btn-group" style="margin-right: 0.7em">
                   <button type="button" class="btn border-0 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                     Accès organisation <% out.print(session.getAttribute("username")); %>
                   </button>
@@ -30,7 +30,7 @@
                   </ul>
                 </div>
             <% } else { %>
-                <button type="button" class="btn ml-2 btn-light border rounded-pill btnConnexion" onclick="openModalConnexion()">Connexion</button>
+                <button type="button" class="btn ml-2 btn-light border rounded-pill btnConnexion" style="margin-right: 0.7em" onclick="openModalConnexion()">Connexion</button>
             <% } %>
         </div>
     
