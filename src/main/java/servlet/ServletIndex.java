@@ -123,14 +123,13 @@ public class ServletIndex extends HttpServlet {
         Connexion laConnexion = form.uneConnexion(request);
         request.setAttribute("form", form);        
         request.setAttribute("pConnexion", laConnexion);        
-        System.out.println("ServletPost");
         if (form.getErreurs().isEmpty()){
-            System.out.println("No erreur");
             Connexion faireConnexion = DaoConnexion.getCompte(connection,laConnexion);
             
             if(faireConnexion != null) {
                 HttpSession session = request.getSession();
                 session.setAttribute("NormanzikAuthID", faireConnexion.getId());
+                session.setAttribute("NormanzikGradeID", faireConnexion.getGradeID());
                 this.getServletContext().getRequestDispatcher("/view/index/index.jsp" ).forward( request, response );
             }
         }
