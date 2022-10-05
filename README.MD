@@ -24,3 +24,6 @@ Accès aux users stories :
 git config --global user.name "votreusernameGithub" 
 git config --global user.email "votremailducompteGithub"
 ```
+
+Accès au FIGMA : 
+**https://www.figma.com/file/SVQ5d5HtTHVNdyOkFVmkhp/Norman'zik**
