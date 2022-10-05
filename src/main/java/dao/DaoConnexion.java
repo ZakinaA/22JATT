@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import model.Connexion;
 
 /**
  *
@@ -18,17 +19,18 @@ public class DaoConnexion {
     static PreparedStatement requete=null;
     static ResultSet rs=null;
     
-    public static int getCompte (Connection connection, String login, String mdp){
-    int NormanzikAuthID = -1;
+    public static Connexion getCompte (Connection connection, String login, String mdp){
+        Connexion uneConnexion = new Connexion();
         try
         {
             //preparation de la requete
-            requete=connection.prepareStatement("SELECT id FROM membre WHERE mail = ? && password = ?");
+            requete=connection.prepareStatement("SELECT id,gradeID FROM membre WHERE mail = ? && password = ?");
             requete.setString(1, login);
             requete.setString(2, mdp); // A mettre en md5 pour le futur
             rs=requete.executeQuery();  
             if ( rs.next() ) {
-                NormanzikAuthID = rs.getInt("id");
+                uneConnexion.setId(rs.getInt("id"));
+                uneConnexion.setGradeID(rs.getInt("gradeID"));
             }
         }
         catch (SQLException e)
@@ -36,7 +38,7 @@ public class DaoConnexion {
             e.printStackTrace();
             //out.println("Erreur lors de l’établissement de la connexion");
         }
-        return NormanzikAuthID;
+        return uneConnexion;
     }
 }
 

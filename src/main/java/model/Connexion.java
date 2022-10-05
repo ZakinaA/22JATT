@@ -12,45 +12,17 @@ import java.util.ArrayList;
  */
 public class Connexion {    
     private int id;
-    private String mail_utilisateur;
-    private String mdp;
-    private String type;
-    private ArrayList<Membre> lesMembres;
+    private int gradeID; 
 
+    public Connexion() {
+    }
     
-    public Connexion(String mail_utilisateur, String mdp) {
-        //this.id = id;
-        this.mail_utilisateur = mail_utilisateur;
-        this.mdp = mdp;
+    public Connexion(int id, int gradeID) {
+        this.id = id;
+        this.gradeID = gradeID;
+
        // this.type = type;
     }
-    
-    
-    public ArrayList<Membre> getLesMembres() {
-        return lesMembres;
-    }
-
-    public void setLesMembres(ArrayList<Membre> lesMembres) {
-        this.lesMembres = lesMembres;
-    }
-
-    public void addUnMembre (Membre pUnMembre) {
-        if (lesMembres == null){
-            lesMembres = new ArrayList<Membre>();
-        }
-        lesMembres.add(pUnMembre);
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
-
-
 
     public int getId() {
         return id;
@@ -60,19 +32,12 @@ public class Connexion {
         this.id = id;
     }
 
-    public String getMail_Utilisateur() {
-        return mail_utilisateur;
+    public int getGradeID() {
+        return gradeID;
     }
 
-    public void setMail_utilisateur(String mail_utilisateur) {
-        this.mail_utilisateur = mail_utilisateur;
+    public void setGradeID(int gradeID) {
+        this.gradeID = gradeID;
     }
 
-    public String getMdp() {
-        return mdp;
-    }
-
-    public void setMdp(String mdp) {
-        this.mdp = mdp;
-    }
 }

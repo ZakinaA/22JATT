@@ -7,6 +7,7 @@ package test;
 import dao.DaoConnexion;
 import java.sql.Connection;
 import java.sql.SQLException;
+import model.Connexion;
 
 /**
  *
@@ -16,8 +17,8 @@ public class TestDaoConnexion {
     
     public static void main(String[] args) throws SQLException { 
         Connection con = ConnexionBdd.ouvrirConnexion();
-        int uneConnexion = DaoConnexion.getCompte(con,"test@live.fr", "testPassword");
+        Connexion uneConnexion = DaoConnexion.getCompte(con,"test@live.fr", "testPassword");
        
-        System.out.print("test compte id :  "+uneConnexion);
+        System.out.print("test compte id :  "+uneConnexion.getId() +  " get grade : "+uneConnexion.getGradeID());
     }
 }
