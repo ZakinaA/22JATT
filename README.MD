@@ -8,7 +8,7 @@ Liste des membres :
 
 ```
 1. JLE.GIT = Julien Lemoine
-2.Space-Exo = Arthur Farietti
+2. Space-Exo = Arthur Farietti
 3. ThomasGlbrt = Thomas Guilbert
 4. ThomasVerEecke = Thomas Ver Eecke
 ```
@@ -19,6 +19,10 @@ Accès aux users stories :
 
 **En cas de problème sur le commmit avec Visual Studio Code** : 
 *Renseigner ces informations dans le terminal de Visual Studio Code*
+
+*Figma**
+
+**https://www.figma.com/file/SVQ5d5HtTHVNdyOkFVmkhp/Norman'zik?node-id=0%3A1**
 
 ```
 git config --global user.name "votreusernameGithub" 
