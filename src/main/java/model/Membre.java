@@ -16,6 +16,7 @@ public class Membre {
     private String motDePasse;
     private String mail;
     private ArrayList<Groupe> lesGroupes;
+    private ArrayList<Instrument> lesInstruments;
     private Instrument instrumentPrincipal; // On récupère l'instrument principal du membre
     private Statut StatutMembre;
     
@@ -73,7 +74,8 @@ public class Membre {
 
      public ArrayList<Groupe> getLesGroupes() {
         return lesGroupes;
-    }
+    }    
+     
 
     public void setLesGroupes(ArrayList<Groupe> lesGroupes) {
         this.lesGroupes = lesGroupes;
@@ -102,6 +104,23 @@ public class Membre {
     public void setStatutMembre(Statut StatutMembre) {
         this.StatutMembre = StatutMembre;
     }
+
+    public ArrayList<Instrument> getLesInstruments() {
+        return lesInstruments;
+    }
+
+    public void setLesInstruments(ArrayList<Instrument> lesInstruments) {
+        this.lesInstruments = lesInstruments;
+    }
+    
+    public void addLesInstruments(Instrument unInstrument){
+        if (lesInstruments == null){
+            lesInstruments = new ArrayList<>();
+        }
+        lesInstruments.add(unInstrument);
+    }
+    
+    
 
     
     

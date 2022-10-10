@@ -1,3 +1,4 @@
+<%@page import="model.Instrument"%>
 <%@page import="model.Groupe"%>
 <%@page import="model.Membre"%>
 <%@page import="java.util.ArrayList"%>
@@ -26,15 +27,12 @@
     <br>
     <div class="container-fluid" style="width: 85%;bottom: 0;top: 1">
         <% if(showBtnModifProfil == 1) { %>
-        <div>
-                <button class="btn border-0 text-white float-end" style="background: #FD841F;text-transform: uppercase; text-align: center">Modifier mon profil</button>
-        </div>
-        <div style="clear:both;" class="mb-3"></div>
+            <div>
+                    <a href="/normanzik/ServletMembre/modifierprofil" class="btn border-0 text-white float-end" style="background: #FD841F;text-transform: uppercase; text-align: center">Modifier mon profil</a>
+            </div>
+            <div style="clear:both;" class="mb-3"></div>
         <% } %>
-
         <div class="card border-0 shadow-sm text-center rounded mb-3" style="background-color: #FD841F;">
-
-
             <div class="table-responsive rounded">
                 <table class="table table-borderless" style="background-color: #FD841F;">
                     <tbody>
@@ -95,13 +93,11 @@
                     <tbody>
                         <%
                         int instrumentOrder = 1;
-                        for (Groupe unGroupe : lesGroupesMembre) {
-                        
-                                
+                        for (Instrument unInstrument : leMembre.getLesInstruments()) {    
                         %>    
                         <tr>
-                            <td class="align-middle">Instrument <% out.print(instrumentOrder); %></td>
-                            <td class="align-middle"><% out.print(unGroupe.getDateCreation()); %></td>  
+                            <td class="align-middle">Instrument <% if(unInstrument.getEstInstrumentPrincipal() == 1) { out.print("<b>Principal</b>"); } else { out.print(instrumentOrder); } %></td>
+                            <td class="align-middle"><% out.print(unInstrument.getLibelle()); %></td>  
                         </tr>
                         <% instrumentOrder++; } %>
                     </tbody>

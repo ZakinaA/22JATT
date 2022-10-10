@@ -13,14 +13,16 @@ import java.util.ArrayList;
 public class Instrument {
     private ArrayList<Membre> lesMembres; // Liste les membres ayant cette instrument pour instrument principal
     private int id; 
-    private String libelle;    
+    private String libelle;  
+    private int estInstrumentPrincipal;
     
     public Instrument() {}
     
-    public Instrument(int id, String libelle, ArrayList<Membre> lesMembres) {
+    public Instrument(int id, String libelle, ArrayList<Membre> lesMembres, int estInstrumentPrincipal) {
         this.id = id;
         this.libelle = libelle;
         this.lesMembres = lesMembres;
+        this.estInstrumentPrincipal = estInstrumentPrincipal;
     }        
     
     
@@ -57,4 +59,14 @@ public class Instrument {
         
         lesMembres.add(unMembre);
     }
+
+    public int getEstInstrumentPrincipal() {
+        return estInstrumentPrincipal;
+    }
+
+    public void setEstInstrumentPrincipal(int estInstrumentPrincipal) {
+        this.estInstrumentPrincipal = estInstrumentPrincipal;
+    }
+     
+     
 }

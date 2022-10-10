@@ -23,7 +23,8 @@ public class DaoMembre {
     static PreparedStatement requete=null;
     static ResultSet rs=null;   
     static PreparedStatement requeteStatut=null;
-    
+    static PreparedStatement requeteInstrumentMembre=null;
+    static ResultSet rsInstrumentMembre=null;   
     
     public static Membre ajouterMembre(Connection connection, Membre unMembre){
         int idGenere = -1;
@@ -100,8 +101,8 @@ public class DaoMembre {
     }
     
     public static Membre getLeMembre(Connection connection, int idMembre){
-
         Membre leMembre = new Membre();
+        ArrayList<Instrument> lesInstruments = new  ArrayList<Instrument>();
         try
         {
             //preparation de la requete
@@ -124,7 +125,32 @@ public class DaoMembre {
                 
                 Instrument leInstrument = new Instrument();
                 leInstrument.setLibelle(rs.getString("instrumentLibelle"));                
-                leMembre.setInstrumentPrincipal(leInstrument);                
+                leInstrument.setEstInstrumentPrincipal(1);                
+                leMembre.setInstrumentPrincipal(leInstrument);    
+                lesInstruments.add(leInstrument);      
+                /*Instrument unInstrument = new Instrument();
+                unInstrument.setLibelle(rs.getString("instrumentLibelle"));      */ 
+                
+                    
+                
+                //preparation de la requete
+                requeteInstrumentMembre=connection.prepareStatement("SELECT DISTINCT libelle FROM jouer_groupe, instrument where instrument.id = instrumentID && jouer_groupe.membreID = ?");
+                requeteInstrumentMembre.setInt(1, idMembre);
+                System.out.println("Requete" + requeteInstrumentMembre);
+
+                //executer la requete
+                rsInstrumentMembre=requeteInstrumentMembre.executeQuery();
+
+                //On hydrate l'objet métier Groupe et sa relation Genre avec les résultats de la requête
+                while ( rsInstrumentMembre.next() ) {
+                    Instrument unInstrument = new Instrument();
+                    unInstrument.setLibelle(rsInstrumentMembre.getString("libelle"));                
+                    unInstrument.setEstInstrumentPrincipal(0);   
+                    lesInstruments.add(unInstrument);          
+                }
+                        
+                System.out.println(lesInstruments);
+                leMembre.setLesInstruments(lesInstruments);  
             }
         }
         catch (SQLException e)
