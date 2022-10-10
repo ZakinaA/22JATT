@@ -133,7 +133,7 @@ public class ServletMembre extends HttpServlet {
             this.getServletContext().getRequestDispatcher("/view/membre/ajouter.jsp" ).forward( request, response );
         }
         
-        if(url.equals("/normanzik/ServletMembre/modifier"))
+        if(url.equals("/normanzik/ServletMembre/modifierprofil"))
         {
             int idMembre = Integer.parseInt(request.getParameter("idMembre"));              
             Membre leMembre = DaoMembre.getLeMembre(connection, idMembre);

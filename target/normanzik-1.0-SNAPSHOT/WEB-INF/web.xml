@@ -51,10 +51,10 @@
     <servlet-mapping>
         <servlet-name>ServletMembre</servlet-name>
         <url-pattern>/ServletMembre/ajouter</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping>    
     <servlet-mapping>
         <servlet-name>ServletMembre</servlet-name>
-        <url-pattern>/ServletMembre/modifier</url-pattern>
+        <url-pattern>/ServletMembre/modifierprofil</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ServletIndex</servlet-name>
