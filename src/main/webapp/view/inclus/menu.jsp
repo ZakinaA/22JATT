@@ -18,11 +18,15 @@
                 <a class="nav-link <% if(pageID == "listesMembres") { out.println("active"); } %>" aria-current="page" href="/normanzik/ServletMembre/lister">Les Membres</a>
               </li>
             </ul>
-            <% if (session.getAttribute("NormanzikAuthID") != null) { // Permet de vérifier si l'utilisateur est connecté ou non %>
-                <% if(session.getAttribute("NormanzikGradeID") == "2") { %>
+            <% 
+                Integer NormanzikAuthID = (Integer) session.getAttribute("NormanzikAuthID"); 
+                if (NormanzikAuthID != null  && NormanzikAuthID != 0) { // Permet de vérifier si l'utilisateur est connecté ou non
+                    Integer NormanzikGradeID = (Integer) session.getAttribute("NormanzikGradeID"); 
+            %>
+                <% if(NormanzikGradeID == 2) { %>
                 <div class="btn-group" style="margin-right: 0.7em">
                   <button type="button" class="btn border-0 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    Accès organisation <% out.print(session.getAttribute("NormanzikAuthID")); %>
+                    Accès organisation
                   </button>
                   <ul class="dropdown-menu dropdown-menu-end">
                     <li><button class="dropdown-item" type="button">Management des concerts</button></li>
@@ -32,11 +36,11 @@
                     <li><a href="/normanzik/ServletIndex/logout" class="dropdown-item">Déconnexion</a></li>
                   </ul>
                 </div>
-                <% } else if(session.getAttribute("NormanzikGradeID") == "1") { %>
+                <% } else if(NormanzikGradeID == 1) { %>
                 <% } else { %>
                     <div class="btn-group" style="margin-right: 0.7em">
                       <button type="button" class="btn border-0 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        Voir le profil <% out.print(session.getAttribute("NormanzikGradeID")); %>
+                        Voir le profil
                       </button>
                       <ul class="dropdown-menu dropdown-menu-end">
                         <li><button class="dropdown-item" type="button">Consulter mes groupes</button></li>    

@@ -19,7 +19,7 @@ public class DaoConnexion {
     static PreparedStatement requete=null;
     static ResultSet rs=null;
     
-    public static Connexion getCompte (Connection connection, Connexion uneConnexion){
+    public static Connexion getCompte (Connection connection, Connexion uneConnexion){        
         Connexion laConnexion = new Connexion();
         try
         {
@@ -28,7 +28,7 @@ public class DaoConnexion {
             requete.setString(1, uneConnexion.getLoginMail());
             requete.setString(2, uneConnexion.getLoginPassword()); // A mettre en md5 pour le futur
             rs=requete.executeQuery();  
-            if ( rs.next() ) {
+            if ( rs.next() ) {                
                 laConnexion.setId(rs.getInt("id"));
                 laConnexion.setGradeID(rs.getInt("gradeID"));
             }
@@ -37,6 +37,7 @@ public class DaoConnexion {
         {
             e.printStackTrace();
             //out.println("Erreur lors de l’établissement de la connexion");
+            laConnexion = null;
         }
         return laConnexion;
     }
