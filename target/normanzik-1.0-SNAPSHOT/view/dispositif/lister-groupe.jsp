@@ -6,8 +6,9 @@
     int cardOrder = 0;
     String pageName = "Liste des groupes";
     String pageID = "listesGroupes"; 
-    ArrayList<Groupe> lesGroupes = (ArrayList)request.getAttribute("pLesGroupes");    
-    %>
+    ArrayList<Groupe> lesGroupesDispositif = (ArrayList)request.getAttribute("pLesGroupesDispositif");    
+%>
+
     <%@ include file="../inclus/head.jsp" %>
     <%@ include file="../inclus/header.jsp" %>
     <%@ include file="../inclus/menu.jsp" %>
@@ -33,9 +34,7 @@
   
     <div class="container-fluid" style="width: 85%;bottom: 0;top: 1">
         <div class="row">
-         <%
-    ArrayList<Groupe> lesGroupesDispositif = (ArrayList)request.getAttribute("pLesGroupesDispositif");    
-%>
+
               <%
              for (Groupe unGroupe : lesGroupesDispositif) {
         %>
@@ -45,51 +44,64 @@
                 <img src="https://raw.githubusercontent.com/ZakinaA/22JATT/c5777d15cccd206839c4e50a09539670f7c48441/placeholder_default.png" class="rounded img-fluid">
                 <h4 class="mt-2">                  
                     <a href="" class="text-decoration-none text-dark fw-bold mb-0">
-         <% out.println(unGroupe.getNom()); %>
+                <% out.println(unGroupe.getNom()); %>
                     </a>
                 </h4>             
-                <p class="mt-2">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                </p>
                 <div class="card bg-light mt-4 mb-2 shadow-none">
                   <table class="table table-borderless mb-0 ">
                     <tbody>
                       <tr class="mb-0 align-middle">
                         <td class="align-middle fw-bold" style="width: 60%">
-                          Membre Contact
+                         Identifiant 
                         </td>
                         <td class="align-middle fw-bold float-end text-end">
                           <h6 class="mb-0">
-                            ----
+                              <% out.println(unGroupe.getId()); %>
                           </h4>
                         </td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
-
-                <div class="card bg-light shadow-none">
+                <div class="card bg-light mt-4 mb-2 shadow-none">
                   <table class="table table-borderless mb-0 ">
                     <tbody>
                       <tr class="mb-0 align-middle">
                         <td class="align-middle fw-bold" style="width: 60%">
-                          Date de création
+                          Date de Création
                         </td>
                         <td class="align-middle fw-bold float-end text-end">
                           <h6 class="mb-0">
-                           ----
-                          </h6>
+                              <% out.println(unGroupe.getDateCreation()); %>
+                          </h4>
                         </td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
-                <a href="#" class="btn mt-2 text-white w-100 btnHover" style="background: #FD841F;text-transform: uppercase; text-align: center">VOIR PLUS</a>          
+                <div class="card bg-light mt-4 mb-2 shadow-none">
+                  <table class="table table-borderless mb-0 ">
+                    <tbody>
+                      <tr class="mb-0 align-middle">
+                        <td class="align-middle fw-bold" style="width: 60%">
+                          Lieu répétition                        </td>
+                        <td class="align-middle fw-bold float-end text-end">
+                          <h6 class="mb-0">
+                             <% out.println(unGroupe.getLieuRepetition()); %>
+                          </h4>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                
+          <a href="#" class="btn mt-2 text-white w-100 btnHover" style="background: #FD841F;text-transform: uppercase; text-align: center">VOIR PLUS</a>          
                </div>
             </div>
         </div>  
-        <% } %>
-            
+             
+     <% cardOrder++; } %>
+           
         </div>
     </div>
     <%@ include file="../inclus/footer.jsp" %>

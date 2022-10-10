@@ -51,34 +51,25 @@
         </div>
       </div>
     </nav>    
-
-            <tr>
-                
-                <div class="shadow-lg p-3 mb-5 bg-body rounded">Nom du dispositif</div>
    
-            </tr>
-            <%
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Nom</th>
+      <th scope="col">Annee</th>
+    </tr>
+  </thead>
+  <tbody>   
+    <%
                 for (Dispositif unDispositif : lesDispositif) { %>
-           
-                
-                
-                
-                <div class="d-grid gap-3">
-  <div class="p-2 bg-light border"><% out.println(unDispositif.getId()); %></div> 
-
-</div>
-
-
-   <% out.println("<tr><td><a href='../ServletDispositif/lister-groupe?idDispositif="+unDispositif.getId()+"'>");%>
-  </div>
-</div>
-
-
-  
-  <% }%>
-             
-    
-  
-
+    <tr>
+      <th scope="row"><% out.println(unDispositif.getId()); %> </th>
+      <td><% out.println("<a href='../ServletDispositif/lister-groupe?idDispositif="+unDispositif.getId()+"'>");%><% out.println(unDispositif.getLibelle()); %></td>
+      <td><% out.println(unDispositif.getAnnee()); %></td>
+    </tr>
+    <% }%>
+  </tbody>  
+</table>
     </body>
 </html>

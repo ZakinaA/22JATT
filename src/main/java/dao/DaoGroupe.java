@@ -275,6 +275,7 @@ public class DaoGroupe {
                 leGroupe.setId(rs.getInt("groupe.id"));
                 leGroupe.setNom(rs.getString("groupe.nom"));
                 leGroupe.setDateCreation(rs.getString("groupe.dateCreation"));
+                leGroupe.setLieuRepetition(rs.getString("groupe.lieuRepetition"));
 
                 Dispositif leDispositif = new Dispositif();
                 leDispositif.setId(rs.getInt("dispositif.id"));
