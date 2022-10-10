@@ -79,7 +79,7 @@ public class ServletConcert extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
         
          String url = request.getRequestURI();
         
@@ -87,6 +87,7 @@ public class ServletConcert extends HttpServlet {
 
         //Affichage de tous les groupes (en indiquant le libellé du genre musical)
         if(url.equals("/normanzik/ServletConcert/lister")){
+            System.out.println("Lui");
             
            
             this.getServletContext().getRequestDispatcher("/view/concert/lister.jsp" ).forward( request, response );

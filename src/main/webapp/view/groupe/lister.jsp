@@ -27,7 +27,7 @@
     
     
 
-}
+
   </style>
     <div class="container-fluid" style="width: 85%;bottom: 0;top: 1">
         <div class="row">
