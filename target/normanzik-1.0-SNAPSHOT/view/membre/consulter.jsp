@@ -4,16 +4,37 @@
 <%
     String pageName = "Modifier mon profil";
     String pageID = "listesMembres"; 
+    int showBtnModifProfil = 0;
     Membre leMembre = (Membre)request.getAttribute("pMembre");
-    ArrayList<Groupe> lesGroupesMembre = (ArrayList) request.getAttribute("pLesGroupesMembre");    
+    
+    ArrayList<Groupe> lesGroupesMembre = (ArrayList) request.getAttribute("pLesGroupesMembre");
+
+
 %>
     
     <%@ include file="../inclus/head.jsp" %>  
     <%@ include file="../inclus/header.jsp" %>
     <%@ include file="../inclus/menu.jsp" %>  
+    
+    <%
+        if (NormanzikAuthID != null  && NormanzikAuthID != 0) {
+            if(NormanzikAuthID == leMembre.getId()) {
+                showBtnModifProfil = 1;
+            }
+        }
+    %>
     <br>
     <div class="container-fluid" style="width: 85%;bottom: 0;top: 1">
+        <% if(showBtnModifProfil == 1) { %>
+        <div>
+                <button class="btn border-0 text-white float-end" style="background: #FD841F;text-transform: uppercase; text-align: center">Modifier mon profil</button>
+        </div>
+        <div style="clear:both;" class="mb-3"></div>
+        <% } %>
+
         <div class="card border-0 shadow-sm text-center rounded mb-3" style="background-color: #FD841F;">
+
+
             <div class="table-responsive rounded">
                 <table class="table table-borderless" style="background-color: #FD841F;">
                     <tbody>

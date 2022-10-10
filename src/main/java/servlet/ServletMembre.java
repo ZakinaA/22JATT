@@ -26,7 +26,7 @@ import model.Groupe;
 import model.Instrument;
 import model.Membre;
 import model.Statut;
-
+import javax.servlet.http.HttpSession;
 /**
  *
  * @author Zakina
@@ -110,10 +110,10 @@ public class ServletMembre extends HttpServlet {
         }
         if(url.equals("/normanzik/ServletMembre/consulter"))
         {
+           
             int idMembre = Integer.parseInt(request.getParameter("idMembre"));              
             Membre leMembre = DaoMembre.getLeMembre(connection, idMembre);
             request.setAttribute("pMembre", leMembre);
-            
             
             ArrayList<Groupe> lesGroupesMembre = DaoMembre.getLesGroupesMembre(connection, idMembre);
             request.setAttribute("pLesGroupesMembre", lesGroupesMembre);

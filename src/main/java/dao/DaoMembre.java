@@ -114,6 +114,7 @@ public class DaoMembre {
 
             //On hydrate l'objet métier Groupe et sa relation Genre avec les résultats de la requête
             if ( rs.next() ) {
+                leMembre.setId(idMembre);
                 leMembre.setNom(rs.getString("nom"));
                 leMembre.setPrenom(rs.getString("prenom"));
                 
