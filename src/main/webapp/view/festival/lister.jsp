@@ -1,10 +1,9 @@
 <%@page import="model.Festival"%>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@page import="java.util.ArrayList"%>
 <%
     String pageName = "Liste des festivals";
     String pageID = "listesFestivals"; 
-    ArrayList<Festival> lesFestivals = (ArrayList)request.getAttribute("pLesMembres");
+    ArrayList<Festival> lesFestivals = (ArrayList)request.getAttribute("pLesFestivals");
 %>
     <%@ include file="../inclus/head.jsp" %>  
     <%@ include file="../inclus/header.jsp" %>
@@ -14,13 +13,20 @@
             <div class="table-responsive">
                 <table class="table table-striped mb-0">
                     <tbody>
+                        <% 
+                            for (Festival unFestival : lesFestivals) {                 
+                        %>
                         <tr class="align-middle">
-                            <td class="align-middle">Test</td>
-                            <td class="align-middle">Test2</td>
+                            <td class="align-middle"><% out.println(unFestival.getNom()); %></td>
+                            <td class="align-middle"><% out.println(unFestival.getDateDebutFestival()); %></td>
+                            <td class="align-middle"><% out.println(unFestival.getDateFinFestival()); %></td>
+                            <td class="align-middle text-end"><a class="btn mt-2 text-white rounded-pill btn-sm" href="/normanzik/ServletFestival/consulter?idFestival=<% out.print(unFestival.getId()); %>" style="background: #FD841F;text-transform: uppercase; text-align: center">VOIR PLUS</a></td>
                         </tr>
+                        <% } %>
                     </tbody>
                 </table>  
             </div>
+            
         </div>
     </div>
     <%@ include file="../inclus/footer.jsp" %>

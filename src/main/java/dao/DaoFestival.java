@@ -32,12 +32,12 @@ public class DaoFestival {
             //executer la requete
             rs=requete.executeQuery();
 
-            //On hydrate l'objet métier Groupe et sa relation Genre avec les résultats de la requête
             while ( rs.next() ) {
                 Festival leFestival = new Festival();
-                leFestival.setId(rs.getInt("dispositif.id"));
-                leFestival.setDateFestival(rs.getString("dispositif.annee"));
-                leFestival.setNom(rs.getString("dispositif.libelle"));
+                leFestival.setId(rs.getInt("festival.idFestival"));
+                leFestival.setDateDebutFestival(rs.getString("festival.dateDebut"));
+                leFestival.setDateFinFestival(rs.getString("festival.dateFin"));
+                leFestival.setNom(rs.getString("festival.nom"));
                 
                 lesFestivals.add(leFestival);
             }

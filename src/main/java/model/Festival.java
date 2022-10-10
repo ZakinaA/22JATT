@@ -11,7 +11,8 @@ package model;
 public class Festival {
     private int id;
     private String nom;
-    private String dateFestival;
+    private String dateDebutFestival;
+    private String dateFinFestival;
 
     public Festival() {
     }
@@ -32,12 +33,21 @@ public class Festival {
         this.nom = nom;
     }
 
-    public String getDateFestival() {
-        return dateFestival;
+    public String getDateDebutFestival() {
+        return dateDebutFestival;
     }
 
-    public void setDateFestival(String dateFestival) {
-        this.dateFestival = dateFestival;
+    public void setDateDebutFestival(String dateDebutFestival) {
+        this.dateDebutFestival = dateDebutFestival;
     }
+
+    public String getDateFinFestival() {
+        return dateFinFestival;
+    }
+
+    public void setDateFinFestival(String dateFinFestival) {
+        this.dateFinFestival = dateFinFestival;
+    }
+
     
 }
