@@ -28,6 +28,10 @@
         <servlet-name>ServletDispositif</servlet-name>
         <servlet-class>servlet.ServletDispositif</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletFestival</servlet-name>
+        <servlet-class>servlet.ServletFestival</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletGroupe</servlet-name>
         <url-pattern>/ServletGroupe/consulter</url-pattern>
@@ -63,6 +67,10 @@
     <servlet-mapping>
         <servlet-name>ServletDispositif</servlet-name>
         <url-pattern>/ServletDispositif/lister-groupe</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletFestival</servlet-name>
+        <url-pattern>/ServletFestival/lister</url-pattern>
     </servlet-mapping>
     <session-config>        
         <session-timeout>
