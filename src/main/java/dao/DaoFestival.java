@@ -26,7 +26,7 @@ public class DaoFestival {
         try
         {
             //preparation de la requete
-            requete=connection.prepareStatement("select * from festival ORDER by  ASC");
+            requete=connection.prepareStatement("select * from festival");
             System.out.println("Requete" + requete);
 
             //executer la requete

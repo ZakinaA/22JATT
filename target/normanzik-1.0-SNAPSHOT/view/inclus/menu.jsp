@@ -12,7 +12,7 @@
                 <a class="nav-link <% if(pageID == "groupeSection") { out.println("active"); } %>" aria-current="page" href="/normanzik/ServletGroupe/lister">Les Groupes</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link <% if(pageID == "listesFestivales") { out.println("active"); } %>" aria-current="page" href="/normanzik/ServletFestival/lister">Les Festivals</a>
+                <a class="nav-link <% if(pageID == "listesFestivals") { out.println("active"); } %>" aria-current="page" href="/normanzik/ServletFestival/lister">Les Festivals</a>
               </li>              
               <li class="nav-item">
                 <a class="nav-link <% if(pageID == "listesMembres") { out.println("active"); } %>" aria-current="page" href="/normanzik/ServletMembre/lister">Les Membres</a>

@@ -80,7 +80,7 @@ public class ServletFestival extends HttpServlet {
          // récupération de l url saisie dans le navigateur
         String url = request.getRequestURI();
         
-        System.out.println("servlergroupe url="+url);
+        System.out.println("servlerfestival url="+url);
         
         if(url.equals("/normanzik/ServletFestival/lister")){
             ArrayList<Festival> lesFestivals = DaoFestival.getLesFestivals(connection);
@@ -103,25 +103,6 @@ public class ServletFestival extends HttpServlet {
     }
     
     
-    public void destroy(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException
-    {
-        try
-        {
-            //fermeture
-            System.out.println("Connexion fermée");
-        }
-        catch (Exception e)
-        {
-            e.printStackTrace();
-            System.out.println("Erreur lors de l’établissement de la connexion");
-        }
-        finally
-        {
-            //Utilitaire.fermerConnexion(rs);
-            //Utilitaire.fermerConnexion(requete);
-            //Utilitaire.fermerConnexion(connection);
-        }
-    }
 
     /**
      * Returns a short description of the servlet.
