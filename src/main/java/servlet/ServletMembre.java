@@ -112,8 +112,12 @@ public class ServletMembre extends HttpServlet {
         {
             int idMembre = Integer.parseInt(request.getParameter("idMembre"));              
             Membre leMembre = DaoMembre.getLeMembre(connection, idMembre);
-
             request.setAttribute("pMembre", leMembre);
+            
+            
+            ArrayList<Groupe> lesGroupesMembre = DaoMembre.getLesGroupesMembre(connection, idMembre);
+            request.setAttribute("pLesGroupesMembre", lesGroupesMembre);
+
             this.getServletContext().getRequestDispatcher("/view/membre/consulter.jsp" ).forward( request, response );
         }
         
@@ -133,8 +137,10 @@ public class ServletMembre extends HttpServlet {
         {
             int idMembre = Integer.parseInt(request.getParameter("idMembre"));              
             Membre leMembre = DaoMembre.getLeMembre(connection, idMembre);
-
             request.setAttribute("pMembre", leMembre);
+            
+            ArrayList<Groupe> lesGroupesMembre = DaoMembre.getLesGroupesMembre(connection, idMembre);
+            request.setAttribute("pLesGroupesMembre", lesGroupesMembre);
             this.getServletContext().getRequestDispatcher("/view/membre/modifier.jsp" ).forward( request, response );
         }
     }

@@ -1,9 +1,13 @@
+<%@page import="model.Groupe"%>
 <%@page import="model.Membre"%>
 <%@page import="java.util.ArrayList"%>
 <%
     String pageName = "Modifier mon profil";
     String pageID = "listesMembres"; 
-    Membre leMembre = (Membre)request.getAttribute("pMembre");%>
+    Membre leMembre = (Membre)request.getAttribute("pMembre");
+    ArrayList<Groupe> lesGroupesMembre = (ArrayList) request.getAttribute("pLesGroupesMembre");    
+%>
+    
     <%@ include file="../inclus/head.jsp" %>  
     <%@ include file="../inclus/header.jsp" %>
     <%@ include file="../inclus/menu.jsp" %>  
@@ -42,18 +46,48 @@
             </div>
         </div>
                         
-        <div class="card">
+        <h4>Les groupes de l'utilisateur : </h4>                
+                        
+        <div class="card mb-3">
             <div class="table-responsive rounded mb-0">
                 <table class="table table-borderless mb-0 table-striped">
                     <tbody>
+                        <%
+                        for (Groupe unGroupe : lesGroupesMembre) {
+                        %>    
                         <tr>
-                            <td class="align-middle">Nom du groupe</td>
-                            <td class="align-middle">Date de création</td>  
-                            <td class="align-middle text-end" style="width: 20%"><a class="btn text-white btnHover rounded-pill btn-sm" href="/normanzik/ServletMembre/consulter?idMembre=0" style="background: #FD841F;text-transform: uppercase; text-align: center">VOIR LE PROFIL du groupe</a></td>                    
+                            <td class="align-middle"><% out.print(unGroupe.getNom()); %></td>
+                            <td class="align-middle"><% out.print(unGroupe.getDateCreation()); %></td>  
+                            <td class="align-middle text-end" style="width: 20%"><a class="btn text-white btnHover rounded-pill btn-sm" href="/normanzik/ServletGroupe/consulter?idGroupe=<% out.print(unGroupe.getId()); %>" style="background: #FD841F;text-transform: uppercase; text-align: center">VOIR LE PROFIL du groupe</a></td>                    
                         </tr>
+                        <% } %>
                     </tbody>
                 </table>
             </div>
-        </div>                        
+        </div>    
+
+        <h4>Les instruments de l'utilisateur : </h4>   
+        
+        <div class="card mb-3">
+            <div class="table-responsive rounded mb-0">
+                <table class="table table-borderless mb-0 table-striped">
+                    <tbody>
+                        <%
+                        int instrumentOrder = 1;
+                        for (Groupe unGroupe : lesGroupesMembre) {
+                        
+                                
+                        %>    
+                        <tr>
+                            <td class="align-middle">Instrument <% out.print(instrumentOrder); %></td>
+                            <td class="align-middle"><% out.print(unGroupe.getDateCreation()); %></td>  
+                        </tr>
+                        <% instrumentOrder++; } %>
+                    </tbody>
+                </table>
+            </div>
+        </div>   
     </div>
+                    
+                             
     <%@ include file="../inclus/footer.jsp" %>

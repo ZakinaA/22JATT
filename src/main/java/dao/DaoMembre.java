@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import model.Groupe;
 import model.Instrument;
 import model.Membre;
 import model.Statut;
@@ -171,4 +172,39 @@ public class DaoMembre {
         }
         return lesMembres ;
     }    
+    
+    public static ArrayList<Groupe> getLesGroupesMembre(Connection connection, int idMembre) {
+        ArrayList<Groupe> lesGroupes = new  ArrayList<Groupe>();
+        try
+        {
+            //preparation de la requete
+            requete=connection.prepareStatement("SELECT groupe.id, groupe.nom as groupeNom, groupe.dateCreation as dateCreationGroupe FROM groupe_membres, groupe where groupe.id = groupe_membres.groupeID && groupe_membres.membreID = ?");
+            requete.setInt(1, idMembre);
+            //System.out.println("Requete" + requete);
+
+            //executer la requete
+            rs=requete.executeQuery();
+
+            //On hydrate l'objet métier Groupe et sa relation Genre avec les résultats de la requête
+            while ( rs.next() ) {
+
+
+                Groupe leGroupe = new Groupe();
+                leGroupe.setId(rs.getInt("groupe.id"));
+                leGroupe.setNom(rs.getString("groupeNom"));
+                leGroupe.setDateCreation(rs.getString("dateCreationGroupe"));
+
+
+                
+                lesGroupes.add(leGroupe);
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+            //out.println("Erreur lors de l’établissement de la connexion");
+        }
+        return lesGroupes ;
+    }
+    
 }
