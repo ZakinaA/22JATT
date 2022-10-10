@@ -110,8 +110,7 @@ public class ServletMembre extends HttpServlet {
         }
         if(url.equals("/normanzik/ServletMembre/consulter"))
         {
-            int idMembre = Integer.parseInt(request.getParameter("idMembre"));  
-            
+            int idMembre = Integer.parseInt(request.getParameter("idMembre"));              
             Membre leMembre = DaoMembre.getLeMembre(connection, idMembre);
 
             request.setAttribute("pMembre", leMembre);
@@ -128,6 +127,15 @@ public class ServletMembre extends HttpServlet {
             ArrayList<Statut> lesStatuts = DaoAdmin.getLesStatuts(connection);
             request.setAttribute("pLesStatuts", lesStatuts);
             this.getServletContext().getRequestDispatcher("/view/membre/ajouter.jsp" ).forward( request, response );
+        }
+        
+        if(url.equals("/normanzik/ServletMembre/modifier"))
+        {
+            int idMembre = Integer.parseInt(request.getParameter("idMembre"));              
+            Membre leMembre = DaoMembre.getLeMembre(connection, idMembre);
+
+            request.setAttribute("pMembre", leMembre);
+            this.getServletContext().getRequestDispatcher("/view/membre/modifier.jsp" ).forward( request, response );
         }
     }
 

@@ -104,7 +104,7 @@ public class DaoMembre {
         try
         {
             //preparation de la requete
-            requete=connection.prepareStatement("select nom,prenom, instrumentPrincipalID from membre where membre.id = ?");
+            requete=connection.prepareStatement("SELECT nom,prenom, instrumentPrincipalID,statut.libelle as statutLibelle, instrument.libelle as instrumentLibelle FROM membre,statut, instrument WHERE statut.id = membre.statutID && instrument.id = membre.instrumentPrincipalID && membre.id = ?");
             requete.setInt(1, idMembre);
             //System.out.println("Requete" + requete);
 
@@ -115,6 +115,14 @@ public class DaoMembre {
             if ( rs.next() ) {
                 leMembre.setNom(rs.getString("nom"));
                 leMembre.setPrenom(rs.getString("prenom"));
+                
+                Statut leStatut = new Statut();
+                leStatut.setLibelleStatut(rs.getString("statutLibelle"));                
+                leMembre.setStatutMembre(leStatut);
+                
+                Instrument leInstrument = new Instrument();
+                leInstrument.setLibelle(rs.getString("instrumentLibelle"));                
+                leMembre.setInstrumentPrincipal(leInstrument);                
             }
         }
         catch (SQLException e)

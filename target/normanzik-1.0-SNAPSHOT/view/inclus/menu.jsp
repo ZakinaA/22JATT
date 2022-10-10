@@ -33,7 +33,7 @@
                     <li><button class="dropdown-item" type="button">Management des festivales</button></li>
                     <li><button class="dropdown-item" type="button">Management des groupes</button></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a href="/normanzik/ServletIndex/logout" class="dropdown-item">Mon profil</a></li>
+                    <li><a href="/normanzik/ServletMembre/consulter?idMembre=<% out.println(NormanzikAuthID); %>" class="dropdown-item">Mon profil</a></li>
                     <li><a href="/normanzik/ServletIndex/logout" class="dropdown-item">Déconnexion</a></li>
                   </ul>
                 </div>
@@ -46,7 +46,7 @@
                       <ul class="dropdown-menu dropdown-menu-end">
                         <li><button class="dropdown-item" type="button">Consulter mes groupes</button></li>    
                         <li><hr class="dropdown-divider"></li>
-                        <li><a href="/normanzik/ServletIndex/logout" class="dropdown-item">Mon profil</a></li>
+                        <li><a href="/normanzik/ServletMembre/consulter?idMembre=<% out.println(NormanzikAuthID); %>" class="dropdown-item">Mon profil</a></li>
                         <li><a href="/normanzik/ServletIndex/logout" class="dropdown-item">Déconnexion</a></li>
                       </ul>
                     </div>

@@ -9,8 +9,8 @@
     <%@ include file="../inclus/header.jsp" %>
     <%@ include file="../inclus/menu.jsp" %>     
     <div class="container-fluid" style="width: 85%;bottom: 0;top: 1">
-        <div class="card mt-4 shadow-sm"> 
-            <div class="table-responsive">
+        <div class="card mt-4 shadow-sm mb-0"> 
+            <div class="table-responsive mb-0">
                 <table class="table table-striped mb-0">
                     <tbody>
                         <%
