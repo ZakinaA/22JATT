@@ -20,6 +20,10 @@
         <servlet-name>ServletDispositif</servlet-name>
         <servlet-class>servlet.ServletDispositif</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletConcert</servlet-name>
+        <servlet-class>servlet.ServletConcert</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletGroupe</servlet-name>
         <url-pattern>/ServletGroupe/consulter</url-pattern>
@@ -45,12 +49,20 @@
         <url-pattern>/ServletMembre/ajouter</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>ServletMembre</servlet-name>
+        <url-pattern>/ServletMembre/modifier</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ServletDispositif</servlet-name>
         <url-pattern>/ServletDispositif/lister</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ServletDispositif</servlet-name>
         <url-pattern>/ServletDispositif/lister-groupe</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletConcert</servlet-name>
+        <url-pattern>/ServletConcert/lister</url-pattern>
     </servlet-mapping>
     <session-config>        
         <session-timeout>

@@ -127,6 +127,14 @@ public class ServletMembre extends HttpServlet {
             request.setAttribute("pLesStatuts", lesStatuts);
             this.getServletContext().getRequestDispatcher("/view/membre/ajouter.jsp" ).forward( request, response );
         }
+        
+         if(url.equals("/normanzik/ServletMembre/modifier"))
+        {
+           this.getServletContext().getRequestDispatcher("/view/membre/modifier.jsp" ).forward( request, response );
+           
+        }
+        
+        
     }
 
     /**
