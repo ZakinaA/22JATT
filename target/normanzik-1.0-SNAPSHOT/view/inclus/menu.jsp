@@ -19,7 +19,7 @@
               </li>
             </ul>
             <% if (session.getAttribute("NormanzikAuthID") != null) { // Permet de vérifier si l'utilisateur est connecté ou non %>
-                <% if(session.getAttribute("NormanzikGradeID" ) == "2") { %>
+                <% if(session.getAttribute("NormanzikGradeID") == "2") { %>
                 <div class="btn-group" style="margin-right: 0.7em">
                   <button type="button" class="btn border-0 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                     Accès organisation <% out.print(session.getAttribute("NormanzikAuthID")); %>
@@ -32,7 +32,7 @@
                     <li><a href="/normanzik/ServletIndex/logout" class="dropdown-item">Déconnexion</a></li>
                   </ul>
                 </div>
-                <% } else if(session.getAttribute("NormanzikGradeID" ) == "1") { %>
+                <% } else if(session.getAttribute("NormanzikGradeID") == "1") { %>
                 <% } else { %>
                     <div class="btn-group" style="margin-right: 0.7em">
                       <button type="button" class="btn border-0 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">

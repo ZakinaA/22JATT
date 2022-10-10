@@ -164,19 +164,21 @@ public class ServletMembre extends HttpServlet {
             else
             {
                 // Cas où l'insertion en bdd a échoué
-                //On renvoie vers le formulaire
-               /* ArrayList<Genre> lesGenres = DaoAdmin.getLesGenres(connection);
-                request.setAttribute("pLesGenres", lesGenres);
-                System.out.println("le groupe est null en bdd- echec en bdd");*/
+                ArrayList<Instrument> lesInstruments = DaoInstrument.getLesInstruments(connection);
+                request.setAttribute("pLesInstruments", lesInstruments);
+            
+                ArrayList<Statut> lesStatuts = DaoAdmin.getLesStatuts(connection);
+                request.setAttribute("pLesStatuts", lesStatuts);
                 this.getServletContext().getRequestDispatcher("/view/membre/ajouter.jsp" ).forward( request, response );
             }
         }
         else
         {
-
-            // il y a des erreurs de saisie. On réaffiche le formulaire avec des messages d'erreurs
             ArrayList<Instrument> lesInstruments = DaoInstrument.getLesInstruments(connection);
             request.setAttribute("pLesInstruments", lesInstruments);
+            
+            ArrayList<Statut> lesStatuts = DaoAdmin.getLesStatuts(connection);
+            request.setAttribute("pLesStatuts", lesStatuts);
             this.getServletContext().getRequestDispatcher("/view/membre/ajouter.jsp" ).forward( request, response );
         }
 
