@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import model.Instrument;
 import model.Membre;
 import model.Statut;
 
@@ -31,14 +32,41 @@ public class DaoMembre {
             // gpe_id (clé primaire de la table groupe) est en auto_increment,donc on ne renseigne pas cette valeur
             // le paramètre RETURN_GENERATED_KEYS est ajouté à la requête afin de pouvoir récupérer l'id généré par la bdd (voir ci-dessous)
             // supprimer ce paramètre en cas de requête sans auto_increment.
-            requete=connection.prepareStatement("INSERT INTO membre ( nom, prenom, instrumentPrincipalID, statutID, mail, password)\n" +
-                    "VALUES (?,?,?,?, ?, ?)", requete.RETURN_GENERATED_KEYS );
-            requete.setString(1, unMembre.getNom());
-            requete.setString(2, unMembre.getPrenom());
-            requete.setInt(3, unMembre.getInstrumentPrincipal().getId());
-            requete.setInt(4, unMembre.getStatutMembre().getId());            
-            requete.setString(5, unMembre.getMail());  
-            requete.setString(6, unMembre.getMotDePasse());  
+            if(unMembre.getInstrumentPrincipal().getId() == -1) {
+                int idInstrumentGenere = -1;
+                
+                requete=connection.prepareStatement("INSERT INTO instrument (libelle)\n" +
+                    "VALUES (?)", requete.RETURN_GENERATED_KEYS );
+                requete.setString(1, unMembre.getInstrumentPrincipal().getLibelle());
+                int resultatRequete = requete.executeUpdate();
+                // Récupération de id auto-généré par la bdd dans la table groupe
+                rs = requete.getGeneratedKeys();
+                if ( rs.next() ) {
+                    idInstrumentGenere = rs.getInt( 1 );
+                
+                
+                    requete=connection.prepareStatement("INSERT INTO membre ( nom, prenom, instrumentPrincipalID, statutID, mail, password)\n" +
+                            "VALUES (?,?,?,?, ?, ?)", requete.RETURN_GENERATED_KEYS );
+                    requete.setString(1, unMembre.getNom());
+                    requete.setString(2, unMembre.getPrenom());
+                    requete.setInt(3, idInstrumentGenere);
+                    requete.setInt(4, unMembre.getStatutMembre().getId());            
+                    requete.setString(5, unMembre.getMail());  
+                    requete.setString(6, unMembre.getMotDePasse());  
+                }
+                
+            } else {
+                requete=connection.prepareStatement("INSERT INTO membre ( nom, prenom, instrumentPrincipalID, statutID, mail, password)\n" +
+                        "VALUES (?,?,?,?, ?, ?)", requete.RETURN_GENERATED_KEYS );
+                requete.setString(1, unMembre.getNom());
+                requete.setString(2, unMembre.getPrenom());
+                requete.setInt(3, unMembre.getInstrumentPrincipal().getId());
+                requete.setInt(4, unMembre.getStatutMembre().getId());            
+                requete.setString(5, unMembre.getMail());  
+                requete.setString(6, unMembre.getMotDePasse());                  
+            }   
+                
+
             System.out.println("requeteInsertion=" + requete);
             
             

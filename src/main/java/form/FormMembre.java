@@ -151,6 +151,10 @@ public class FormMembre {
 
         Instrument leInstrumentPrincipal = new Instrument();
         leInstrumentPrincipal.setId(instrumentPrincipalID);
+        if(instrumentPrincipalID == -1) {
+            String nomInstrumentAjout = getDataForm( request, "nomInstrumentAjout");
+            leInstrumentPrincipal.setLibelle(nomInstrumentAjout);
+        }
         unMembre.setInstrumentPrincipal(leInstrumentPrincipal);
         
         Statut leStatut = new Statut();

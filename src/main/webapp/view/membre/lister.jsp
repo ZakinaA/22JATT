@@ -20,7 +20,7 @@
                         <tr class="align-middle">
                             <td class="align-middle"><% out.print(firstName); %> <% out.print(unMembre.getPrenom()); %></td>
                             <td class="align-middle"><% out.println(unMembre.getStatutMembre().getLibelleStatut()); %></td>
-                            <td class="align-middle text-end"><a class="btn mt-2 text-white btnHover rounded-pill btn-sm" href="/normanzik/ServletMembre/consulter?idMembre=<% out.print(unMembre.getId()); %>" style="background: #FD841F;text-transform: uppercase; text-align: center">VOIR LE PROFIL</a></td>
+                            <td class="align-middle text-end"><a class="btn text-white btnHover rounded-pill btn-sm" href="/normanzik/ServletMembre/consulter?idMembre=<% out.print(unMembre.getId()); %>" style="background: #FD841F;text-transform: uppercase; text-align: center">VOIR LE PROFIL</a></td>
                         </tr>
                         <% } %>
                     </tbody>

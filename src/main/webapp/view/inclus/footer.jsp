@@ -24,8 +24,9 @@
     };
     
     function addInstrument() {
+        $('#nomInstrumentAjoutInput').val($('#nomInstrumentAjout').val());
         $("#openModal").modal('hide'); 
-        $('#instrumentPrincipalID').append('<option value="add" selected>'+$('#nomInstrumentAjout').val()+'</option>');        
+        $('#instrumentPrincipalID').append('<option value="-1" selected>'+$('#nomInstrumentAjout').val()+'</option>');        
     };
     
     function verifPasswordInput() {
