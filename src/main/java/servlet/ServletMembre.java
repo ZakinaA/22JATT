@@ -141,6 +141,10 @@ public class ServletMembre extends HttpServlet {
             
             ArrayList<Groupe> lesGroupesMembre = DaoMembre.getLesGroupesMembre(connection, idMembre);
             request.setAttribute("pLesGroupesMembre", lesGroupesMembre);
+            
+            ArrayList<Instrument> lesInstruments = DaoInstrument.getLesInstruments(connection);
+            request.setAttribute("pLesInstruments", lesInstruments);
+            
             this.getServletContext().getRequestDispatcher("/view/membre/modifier.jsp" ).forward( request, response );
         }
     }

@@ -1,3 +1,4 @@
+<%@page import="model.Instrument"%>
 <%@page import="model.Membre"%>
 <%@page import="java.util.ArrayList"%>
 <%
@@ -29,7 +30,7 @@
                         <div class="col-sm-10">
                             <input type="text" class="form-control" id="inputPassword" value="<% out.println(leMembre.getMail()); %>">
                         </div>
-                    </div>
+                    </div>     
                     <div class="mb-3 row">
                         <label for="inputPassword" class="col-sm-2 col-form-label">Statut</label>
                         <div class="col-sm-10">
@@ -52,25 +53,47 @@
                         <table class="table table-striped mb-0">
                             <tbody>
                                 <tr>
-                                    <td class="align-middle">Lorem Ipsum</td>
-                                    <td class="align-middle"><select class="form-select"><option value="">test</option></select></td>
-                                    <td class="align-middle text-end"><button class="btn btn-success btn-sm">+ Ajouter</button></td>
+                                    <td class="align-middle" style="width: 40%">Ajouter un instrument</td>
+                                    <td class="align-middle">
+                                        <select class="form-select">
+                                            
+                                            <%
+                                            ArrayList<Instrument> lesInstruments = (ArrayList)request.getAttribute("pLesInstruments");
+                                            for (int i=0; i<lesInstruments.size();i++){
+                                                Instrument ins = lesInstruments.get(i);
+                                                out.println("<option value='" + ins.getId()+"'>" + ins.getLibelle()+"</option>" );
+                                            }
+                                            %>
+                                            <option value="">test</option>
+                                        </select>
+                                    </td>
+                                    <td class="align-middle text-end"><button class="btn btn-success btn-sm" onclick="ajoutInstrumentFunc()">+ Ajouter</button></td>
                                 </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="card mb-3">
+                    <div class="table-responsive">
+                        <table class="table table-striped mb-0">
+                            <tbody>        
+                                <%
+                                int instrumentOrder = 1;
+                                for (Instrument unInstrument : leMembre.getLesInstruments()) {    
+                                %>    
                                 <tr>
-                                    <td class="align-middle">Lorem Ipsum</td>
-                                    <td class="align-middle">Instrument Principal</td>
-                                    <td class="align-middle text-end"><button class="btn btn-danger btn-sm">X</button></td>
+                                    <td class="align-middle"><% out.print(unInstrument.getLibelle()); %></td>
+                                    <td class="align-middle">Instrument <% if(unInstrument.getEstInstrumentPrincipal() == 1) { out.print("<b>Principal</b>"); } else { out.print(instrumentOrder); } %></td>
+                                    <td class="align-middle text-end"><button class="btn btn-danger btn-sm" onclick="deleteInstrumentMembre(<%out.print(instrumentOrder);%>)">X</button><% if(unInstrument.getEstInstrumentPrincipal() == 0) { %><input type="number" name="deleteInstrument" id="deleteInstrument<%out.print(instrumentOrder);%>" value="0"><% } %></td>
                                 </tr>
+                                <% instrumentOrder++; } %>
                                 <tr>
-                                    <td class="align-middle">Lorem Ipsum</td>
-                                    <td class="align-middle">Instrument Principal</td>
-                                    <td class="align-middle text-end"><button class="btn btn-danger btn-sm">X</button></td>
+
                                 </tr>
                             </tbody>
                         </table>
                     </div>                    
                 </div>
-                
             </div>
             <div class="col-md-4 mt-4">
                 <div class="card card-body">
@@ -80,7 +103,7 @@
                             <button type="button" class="btn btn-outline-dark w-100">Modifier l'image</button>
                         </div> 
                         <div class="col-md-6">
-                            <button type="button" class="btn btn-outline-dark w-100">Supprimer l'image</button>
+                            <button type="button" class="btn btn-outline-danger w-100">Supprimer l'image</button>
                         </div> 
                     </div>
                 </div>

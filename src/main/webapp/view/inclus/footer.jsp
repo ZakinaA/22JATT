@@ -35,7 +35,19 @@
         if(passwordInput != "" && passwordInput != verifPasswordInput) {
             $('#motDePasseVerif').css('color', 'red').text('Merci de retaper votre mot de passe correctement dans les 2 champs.');            
         }
-
+    }
+    
+    function ajoutInstrumentFunc() {
+        console.log("add instrument");
+    }
+    
+    function deleteInstrumentMembre(instrumentOrder) {
+        let deleteInstrumentVal = $('#deleteInstrument'+instrumentOrder).val();
+        if(deleteInstrumentVal == 0) {
+            $('#deleteInstrument'+instrumentOrder).val(1);
+        } else {
+            $('#deleteInstrument'+instrumentOrder).val(0);  
+        }
     }
 </script>        
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
