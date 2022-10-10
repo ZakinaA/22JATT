@@ -13,13 +13,14 @@ import java.util.ArrayList;
 public class Concert {
     
     private String dateConcert;
-    private String lieuConcertId;
-    private ArrayList<Groupe> groupeID;
+
+    private LieuConcert lieuConcertId;
+    private Groupe groupeID;
 
     public Concert() {
     }
 
-    public Concert(String dateConcert, String lieuConcertId, ArrayList<Groupe> groupeID) {
+    public Concert(String dateConcert, Concert lieuConcertId, Groupe groupeID) {
         this.dateConcert = dateConcert;
         this.lieuConcertId = lieuConcertId;
         this.groupeID = groupeID;
@@ -33,22 +34,23 @@ public class Concert {
         this.dateConcert = dateConcert;
     }
 
-    public String getLieuConcertId() {
+    public Concert getLieuConcertId() {
         return lieuConcertId;
     }
 
-    public void setLieuConcertId(String lieuConcertId) {
+    public void setLieuConcertId(Concert lieuConcertId) {
         this.lieuConcertId = lieuConcertId;
     }
 
-    public ArrayList<Groupe> getGroupeID() {
+    public Groupe getGroupeID() {
         return groupeID;
     }
 
-    public void setGroupeID(ArrayList<Groupe> groupeID) {
+    public void setGroupeID(Groupe groupeID) {
         this.groupeID = groupeID;
     }
-    
+
+   
     
 
     

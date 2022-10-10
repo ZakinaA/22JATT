@@ -4,17 +4,20 @@
  */
 package servlet;
 
+import dao.DaoConcert;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Concert;
 
 /**
  *
@@ -87,9 +90,9 @@ public class ServletConcert extends HttpServlet {
 
         //Affichage de tous les groupes (en indiquant le libellé du genre musical)
         if(url.equals("/normanzik/ServletConcert/lister")){
-            System.out.println("Lui");
             
-           
+           ArrayList<Concert> lesConcert = DaoConcert.getLesConcerts(connection);
+            request.setAttribute("pLesConcert", lesConcert);
             this.getServletContext().getRequestDispatcher("/view/concert/lister.jsp" ).forward( request, response );
         }
         

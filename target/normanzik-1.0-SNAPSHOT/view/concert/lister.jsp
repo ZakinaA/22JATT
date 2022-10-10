@@ -1,17 +1,28 @@
-<%-- 
-    Document   : lister
-    Created on : 10 oct. 2022, 13:21:32
-    Author     : sio2
---%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@page import="model.Concert"%>
+<%@ page import="java.util.ArrayList" %>
+<%
+    int cardOrder = 0;
+    String pageName = "Liste des Concerts";
+    String pageID = "listesConcerts"; 
+   ArrayList<Concert> lesConcerts = (ArrayList)request.getAttribute("pLesConcert");    
+    %>
+    <%@ include file="../inclus/head.jsp" %>
+    <%@ include file="../inclus/header.jsp" %>
+    <%@ include file="../inclus/menu.jsp" %>
     <body>
-        <h1>Hello Worldgh!</h1>
+        fdd
+          <%
+            for (Concert unConcert : lesConcerts) {
+            
+        %>
+       <div class="card card-body mt-4 shadow-sm"> 
+           
+            <% out.println(unConcert.getLieuConcertId()); %>
+            <% out.println(unConcert.getDateConcert()); %>
+        </div>
+        
+       
+            <% } %>
     </body>
 </html>
