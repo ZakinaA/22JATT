@@ -106,7 +106,7 @@ public class DaoMembre {
         try
         {
             //preparation de la requete
-            requete=connection.prepareStatement("SELECT nom,prenom, instrumentPrincipalID,statut.libelle as statutLibelle, instrument.libelle as instrumentLibelle FROM membre,statut, instrument WHERE statut.id = membre.statutID && instrument.id = membre.instrumentPrincipalID && membre.id = ?");
+            requete=connection.prepareStatement("SELECT nom,prenom,mail, instrumentPrincipalID,statut.libelle as statutLibelle, instrument.libelle as instrumentLibelle FROM membre,statut, instrument WHERE statut.id = membre.statutID && instrument.id = membre.instrumentPrincipalID && membre.id = ?");
             requete.setInt(1, idMembre);
             //System.out.println("Requete" + requete);
 
@@ -118,6 +118,7 @@ public class DaoMembre {
                 leMembre.setId(idMembre);
                 leMembre.setNom(rs.getString("nom"));
                 leMembre.setPrenom(rs.getString("prenom"));
+                leMembre.setMail(rs.getString("mail"));
                 
                 Statut leStatut = new Statut();
                 leStatut.setLibelleStatut(rs.getString("statutLibelle"));                

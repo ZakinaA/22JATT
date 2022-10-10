@@ -3,6 +3,7 @@
 <%
     String pageName = "Modifier mon profil";
     String pageID = "listesMembres"; 
+    Membre leMembre = (Membre)request.getAttribute("pMembre");
 %>
     <%@ include file="../inclus/head.jsp" %>  
     <%@ include file="../inclus/header.jsp" %>
@@ -14,19 +15,19 @@
                     <div class="mb-3 row">
                         <label for="inputPassword" class="col-sm-2 col-form-label">Nom</label>
                         <div class="col-sm-10">
-                            <input type="password" class="form-control" id="inputPassword">
+                            <input type="text" class="form-control" id="inputPassword" value="<% out.println(leMembre.getNom()); %>">
                         </div>
                     </div>
                    <div class="mb-3 row">
                         <label for="inputPassword" class="col-sm-2 col-form-label">Prenom</label>
                         <div class="col-sm-10">
-                            <input type="password" class="form-control" id="inputPassword">
+                            <input type="text" class="form-control" id="inputPassword" value="<% out.println(leMembre.getPrenom()); %>">
                         </div>
                     </div>
                     <div class="mb-3 row">
                         <label for="inputPassword" class="col-sm-2 col-form-label">Adresse mail</label>
                         <div class="col-sm-10">
-                            <input type="password" class="form-control" id="inputPassword">
+                            <input type="text" class="form-control" id="inputPassword" value="<% out.println(leMembre.getMail()); %>">
                         </div>
                     </div>
                     <div class="mb-3 row">

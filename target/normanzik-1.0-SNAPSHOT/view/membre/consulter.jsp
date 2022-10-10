@@ -3,14 +3,13 @@
 <%@page import="model.Membre"%>
 <%@page import="java.util.ArrayList"%>
 <%
-    String pageName = "Modifier mon profil";
+
     String pageID = "listesMembres"; 
     int showBtnModifProfil = 0;
     Membre leMembre = (Membre)request.getAttribute("pMembre");
     
     ArrayList<Groupe> lesGroupesMembre = (ArrayList) request.getAttribute("pLesGroupesMembre");
-
-
+    String pageName = "Consulter le profil de "+leMembre.getPrenom()+" "+leMembre.getNom();
 %>
     
     <%@ include file="../inclus/head.jsp" %>  
