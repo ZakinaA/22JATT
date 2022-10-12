@@ -5,6 +5,7 @@
 package servlet;
 
 import dao.DaoFestival;
+import dao.DaoGroupe;
 import dao.Utilitaire;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,12 +13,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import javax.servlet.GenericServlet;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Festival;
+import model.Groupe;
+import model.Jouer_Groupe;
+import model.Participer_Festival;
 
 /**
  *
@@ -87,6 +92,25 @@ public class ServletFestival extends HttpServlet {
             request.setAttribute("pLesFestivals", lesFestivals);
             this.getServletContext().getRequestDispatcher("/view/festival/lister.jsp" ).forward( request, response );
         }
+        
+        if(url.equals("/normanzik/ServletFestival/consulter")){
+
+            int idFestival = Integer.parseInt(request.getParameter("idFestival"));
+            Festival leFestival = DaoFestival.getLeFestival(connection, idFestival);
+            request.setAttribute("pFestival", leFestival);
+            
+            ArrayList<Groupe> lesGroupes = DaoGroupe.getLesGroupes(connection);
+            request.setAttribute("pGroupes", lesGroupes);
+            
+            Participer_Festival uneParticipation = new Participer_Festival();
+            request.setAttribute("pParticiper_Festival", uneParticipation);
+            
+            Festival teteAffiche = DaoFestival.getLaTeteAffiche(connection, idFestival);
+            request.setAttribute("pTeteAffiche", teteAffiche);
+            
+            this.getServletContext().getRequestDispatcher("/view/festival/consulter.jsp" ).forward( request, response );
+        }
+        
     }
 
     /**
@@ -100,6 +124,9 @@ public class ServletFestival extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        
+        
     }
     
     
