@@ -20,7 +20,7 @@
                             <td class="align-middle"><% out.println(unFestival.getNom()); %></td>
                             <td class="align-middle"><% out.println(unFestival.getDateDebutFestival()); %></td>
                             <td class="align-middle"><% out.println(unFestival.getDateFinFestival()); %></td>
-                            <td class="align-middle text-end"><a class="btn mt-2 text-white rounded-pill btn-sm" href="/normanzik/ServletFestival/consulter?idFestival=<% out.print(unFestival.getId()); %>" style="background: #FD841F;text-transform: uppercase; text-align: center">VOIR PLUS</a></td>
+                            <td class="align-middle text-end"><a class="btn text-white rounded-pill btn-sm" href="<% out.print(getServletContext().getContextPath()); %>/ServletFestival/consulter?idFestival=<% out.print(unFestival.getId()); %>" style="background: #FD841F;text-transform: uppercase; text-align: center">VOIR PLUS</a></td>
                         </tr>
                         <% } %>
                     </tbody>

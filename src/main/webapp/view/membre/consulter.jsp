@@ -75,7 +75,7 @@
                         <tr>
                             <td class="align-middle"><% out.print(unGroupe.getNom()); %></td>
                             <td class="align-middle"><% out.print(unGroupe.getDateCreation()); %></td>  
-                            <td class="align-middle text-end" style="width: 20%"><a class="btn text-white btnHover rounded-pill btn-sm" href="/normanzik/ServletGroupe/consulter?idGroupe=<% out.print(unGroupe.getId()); %>" style="background: #FD841F;text-transform: uppercase; text-align: center">VOIR LE PROFIL du groupe</a></td>                    
+                            <td class="align-middle text-end" style="width: 20%"><a class="btn text-white btnHover rounded-pill btn-sm" href="<%out.print(getServletContext().getContextPath()); %>/ServletGroupe/consulter?idGroupe=<% out.print(unGroupe.getId()); %>" style="background: #FD841F;text-transform: uppercase; text-align: center">VOIR LE PROFIL du groupe</a></td>                    
                         </tr>
                         <% } %>
                     </tbody>

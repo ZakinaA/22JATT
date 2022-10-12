@@ -89,7 +89,7 @@ public class ServletConcert extends HttpServlet {
         System.out.println("servletconcert url="+url);
 
         //Affichage de tous les groupes (en indiquant le libellé du genre musical)
-        if(url.equals("/normanzik/ServletConcert/lister")){
+        if(url.equals(getServletContext().getContextPath()+"/ServletConcert/lister")){
             
            ArrayList<Concert> lesConcert = DaoConcert.getLesConcerts(connection);
             request.setAttribute("pLesConcert", lesConcert);

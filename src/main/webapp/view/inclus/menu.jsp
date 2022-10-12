@@ -12,10 +12,16 @@
                 <a class="nav-link <% if(pageID == "groupeSection") { out.print("active"); } %>" aria-current="page" href="<% out.print(getServletContext().getContextPath()); %>/ServletGroupe/lister">Les Groupes</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link <% if(pageID == "listesFestivales") { out.print("active"); } %>" aria-current="page" href="<% out.print(getServletContext().getContextPath()); %>/ServletConcert/lister">Les Concerts</a>
-              </li>              
+                <a class="nav-link <% if(pageID == "listesFestivals") { out.print("active"); } %>" aria-current="page" href="<% out.print(getServletContext().getContextPath()); %>/ServletFestival/lister">Les Festivals</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link <% if(pageID == "listesConcerts") { out.print("active"); } %>" aria-current="page" href="<% out.print(getServletContext().getContextPath()); %>/ServletConcert/lister">Les Concerts</a>
+              </li>                            
               <li class="nav-item">
                 <a class="nav-link <% if(pageID == "listesMembres") { out.print("active"); } %>" aria-current="page" href="<% out.print(getServletContext().getContextPath()); %>/ServletMembre/lister">Les Membres</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link <% if(pageID == "listesDispositifs") { out.print("active"); } %>" aria-current="page" href="<% out.print(getServletContext().getContextPath()); %>/ServletDispositif/lister">Les Dispositifs</a>
               </li>
             </ul>
             <% 
