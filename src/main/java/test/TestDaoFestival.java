@@ -22,5 +22,9 @@ public class TestDaoFestival {
             System.out.println(unFestival.getNom());
     
         }
+        
+        Festival leFestival = new Festival();
+        leFestival = DaoFestival.getLeFestival(con, 4);
+        System.out.println(leFestival.getNom()+ " "+ leFestival.getDateDebutFestival()+ " "+leFestival.getDateFinFestival());
     }
 }
