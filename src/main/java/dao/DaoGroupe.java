@@ -254,6 +254,56 @@ public class DaoGroupe {
         return unGroupe ;
     }
     
+    public static Groupe modifierGroupe(Connection connection, Groupe unGroupe){
+        int idGenere = -1;
+        try
+        {
+            //preparation de la requete
+            // gpe_id (clé primaire de la table groupe) est en auto_increment,donc on ne renseigne pas cette valeur
+            // le paramètre RETURN_GENERATED_KEYS est ajouté à la requête afin de pouvoir récupérer l'id généré par la bdd (voir ci-dessous)
+            // supprimer ce paramètre en cas de requête sans auto_increment.
+            requete=connection.prepareStatement("UPDATE GROUPE \n" +
+                                                    "SET    nom = '?',\n" +
+                                                    "	dateCreation = '?',\n" +
+                                                    "	telephone = '?',\n" +
+                                                    "	melSiteWeb = '?',\n" +
+                                                    "	lieuReception = '?',\n" +
+                                                    "	idGenre = '?',\n" +
+                                                    "	idMembre = '?',\n" +
+                                                    "	idDispositif = '?',\n" +
+                                                    "	estSelectionne = '?'\n" +
+                                                    "WHERE id = '?'" +
+                    "VALUES (?,?,?,?,?,?,?,?,?,?)", requete.RETURN_GENERATED_KEYS );
+            requete.setString(1, unGroupe.getNom());
+            requete.setString(2, unGroupe.getDateCreation());
+            requete.setString(3, unGroupe.getTelephone());
+            requete.setString(4, unGroupe.getMelSiteWeb());
+            requete.setString(5, unGroupe.getLieuRepetition());
+            requete.setInt(6, unGroupe.getGenre().getId());
+            requete.setInt(7, unGroupe.getMembreContact().getId());
+            requete.setInt(8, unGroupe.getDispositifGroupe().getId());
+            requete.setInt(9, unGroupe.getEstSelectionne());
+            requete.setInt(10, unGroupe.getId());
+            System.out.println("requeteInsertion=" + requete);
+            /* Exécution de la requête */
+            int resultatRequete = requete.executeUpdate();
+            System.out.println("resultatrequete=" + resultatRequete);
+            // Récupération de id auto-généré par la bdd dans la table groupe
+            // si le résultat de la requete est différent de 1, c'est que la requête a échoué.
+            // Dans ce cas, on remet l'objet groupe à null
+            if (resultatRequete != 1){
+                unGroupe= null;
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+            //out.println("Erreur lors de l’établissement de la connexion");
+            unGroupe= null;
+        }
+        return unGroupe ;
+    }
+    
     public static ArrayList<Groupe> getLesGroupesDispositif(Connection connection, int idDispositif){
         ArrayList<Groupe> lesGroupes = new  ArrayList<Groupe>();
         try
