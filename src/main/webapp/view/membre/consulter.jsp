@@ -3,7 +3,6 @@
 <%@page import="model.Membre"%>
 <%@page import="java.util.ArrayList"%>
 <%
-
     String pageID = "listesMembres"; 
     int showBtnModifProfil = 0;
     Membre leMembre = (Membre)request.getAttribute("pMembre");
