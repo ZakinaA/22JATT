@@ -5,7 +5,7 @@
 <%@page import="java.util.ArrayList"%>
 <%
     String pageName = "Consulter les festivals";
-    String pageID = "festivalsection"; 
+    String pageID = "listesFestivals"; 
     Festival unFestival = (Festival)request.getAttribute("pFestival");
     Participer_Festival uneParticipation = (Participer_Festival)request.getAttribute("pParticiper_Festival");
     Festival teteAffiche = (Festival)request.getAttribute("pTeteAffiche");

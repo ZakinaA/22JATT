@@ -65,7 +65,7 @@
                 for (Dispositif unDispositif : lesDispositif) { %>
     <tr>
       <th scope="row"><% out.println(unDispositif.getId()); %> </th>
-      <td><% out.println("<a href='../ServletDispositif/lister-groupe?idDispositif="+unDispositif.getId()+"'>");%><% out.println(unDispositif.getLibelle()); %></td>
+      <td><% out.println("<a href='"+getServletContext().getContextPath()+"/ServletDispositif/lister-groupe?idDispositif="+unDispositif.getId()+"'>");%><% out.println(unDispositif.getLibelle()); %></td>
       <td><% out.println(unDispositif.getAnnee()); %></td>
     </tr>
     <% }%>
