@@ -50,3 +50,5 @@ http://172.20.177.250:8080
 Fichier WAR à déployer
 
 
+Doc de spec : 
+https://docs.google.com/document/d/1RDJOMEgdQg4mM5iiU_OkZe2QGI0LP5IlHVLhpDP6AcI/edit?usp=sharing
