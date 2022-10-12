@@ -6,16 +6,16 @@
         <div class="collapse navbar-collapse" id="navbarMain">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                  <a class="nav-link <% if(pageID == "") { out.println("active"); } %>" aria-current="page" href="/normanzik/ServletIndex/index" style="margin-left: 0.4em">Accueil</a>
+                  <a class="nav-link <% if(pageID == "") { out.print("active"); } %>" aria-current="page" href="<% out.print(getServletContext().getContextPath()); %>/" style="margin-left: 0.4em">Accueil</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link <% if(pageID == "groupeSection") { out.println("active"); } %>" aria-current="page" href="/normanzik/ServletGroupe/lister">Les Groupes</a>
+                <a class="nav-link <% if(pageID == "groupeSection") { out.print("active"); } %>" aria-current="page" href="<% out.print(getServletContext().getContextPath()); %>/ServletGroupe/lister">Les Groupes</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link <% if(pageID == "listesFestivales") { out.println("active"); } %>" aria-current="page" href="#">Les Festivals</a>
+                <a class="nav-link <% if(pageID == "listesFestivales") { out.print("active"); } %>" aria-current="page" href="#">Les Festivals</a>
               </li>              
               <li class="nav-item">
-                <a class="nav-link <% if(pageID == "listesMembres") { out.println("active"); } %>" aria-current="page" href="/normanzik/ServletMembre/lister">Les Membres</a>
+                <a class="nav-link <% if(pageID == "listesMembres") { out.print("active"); } %>" aria-current="page" href="<% out.print(getServletContext().getContextPath()); %>/ServletMembre/lister">Les Membres</a>
               </li>
             </ul>
             <% 
@@ -33,8 +33,8 @@
                     <li><button class="dropdown-item" type="button">Management des festivales</button></li>
                     <li><button class="dropdown-item" type="button">Management des groupes</button></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a href="/normanzik/ServletMembre/consulter?idMembre=<% out.println(NormanzikAuthID); %>" class="dropdown-item">Mon profil</a></li>
-                    <li><a href="/normanzik/ServletIndex/logout" class="dropdown-item">Déconnexion</a></li>
+                    <li><a href="<% out.print(getServletContext().getContextPath()); %>/ServletMembre/consulter?idMembre=<% out.print(NormanzikAuthID); %>" class="dropdown-item">Mon profil</a></li>
+                    <li><a href="<% out.print(getServletContext().getContextPath()); %>/ServletIndex/logout" class="dropdown-item">Déconnexion</a></li>
                   </ul>
                 </div>
                 <% } else if(NormanzikGradeID == 1) { %>
@@ -46,8 +46,8 @@
                       <ul class="dropdown-menu dropdown-menu-end">
                         <li><button class="dropdown-item" type="button">Consulter mes groupes</button></li>    
                         <li><hr class="dropdown-divider"></li>
-                        <li><a href="/normanzik/ServletMembre/consulter?idMembre=<% out.println(NormanzikAuthID); %>" class="dropdown-item">Mon profil</a></li>
-                        <li><a href="/normanzik/ServletIndex/logout" class="dropdown-item">Déconnexion</a></li>
+                        <li><a href="<% out.print(getServletContext().getContextPath()); %>/ServletMembre/consulter?idMembre=<% out.print(NormanzikAuthID); %>" class="dropdown-item">Mon profil</a></li>
+                        <li><a href="<% out.print(getServletContext().getContextPath()); %>/ServletIndex/logout" class="dropdown-item">Déconnexion</a></li>
                       </ul>
                     </div>
                 <% } %>

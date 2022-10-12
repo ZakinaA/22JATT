@@ -27,7 +27,9 @@ public class DaoConnexion {
             requete=connection.prepareStatement("SELECT id,gradeID FROM membre WHERE mail = ? && password = ?");
             requete.setString(1, uneConnexion.getLoginMail());
             requete.setString(2, uneConnexion.getLoginPassword()); // A mettre en md5 pour le futur
+            System.out.println("Requete" + requete);
             rs=requete.executeQuery();  
+
             if ( rs.next() ) {                
                 laConnexion.setId(rs.getInt("id"));
                 laConnexion.setGradeID(rs.getInt("gradeID"));

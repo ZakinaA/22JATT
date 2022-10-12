@@ -3,7 +3,7 @@
     String pageName = "";
     String pageID = ""; 
 %>
-<%@ include file="../inclus/head.jsp" %>
+<%@ include file="/view/inclus/head.jsp" %>
   <body class="body">
     <div class="card rounded-0 border-0 mb-0 SpaceText tipo" style="height: 3em;background-color: #FD841F; text-transform: uppercase;text-align: center;">
         <div style="margin-top: 3.5%;text-shadow: 3px 5px 0px rgb(0 0 0 / 10%);margin-left: 1.5em">
@@ -13,7 +13,7 @@
     </div>
 
 
-    <%@ include file="../inclus/menu.jsp" %>
+    <%@ include file="/view/inclus/menu.jsp" %>
       <footer>
         </div>
         <div class="container-fluid" style="width: 85%;bottom: 0;top: 1">
@@ -30,4 +30,4 @@
         </div>
       </footer>
 
-    <%@ include file="../inclus/footer.jsp" %>
+    <%@ include file="/view/inclus/footer.jsp" %>

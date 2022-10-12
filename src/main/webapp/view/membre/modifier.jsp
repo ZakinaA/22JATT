@@ -84,7 +84,7 @@
                                 <tr>
                                     <td class="align-middle"><% out.print(unInstrument.getLibelle()); %></td>
                                     <td class="align-middle">Instrument <% if(unInstrument.getEstInstrumentPrincipal() == 1) { out.print("<b>Principal</b>"); } else { out.print(instrumentOrder); } %></td>
-                                    <td class="align-middle text-end"><button class="btn btn-danger btn-sm" onclick="deleteInstrumentMembre(<%out.print(instrumentOrder);%>)">X</button><% if(unInstrument.getEstInstrumentPrincipal() == 0) { %><input type="number" name="deleteInstrument" id="deleteInstrument<%out.print(instrumentOrder);%>" value="0"><% } %></td>
+                                    <td class="align-middle text-end"><% if(unInstrument.getEstInstrumentPrincipal() == 0) { %><button class="btn btn-danger btn-sm" onclick="deleteInstrumentMembre(<%out.print(instrumentOrder);%>)">X</button><input type="hidden" name="deleteInstrument" id="deleteInstrument<%out.print(instrumentOrder);%>" value="0"><% } %></td>
                                 </tr>
                                 <% instrumentOrder++; } %>
                                 <tr>

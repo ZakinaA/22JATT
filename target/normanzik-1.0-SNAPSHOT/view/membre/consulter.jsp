@@ -92,13 +92,15 @@
                     <tbody>
                         <%
                         int instrumentOrder = 1;
+                        
+                        if(leMembre.getLesInstruments().size() != 0) {
                         for (Instrument unInstrument : leMembre.getLesInstruments()) {    
                         %>    
                         <tr>
                             <td class="align-middle">Instrument <% if(unInstrument.getEstInstrumentPrincipal() == 1) { out.print("<b>Principal</b>"); } else { out.print(instrumentOrder); } %></td>
                             <td class="align-middle"><% out.print(unInstrument.getLibelle()); %></td>  
                         </tr>
-                        <% instrumentOrder++; } %>
+                        <% instrumentOrder++; }} %>
                     </tbody>
                 </table>
             </div>

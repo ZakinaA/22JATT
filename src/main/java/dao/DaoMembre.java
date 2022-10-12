@@ -28,6 +28,7 @@ public class DaoMembre {
     
     public static Membre ajouterMembre(Connection connection, Membre unMembre){
         int idGenere = -1;
+        ArrayList<Instrument> lesInstruments = new  ArrayList<Instrument>();
         try
             {
             //preparation de la requete
@@ -80,8 +81,22 @@ public class DaoMembre {
             rs = requete.getGeneratedKeys();
             if ( rs.next() ) {
                 idGenere = rs.getInt( 1 );
-                unMembre.setId(idGenere);               
-
+                
+                Instrument leInstrument = new Instrument();
+                leInstrument.setLibelle("Test insert");                
+                leInstrument.setEstInstrumentPrincipal(1);                
+                unMembre.setInstrumentPrincipal(leInstrument);    
+                lesInstruments.add(leInstrument);      
+                unMembre.setId(idGenere);     
+                
+                
+                Instrument unInstrument = new Instrument();
+                unInstrument.setLibelle("Test insert");  
+                
+                unInstrument.setEstInstrumentPrincipal(0);   
+                lesInstruments.add(unInstrument);   
+                
+                unMembre.setLesInstruments(lesInstruments);  
             }
 
             // si le résultat de la requete est différent de 1, c'est que la requête a échoué.
@@ -108,7 +123,7 @@ public class DaoMembre {
             //preparation de la requete
             requete=connection.prepareStatement("SELECT nom,prenom,mail, instrumentPrincipalID,statut.libelle as statutLibelle, instrument.libelle as instrumentLibelle FROM membre,statut, instrument WHERE statut.id = membre.statutID && instrument.id = membre.instrumentPrincipalID && membre.id = ?");
             requete.setInt(1, idMembre);
-            //System.out.println("Requete" + requete);
+            System.out.println("Requete" + requete);
 
             //executer la requete
             rs=requete.executeQuery();
@@ -167,8 +182,8 @@ public class DaoMembre {
         try
         {
             //preparation de la requete
-            requete=connection.prepareStatement("select * from membre,  statut where statut.id = membre.statutID");
-            //System.out.println("Requete" + requete);
+            requete=connection.prepareStatement("SELECT * FROM membre,  statut WHERE statut.id = membre.statutID");
+            System.out.println("Requete" + requete);
 
             //executer la requete
             rs=requete.executeQuery();

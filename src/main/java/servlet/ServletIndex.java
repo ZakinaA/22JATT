@@ -95,12 +95,12 @@ public class ServletIndex extends HttpServlet {
                 System.out.println("ServletIndex url="+url);
                 
 
-        if(url.equals("/normanzik/ServletIndex/index"))
+        if(url.equals(getServletContext().getContextPath()+"/ServletIndex/index"))
         {
             this.getServletContext().getRequestDispatcher("/view/index/index.jsp" ).forward( request, response );
         }
         
-        if(url.equals("/normanzik/ServletIndex/logout")){ 
+        if(url.equals(getServletContext().getContextPath()+"/ServletIndex/logout")){ 
             HttpSession session = request.getSession();
             session.invalidate();
             this.getServletContext().getRequestDispatcher("/view/index/index.jsp" ).forward( request, response );          

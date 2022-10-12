@@ -97,7 +97,7 @@ public class ServletMembre extends HttpServlet {
         System.out.println("servlermembre url="+url);
 
         
-        if(url.equals("/normanzik/ServletMembre/lister"))
+        if(url.equals(getServletContext().getContextPath()+"/ServletMembre/lister"))
         {
             ArrayList<Membre> lesMembres = DaoMembre.getLesMembres(connection);
             request.setAttribute("pLesMembres", lesMembres);
@@ -108,7 +108,7 @@ public class ServletMembre extends HttpServlet {
             request.setAttribute("pMembre", leMembre);*/
             this.getServletContext().getRequestDispatcher("/view/membre/lister.jsp" ).forward( request, response );
         }
-        if(url.equals("/normanzik/ServletMembre/consulter"))
+        if(url.equals(getServletContext().getContextPath()+"/ServletMembre/consulter"))
         {
            
             int idMembre = Integer.parseInt(request.getParameter("idMembre"));              
@@ -122,7 +122,7 @@ public class ServletMembre extends HttpServlet {
         }
         
         
-        if(url.equals("/normanzik/ServletMembre/ajouter"))
+        if(url.equals(getServletContext().getContextPath()+"/ServletMembre/ajouter"))
         {
            
             ArrayList<Instrument> lesInstruments = DaoInstrument.getLesInstruments(connection);
@@ -133,7 +133,7 @@ public class ServletMembre extends HttpServlet {
             this.getServletContext().getRequestDispatcher("/view/membre/ajouter.jsp" ).forward( request, response );
         }
         
-        if(url.equals("/normanzik/ServletMembre/modifierprofil"))
+        if(url.equals(getServletContext().getContextPath()+"/ServletMembre/modifierprofil"))
         {
             int idMembre = Integer.parseInt(request.getParameter("idMembre"));              
             Membre leMembre = DaoMembre.getLeMembre(connection, idMembre);
@@ -176,7 +176,10 @@ public class ServletMembre extends HttpServlet {
 
             if (membreAjoute != null ){
                 System.out.println("insert 2");
-                request.setAttribute("pMembre", membreAjoute);
+                request.setAttribute("pMembre", membreAjoute);      
+                
+                ArrayList<Groupe> lesGroupesMembre = DaoMembre.getLesGroupesMembre(connection, membreAjoute.getId());
+                request.setAttribute("pLesGroupesMembre", lesGroupesMembre);
                 this.getServletContext().getRequestDispatcher("/view/membre/consulter.jsp" ).forward( request, response );
             }
             else
