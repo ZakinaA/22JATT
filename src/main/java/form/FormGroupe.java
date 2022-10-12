@@ -77,7 +77,7 @@ public class FormGroupe {
         String numTel = getDataForm( request, "numTel");
         String addressMail = getDataForm( request, "mailAddress");
         int idGenre = Integer.parseInt(getDataForm( request, "idGenre" ));
-        int dispositifID = Integer.parseInt(getDataForm( request, "dispositifID" ));
+        //int dispositifID = Integer.parseInt(getDataForm( request, "dispositifID" ));
         
         try {
             validationNom( nom );
@@ -123,9 +123,9 @@ public class FormGroupe {
         unGroupe.setGenre(leGenre);
         
         
-        Dispositif leDispositif = new Dispositif();
+        /*Dispositif leDispositif = new Dispositif();
         leDispositif.setId(dispositifID);
-        unGroupe.setDispositifGroupe(leDispositif);
+        unGroupe.setDispositifGroupe(leDispositif);*/
         return unGroupe ;
     }
 }

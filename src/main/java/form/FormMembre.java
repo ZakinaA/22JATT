@@ -4,6 +4,9 @@
  */
 package form;
 
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
@@ -17,9 +20,9 @@ import model.Statut;
  */
 public class FormMembre {
     private String resultat;
-    private Map<String, String> erreurs      = new HashMap<String, String>(); 
+    private Map<String, String> erreurs = new HashMap<String, String>(); 
     
-        public String getResultat() {
+    public String getResultat() {
         return resultat;
     }
 
@@ -48,6 +51,12 @@ public class FormMembre {
         }
     }
     
+    private void validationMotDePasse( String MotDePasse, String verifMotDePasse ) throws Exception {
+        if (verifMotDePasse == null) {
+            throw new Exception( "Les deux mots de passe doivent correspondre" + verifMotDePasse + MotDePasse);
+        }
+    }
+    
     private void setErreur( String champ, String message ) {
         erreurs.put(champ, message );
     }
@@ -62,7 +71,33 @@ public class FormMembre {
             return valeur.trim();
         }
     }
-
+    public static String getMd5(String input)
+    {
+        try {
+ 
+            // Static getInstance method is called with hashing MD5
+            MessageDigest md = MessageDigest.getInstance("MD5");
+ 
+            // digest() method is called to calculate message digest
+            // of an input digest() return array of byte
+            byte[] messageDigest = md.digest(input.getBytes());
+ 
+            // Convert byte array into signum representation
+            BigInteger no = new BigInteger(1, messageDigest);
+ 
+            // Convert message digest into hex value
+            String hashtext = no.toString(16);
+            while (hashtext.length() < 32) {
+                hashtext = "0" + hashtext;
+            }
+            return hashtext;
+        }
+ 
+        // For specifying wrong message digest algorithms
+        catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+    }
     
     public Membre ajouterMembre(HttpServletRequest request ) {
 
@@ -71,6 +106,9 @@ public class FormMembre {
         //récupération dans des variables des données saisies dans les champs de formulaire
         String nom = getDataForm( request, "nom" );
         String prenom = getDataForm( request, "prenom");
+        String mail = getDataForm(request, "mail");
+        String motDePasse = getDataForm( request, "motdePasse");
+        String verifMotDePasse = getDataForm( request, "verifMotDePasse");
         int instrumentPrincipalID = Integer.parseInt(getDataForm( request, "instrumentPrincipalID" ));
         int statutID = Integer.parseInt(getDataForm( request, "statutID" ));
         try {
@@ -79,13 +117,28 @@ public class FormMembre {
             setErreur( "nom", e.getMessage() );
         }
         unMembre.setNom(nom);
-         
+        
         try {
-            validationPrenom( prenom );
+            validationNom( prenom );
         } catch ( Exception e ) {
-            setErreur( "dateCreation", e.getMessage() );
+            setErreur( "nom", e.getMessage() );
         }
         unMembre.setPrenom(prenom);
+        
+        try {
+            validationNom( nom );
+        } catch ( Exception e ) {
+            setErreur( "nom", e.getMessage() );
+        }
+        unMembre.setNom(nom);
+         
+        try {
+            validationMotDePasse( motDePasse, verifMotDePasse );
+        } catch ( Exception e ) {
+            setErreur( "motDePasse", e.getMessage() );
+        }
+        
+        unMembre.setMotDePasse(getMd5(motDePasse));
         
         if ( erreurs.isEmpty() ) {
             resultat = "Succès de l'ajout.";
@@ -98,12 +151,16 @@ public class FormMembre {
 
         Instrument leInstrumentPrincipal = new Instrument();
         leInstrumentPrincipal.setId(instrumentPrincipalID);
+        if(instrumentPrincipalID == -1) {
+            String nomInstrumentAjout = getDataForm( request, "nomInstrumentAjout");
+            leInstrumentPrincipal.setLibelle(nomInstrumentAjout);
+        }
         unMembre.setInstrumentPrincipal(leInstrumentPrincipal);
         
         Statut leStatut = new Statut();
-        leStatut.setId(statutID);
-        
+        leStatut.setId(statutID);        
         unMembre.setStatutMembre(leStatut);
+        unMembre.setMail(mail);
         return unMembre;
      }
 }

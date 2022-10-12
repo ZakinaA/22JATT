@@ -21,28 +21,34 @@
             
             <form class="form-inline" action="ajouter" method="POST">
                 <h3>Création d'un compte membre</h3>
+                
                 <div class="mb-3">
-                    <label for="nomInput" class="form-label">Nom : </label>
+                    <label for="nomInput" class="form-label">Nom</label>
                     <input id="nomInput" type="text" name="nom"  class="form-control">
                     <span style="color: blue;">${form.erreurs['nom']}</span>
                 </div>
                 <div class="mb-3">
-                    <label for="prenomInput" class="form-label">Prenom : </label>
+                    <label for="prenomInput" class="form-label">Prenom</label>
                     <input id="prenomInput" type="text" name="prenom"  size="70" maxlength="70" class="form-control">
                     <span style="color: blue;">${form.erreurs['prenom']}</span>     
                 </div>
                 <div class="mb-3">
-                    <label for="prenomInput" class="form-label">Mot de passe : </label>
-                    <input id="prenomInput" type="password" name="motdePasse"  size="70" maxlength="70" class="form-control">
-                    <span style="color: blue;">${form.erreurs['motdePasse']}</span>     
+                    <label for="mailInput" class="form-label">Adresse mail</label>
+                    <input id="mailInput" type="mail" name="mail"  class="form-control">
+                    <span style="color: blue;">${form.erreurs['mail']}</span>
                 </div>
                 <div class="mb-3">
-                    <label for="prenomInput" class="form-label">Vérification du mot de passe : </label>
-                    <input id="prenomInput" type="password" name="verifMotDePasse"  size="70" maxlength="70" class="form-control">
-                    <span style="color: blue;">${form.erreurs['verifMotDePasse']}</span>     
+                    <label for="motDePasseInput" class="form-label">Mot de passe</label>
+                    <input id="motDePasseInput" type="password" name="motdePasse" class="form-control">
+                    <span style="color: blue;" id="motDePasse">${form.erreurs['motDePasse']}</span>     
                 </div>
                 <div class="mb-3">
-                    <label for="genre" class="form-label">Instrument principal : </label>
+                    <label for="verifMotDePasseInput" class="form-label">Vérification du mot de passe</label>
+                    <input id="verifMotDePasseInput" type="password" name="verifMotDePasse" class="form-control" onchange="verifPasswordInput()">
+                    <span style="color: blue;" id="motDePasseVerif">${form.erreurs['motDePasse']}</span>     
+                </div>
+                <div class="mb-3">
+                    <label for="genre" class="form-label">Instrument principal</label>
                     <select id="instrumentPrincipalID" name="instrumentPrincipalID" class="form-select" onchange="selectInstrumentPrincipal()">
                     <%
                         ArrayList<Instrument> lesInstruments = (ArrayList)request.getAttribute("pLesInstruments");
@@ -55,7 +61,7 @@
                     </select>
                 </div>
                 <div class="mb-3">                    
-                    <label for="genre" class="form-label">Statut : </label>
+                    <label for="genre" class="form-label">Statut</label>
                     <select name="statutID" class="form-select">
                         <%
                             ArrayList<Statut> lesStatuts = (ArrayList)request.getAttribute("pLesStatuts");
@@ -66,30 +72,13 @@
                         %>
                     </select>
                 </div>
+                <input type="hidden" id="nomInstrumentAjoutInput" name="nomInstrumentAjout" value="">                        
                 <div class="mb-3">
                     <label for="formFile" class="form-label">Téleversement d'une image de profil</label>
                     <input class="form-control" type="file" id="formFile">
                 </div>
                 <button type="submit" class="btn btn-light float-end">Valider mon inscription</button>  
-            </form> 
-                    
-                    
-
-                        
-                  
-        </div>
-        <!-- A SUPPRIMER AVANT PUSH EN PROD -->            
-        <script>
-            function selectInstrumentPrincipal() {
-                let optionSelected = $('#instrumentPrincipalID').find(":selected").val();                           
-                
-                if(optionSelected == "instrumentNotExist") {
-                    $("#modalBody").html('');
-                    $("#modalBody").append('<form class="form-inline" action="ajouter" method="POST"><div class="mt-2 mb-2"><label for="dateCreation" class="form-label">Intitule instrument : </label><input id="dateCreation"  type="text" class="form-control" name="dateCreation" size="10" maxlength="10"></div><button class="btn btn-light float-end">Créer</button></form>');
-                    $("#exampleModal").modal('show'); 
-                }
-            }
-        </script>           
+            </form>                  
+        </div>       
         <%@ include file="../inclus/footer.jsp" %>            
-    </body>
-</html>
+

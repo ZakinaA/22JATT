@@ -4,7 +4,9 @@
  */
 package servlet;
 
+import dao.DaoConnexion;
 import dao.Utilitaire;
+import form.FormConnexion;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -16,6 +18,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.Connexion;
 import static test.ConnexionBdd.connection;
 
 /**
@@ -46,7 +50,7 @@ public class ServletIndex extends HttpServlet {
     static PreparedStatement requete=null;
     static ResultSet rs=null;
     
-     @Override
+    @Override
     public void init()
     {
         
@@ -89,10 +93,17 @@ public class ServletIndex extends HttpServlet {
                 String url = request.getRequestURI();
         
                 System.out.println("ServletIndex url="+url);
+     
 
-        if(url.equals("/normanzik/ServletIndex/index"))
+        if(url.equals(getServletContext().getContextPath()+"/ServletIndex/index"))
         {
             this.getServletContext().getRequestDispatcher("/view/index/index.jsp" ).forward( request, response );
+        }
+        
+        if(url.equals(getServletContext().getContextPath()+"/ServletIndex/logout")){ 
+            HttpSession session = request.getSession();
+            session.invalidate();
+            this.getServletContext().getRequestDispatcher("/view/index/index.jsp" ).forward( request, response );          
         }
     }
 
@@ -108,8 +119,20 @@ public class ServletIndex extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        
-
+        FormConnexion form = new FormConnexion(); 
+        Connexion laConnexion = form.uneConnexion(request);
+        request.setAttribute("form", form);        
+        request.setAttribute("pConnexion", laConnexion);        
+        if (form.getErreurs().isEmpty()){
+            Connexion faireConnexion = DaoConnexion.getCompte(connection,laConnexion);
+            
+            if(faireConnexion != null) {
+                HttpSession session = request.getSession();
+                session.setAttribute("NormanzikAuthID", faireConnexion.getId());
+                session.setAttribute("NormanzikGradeID", faireConnexion.getGradeID());
+                this.getServletContext().getRequestDispatcher("/view/index/index.jsp" ).forward( request, response );
+            }
+        }
     }
 
     /**

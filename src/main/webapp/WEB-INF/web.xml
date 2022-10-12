@@ -13,6 +13,14 @@
         <servlet-class>servlet.NewServlet</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>ServletIndex</servlet-name>
+        <servlet-class>servlet.ServletIndex</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletAdmin</servlet-name>
+        <servlet-class>servlet.ServletAdmin</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>ServletMembre</servlet-name>
         <servlet-class>servlet.ServletMembre</servlet-class>
     </servlet>
@@ -47,6 +55,18 @@
     <servlet-mapping>
         <servlet-name>ServletMembre</servlet-name>
         <url-pattern>/ServletMembre/ajouter</url-pattern>
+    </servlet-mapping>    
+    <servlet-mapping>
+        <servlet-name>ServletMembre</servlet-name>
+        <url-pattern>/ServletMembre/modifierprofil</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletIndex</servlet-name>
+        <url-pattern>/ServletIndex/index</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletIndex</servlet-name>
+        <url-pattern>/ServletIndex/logout</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ServletMembre</servlet-name>
