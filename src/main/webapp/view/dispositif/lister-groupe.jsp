@@ -4,9 +4,9 @@
 <%@page import="java.util.ArrayList"%>
 <%
     int cardOrder = 0;
-    String pageName = "Liste des groupes";
-    String pageID = "listesGroupes"; 
-    ArrayList<Groupe> lesGroupesDispositif = (ArrayList)request.getAttribute("pLesGroupesDispositif");    
+    ArrayList<Groupe> lesGroupesDispositif = (ArrayList)request.getAttribute("pLesGroupesDispositif");
+    String pageName = "Consulter un dispositif";
+    String pageID = "listesDispositifs";     
 %>
 
     <%@ include file="../inclus/head.jsp" %>
@@ -29,7 +29,7 @@
     
     
 
-}
+
   </style>
   
     <div class="container-fluid" style="width: 85%;bottom: 0;top: 1">
@@ -106,7 +106,3 @@
         </div>
     </div>
     <%@ include file="../inclus/footer.jsp" %>
-
-
-</body>
-</html>
