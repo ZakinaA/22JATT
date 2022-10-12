@@ -96,14 +96,15 @@ public class ServletGroupe extends HttpServlet {
         System.out.println("servlergroupe url="+url);
 
         //Affichage de tous les groupes (en indiquant le libellé du genre musical)
-        if(url.equals(getServletContext().getContextPath()+"/ServletGroupe/lister")){
+        if(url.equals("/normanzik/ServletGroupe/lister")){
+             System.out.println("servlergroupe LISTER");
             ArrayList<Groupe> lesGroupes = DaoGroupe.getLesGroupes(connection);
             request.setAttribute("pLesGroupes", lesGroupes);
             this.getServletContext().getRequestDispatcher("/view/groupe/lister.jsp" ).forward( request, response );
         }
 
         // Affichage du groupe selectionné (depuis la fonctionnalité lister)
-        if(url.equals(getServletContext().getContextPath()+"/ServletGroupe/consulter")){
+        if(url.equals("/normanzik/ServletGroupe/consulter")){
 
             int idGroupe = Integer.parseInt(request.getParameter("idGroupe"));
             Groupe leGroupe = DaoGroupe.getLeGroupe(connection, idGroupe);
@@ -120,7 +121,7 @@ public class ServletGroupe extends HttpServlet {
             this.getServletContext().getRequestDispatcher("/view/groupe/consulter.jsp" ).forward( request, response );
         }
 
-        if(url.equals(getServletContext().getContextPath()+"/ServletGroupe/ajouter"))
+        if(url.equals("/normanzik/ServletGroupe/ajouter"))
         {
             ArrayList<Genre> lesGenres = DaoAdmin.getLesGenres(connection);
             request.setAttribute("pLesGenres", lesGenres);
@@ -158,16 +159,6 @@ public class ServletGroupe extends HttpServlet {
 
             if (groupeAjoute != null ){
                 request.setAttribute("pGroupe", groupeAjoute);
-                
-                Membre leMembreContact = DaoGroupe.getLeMembreContact(connection, groupeAjoute.getId());
-                request.setAttribute("pMembreContact", leMembreContact);
-                
-                ArrayList<Membre> lesMembres = DaoGroupe.getLesMembresGroupe(connection, groupeAjoute.getId());
-                request.setAttribute("pMembreGroupe", lesMembres);
-            
-                ArrayList<Titre> lesTitres = DaoGroupe.getLesTitresDuGroupe(connection, groupeAjoute.getId());
-                request.setAttribute("pTitreGroupe", lesTitres);
-                
                 this.getServletContext().getRequestDispatcher("/view/groupe/consulter.jsp" ).forward( request, response );
             }
             else

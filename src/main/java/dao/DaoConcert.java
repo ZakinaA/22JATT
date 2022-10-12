@@ -53,6 +53,7 @@ public class DaoConcert {
                 
                 Groupe GroupeConcertId = new Groupe();
                 GroupeConcertId.setNom(rs.getString("groupe.nom"));
+                GroupeConcertId.setId(rs.getInt("groupe.id"));
                 
 
                 
