@@ -30,7 +30,7 @@ public class DaoConcert {
         try
         {
             //preparation de la requete
-            requete=connection.prepareStatement("select * from jouer_concert,lieuconcert  ORDER by groupeID ASC ");
+            requete=connection.prepareStatement("select * from jouer_concert,lieuconcert,groupe WHERE jouer_concert.lieuConcertID=lieuconcert.id AND jouer_concert.groupeID = groupe.id");
             System.out.println("Requete" + requete);
 
             //executer la requete
@@ -39,8 +39,8 @@ public class DaoConcert {
             //On hydrate l'objet métier Groupe et sa relation Genre avec les résultats de la requête
             while ( rs.next() ) {
                 Concert leConcert = new Concert();
-                leConcert.setDateConcert(rs.getString("dateConcert"));
-                leConcert.setLieuConcertId(rs.LieuConcert("lieuConcertID"));
+                leConcert.setDateConcert(rs.getString("jouer_concert.dateConcert"));
+               
  
                 
                 LieuConcert lieuConcertId = new LieuConcert();
@@ -49,13 +49,22 @@ public class DaoConcert {
                 lieuConcertId.setVille(rs.getString("lieuconcert.ville"));
                 lieuConcertId.setCp(rs.getInt("lieuconcert.codePostal"));
                 lieuConcertId.setSalleNom(rs.getString("lieuconcert.salleNom"));
+                
+                
+                Groupe GroupeConcertId = new Groupe();
+                GroupeConcertId.setNom(rs.getString("groupe.nom"));
+                
+
+                
+                leConcert.setLieuConcertId(lieuConcertId);
+                leConcert.setGroupeConcertId(GroupeConcertId);
                 lesConcerts.add(leConcert);
-               
+
 
             }
             
-             leConcert.setLieuConcertId(lieuConcertId);
-            
+          
+              
                             
         }
         catch (SQLException e)

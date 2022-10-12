@@ -20,7 +20,7 @@ public class TestDaoConcert {
         ArrayList<Concert> lesConcert = DaoConcert.getLesConcerts(con);
         for(int dispositifOrder = 0; dispositifOrder < lesConcert.size(); dispositifOrder++) {
             Concert ct = lesConcert.get(dispositifOrder);
-            System.out.println("Nom du dispositif : "+ct.getDateConcert()+", en : "+ct.getLieuConcertId());
+            System.out.println("Nom du dispositif : "+ct.getDateConcert()+", en : "+ct.getLieuConcertId()+"le lieu du concert"+ct.getLieuConcertId().getVille()+"le nom du groupe"+ct.getGroupeConcertId().getNom());
         }
     }
 }
