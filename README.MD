@@ -8,7 +8,7 @@ Liste des membres :
 
 ```
 1. JLE.GIT = Julien Lemoine
-2. Space-Exo = Arthur Farietti
+2.Space-Exo = Arthur Farietti
 3. ThomasGlbrt = Thomas Guilbert
 4. ThomasVerEecke = Thomas Ver Eecke
 ```
@@ -20,11 +20,33 @@ Accès aux users stories :
 **En cas de problème sur le commmit avec Visual Studio Code** : 
 *Renseigner ces informations dans le terminal de Visual Studio Code*
 
-Figma
-
-**https://www.figma.com/file/SVQ5d5HtTHVNdyOkFVmkhp/Norman'zik?node-id=0%3A1**
-
 ```
 git config --global user.name "votreusernameGithub" 
 git config --global user.email "votremailducompteGithub"
+
 ```
+=======
+```
+
+Accès au FIGMA : 
+**https://www.figma.com/file/SVQ5d5HtTHVNdyOkFVmkhp/Norman'zik**
+
+# Push en prod : 
+
+IP PHPmyAdmin : 172.20.177.250/phpmyAdmin
+
+Compte : 
+
+```
+Identifiant : Voir document interne
+Mot de passe : Voir document interne
+```
+
+2) Sur Netbeans, clique droit sur le projet et "Clean and build" -> renommer le .war en nomGroupe.war
+
+3) Déploiement : 
+http://172.20.177.250:8080
+
+Fichier WAR à déployer
+
+
