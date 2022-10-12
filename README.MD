@@ -23,6 +23,9 @@ Accès aux users stories :
 ```
 git config --global user.name "votreusernameGithub" 
 git config --global user.email "votremailducompteGithub"
+
+```
+=======
 ```
 
 Accès au FIGMA : 
@@ -45,4 +48,5 @@ Mot de passe : Voir document interne
 http://172.20.177.250:8080
 
 Fichier WAR à déployer
+
 
