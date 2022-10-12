@@ -14,19 +14,22 @@ public class Membre {
     private String nom;
     private String prenom;
     private String motDePasse;
+    private String mail;
     private ArrayList<Groupe> lesGroupes;
+    private ArrayList<Instrument> lesInstruments;
     private Instrument instrumentPrincipal; // On récupère l'instrument principal du membre
     private Statut StatutMembre;
     
     public Membre() {
     }
-    public Membre(int id, String nom, String prenom, Instrument instrumentPrincipal, Statut StatutMembre, String motDePasse) {
+    public Membre(int id, String nom, String prenom, Instrument instrumentPrincipal, Statut StatutMembre, String motDePasse, String mail) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
         this.instrumentPrincipal = instrumentPrincipal;
         this.StatutMembre = StatutMembre;
         this.motDePasse = motDePasse;
+        this.mail = mail;
     }
 
     public int getId() {
@@ -53,8 +56,16 @@ public class Membre {
         this.prenom = prenom;
     }
     
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+    
     public String getMotDePasse() {
-        return prenom;
+        return motDePasse;
     }
 
     public void setMotDePasse(String motDePasse) {
@@ -63,7 +74,8 @@ public class Membre {
 
      public ArrayList<Groupe> getLesGroupes() {
         return lesGroupes;
-    }
+    }    
+     
 
     public void setLesGroupes(ArrayList<Groupe> lesGroupes) {
         this.lesGroupes = lesGroupes;
@@ -92,6 +104,23 @@ public class Membre {
     public void setStatutMembre(Statut StatutMembre) {
         this.StatutMembre = StatutMembre;
     }
+
+    public ArrayList<Instrument> getLesInstruments() {
+        return lesInstruments;
+    }
+
+    public void setLesInstruments(ArrayList<Instrument> lesInstruments) {
+        this.lesInstruments = lesInstruments;
+    }
+    
+    public void addLesInstruments(Instrument unInstrument){
+        if (lesInstruments == null){
+            lesInstruments = new ArrayList<>();
+        }
+        lesInstruments.add(unInstrument);
+    }
+    
+    
 
     
     

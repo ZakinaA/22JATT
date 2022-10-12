@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import model.Dispositif;
 import model.Groupe;
+import model.Membre;
 
 /**
  *
@@ -57,7 +58,7 @@ public class DaoDispositif {
         try
         {
             //preparation de la requete
-            requete=connection.prepareStatement("select nom from groupe WHERE dispositifID = ? ");
+            requete=connection.prepareStatement("select * from groupe WHERE dispositifID = ? ");
             requete.setInt(1, idDispositif);
             System.out.println("Requete" + requete);
 
@@ -67,7 +68,11 @@ public class DaoDispositif {
             //On hydrate l'objet métier Groupe et sa relation Genre avec les résultats de la requête
             while ( rs.next() ) {
                 Groupe leGroupe = new Groupe();
+                leGroupe.setId(rs.getInt("id"));
                 leGroupe.setNom(rs.getString("nom"));
+                leGroupe.setDateCreation(rs.getString("dateCreation"));
+                leGroupe.setLieuRepetition(rs.getString("lieuRepetition"));
+
                 
                 lesGroupes.add(leGroupe);
             }
