@@ -12,7 +12,7 @@
                 <a class="nav-link <% if(pageID == "groupeSection") { out.print("active"); } %>" aria-current="page" href="<% out.print(getServletContext().getContextPath()); %>/ServletGroupe/lister">Les Groupes</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link <% if(pageID == "listesFestivales") { out.print("active"); } %>" aria-current="page" href="#">Les Festivals</a>
+                <a class="nav-link <% if(pageID == "listesFestivales") { out.print("active"); } %>" aria-current="page" href="<% out.print(getServletContext().getContextPath()); %>/ServletConcert/lister">Les Concerts</a>
               </li>              
               <li class="nav-item">
                 <a class="nav-link <% if(pageID == "listesMembres") { out.print("active"); } %>" aria-current="page" href="<% out.print(getServletContext().getContextPath()); %>/ServletMembre/lister">Les Membres</a>
