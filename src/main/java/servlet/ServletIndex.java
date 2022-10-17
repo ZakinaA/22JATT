@@ -102,6 +102,7 @@ public class ServletIndex extends HttpServlet {
         if(url.equals(getServletContext().getContextPath()+"/ServletIndex/logout")){ 
             HttpSession session = request.getSession();
             session.invalidate();
+
             this.getServletContext().getRequestDispatcher("/view/index/index.jsp" ).forward( request, response );          
         }
     }
@@ -129,8 +130,9 @@ public class ServletIndex extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("NormanzikAuthID", faireConnexion.getId());
                 session.setAttribute("NormanzikGradeID", faireConnexion.getGradeID());
-                
                 session.setAttribute("NormanzikNomCompte", faireConnexion.getMembre().getPrenom() + " " + faireConnexion.getMembre().getNom().toUpperCase());
+                session.setAttribute("notifMessage", "Bonjour "+faireConnexion.getMembre().getPrenom() + " " + faireConnexion.getMembre().getNom().toUpperCase()); // On met un '1' à l'attribut permettant d'afficher les notifications   
+                session.setAttribute("showNotifMessage", 1); // On met un '1' à l'attribut permettant d'afficher les notifications 
                 this.getServletContext().getRequestDispatcher("/view/index/index.jsp" ).forward( request, response );
             }
         }

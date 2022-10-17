@@ -12,6 +12,17 @@
         Copyright © Norman'Zik 2022 - <a href="" class="text-white">Mentions Légales et contact</a>
     </div>
 </footer>
+<%
+    Integer showNotifMessage = (Integer) session.getAttribute("showNotifMessage");
+    if(showNotifMessage != null && showNotifMessage != 0) { 
+        String notifMessage = (String) session.getAttribute("notifMessage");
+%>
+<script>
+        $(document).ready(function(){
+            showNotification("<% out.print(notifMessage); %>");
+        }); 
+</script>
+<% session.setAttribute("showNotifMessage", 0);} %>
 <script>
     function selectInstrumentPrincipal() {
         let optionSelected = $('#instrumentPrincipalID').find(":selected").val();                           
@@ -63,7 +74,31 @@
             $('#deleteInstrument'+instrumentOrder).val(0);  
         }
     }
-</script>        
+    
+    function updateProfilImage() {
+        $('#updateProfilAvatar').html('<div class="card card-body shadow-sm mb-0"><div class="mb-0"><label for="formFile" class="form-label">Veuillez choisir une nouvelle image de profil</label><input class="form-control" type="file" id="formFile"></div></div>'); 
+    }
+    
+    function showNotification(messageContent) {        
+        $('#liveToastJSStatusColor').css('background', 'green');
+        $('#liveToastJSContent').text(messageContent);
+        $("#liveToastJS").toast({delay: 3500});
+        $("#liveToastJS").toast('show');            
+    }
+
+</script>
+<div class="position-fixed top-0 end-0 p-3" style="z-index: 11;">
+    <div id="liveToastJS" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="toast-header">
+            <div class="rounded" style="width: 1rem;height: 1rem;margin-right: 1.3em;" id="liveToastJSStatusColor"> </div>
+            <strong class="me-auto">Alerte Pop Up</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+        <div class="toast-body" id="liveToastJSContent">
+        </div>
+    </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-u1OknCvxWvY5kfmNBILK2hRnQC3Pr17a+RTT6rIHI7NnikvbZlHgTPOOmMi466C8" crossorigin="anonymous"></script>
 </body>
 </html> 

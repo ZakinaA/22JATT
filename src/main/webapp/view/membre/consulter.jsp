@@ -96,7 +96,7 @@
                         for (Instrument unInstrument : leMembre.getLesInstruments()) {    
                         %>    
                         <tr>
-                            <td class="align-middle">Instrument <% if(unInstrument.getEstInstrumentPrincipal() == 1) { out.print("<b>Principal</b>"); } else { out.print(instrumentOrder); } %></td>
+                            <td class="align-middle">Instrument <% if(unInstrument.getEstInstrumentPrincipal() == 1) { out.print("<b>Principal</b>"); } %></td>
                             <td class="align-middle"><% out.print(unInstrument.getLibelle()); %></td>  
                         </tr>
                         <% instrumentOrder++; }} %>

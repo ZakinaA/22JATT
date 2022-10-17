@@ -121,17 +121,19 @@
                         <img src="<% out.print(getServletContext().getContextPath()); %>/libs/images/<% if(leMembre.getAvatar() != null) { out.print(leMembre.getAvatar()); } else { out.print("placeholder_default.png"); } %>" id="avatarProfil" class="img-fluid mr-4 shadow-sm rounded">
                         <div class="row mt-4">
                             <div class="col-md-6">
-                                <button type="button" class="btn btn-outline-dark w-100" data-bs-toggle="modal" data-bs-target="#openModal">Modifier l'image</button>
+                                <button type="button" class="btn btn-outline-dark w-100" onclick="updateProfilImage()">Modifier l'image</button>
                             </div> 
                             <div class="col-md-6">
                                 <button type="button" class="btn btn-outline-danger w-100" onclick="deleteImageProfil('profilMembre')">Supprimer l'image</button>
                             </div> 
                         </div>
                     </div>
+                    <div id="updateProfilAvatar"></div>    
                 </div>
             </div>
             <div class="float-end">
                 <input type="hidden" name="formType" value="1">
+                <input type="hidden" name="actualNameProfilPic" value="<% if(leMembre.getAvatar() != null) { out.print(leMembre.getAvatar()); } else { out.print("placeholder_default.png"); } %>">
                 <input type="hidden" name="membreID" value="<% out.print(leMembre.getId()); %>">
                 <button type="submit" class="btn mt-2 text-white w-100 btnHover border-0" style="background: #FD841F;text-transform: uppercase; text-align: center">Sauvegarder mes modifications</button>          
             </div>

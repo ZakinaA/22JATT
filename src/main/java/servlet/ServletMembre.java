@@ -181,21 +181,24 @@ public class ServletMembre extends HttpServlet {
             if (form.getErreurs().isEmpty()){
                 int membreModifie = DaoMembre.modifierUnMembre(connection, leMembreSaisi);
                 
-            int idMembre = leMembreSaisi.getId();              
-            Membre leMembre = DaoMembre.getLeMembre(connection, idMembre);
-            request.setAttribute("pMembre", leMembre);
+                int idMembre = leMembreSaisi.getId();              
+                Membre leMembre = DaoMembre.getLeMembre(connection, idMembre);
+                request.setAttribute("pMembre", leMembre);
             
-            ArrayList<Groupe> lesGroupesMembre = DaoMembre.getLesGroupesMembre(connection, idMembre);
-            request.setAttribute("pLesGroupesMembre", lesGroupesMembre);
+                ArrayList<Groupe> lesGroupesMembre = DaoMembre.getLesGroupesMembre(connection, idMembre);
+                request.setAttribute("pLesGroupesMembre", lesGroupesMembre);
             
-            ArrayList<Instrument> lesInstruments = DaoInstrument.getLesInstruments(connection);
-            request.setAttribute("pLesInstruments", lesInstruments);
+                ArrayList<Instrument> lesInstruments = DaoInstrument.getLesInstruments(connection);
+                request.setAttribute("pLesInstruments", lesInstruments);
             
-            ArrayList<Statut> lesStatuts = DaoAdmin.getLesStatuts(connection);
-            request.setAttribute("pLesStatuts", lesStatuts);
+                ArrayList<Statut> lesStatuts = DaoAdmin.getLesStatuts(connection);
+                request.setAttribute("pLesStatuts", lesStatuts);
+                HttpSession session = request.getSession();
+                session.setAttribute("NormanzikNomCompte", leMembreSaisi.getPrenom() + " " + leMembreSaisi.getNom().toUpperCase());
+                session.setAttribute("notifMessage", "Votre profil a bien été mis à jour."); // On met un '1' à l'attribut permettant d'afficher les notifications   
+                session.setAttribute("showNotifMessage", 1); // On met un '1' à l'attribut permettant d'afficher les notifications   
+                this.getServletContext().getRequestDispatcher("/view/membre/modifier.jsp" ).forward( request, response );
             
-            this.getServletContext().getRequestDispatcher("/view/membre/modifier.jsp" ).forward( request, response );
-        
             }
             System.out.println("lui");
         } else {
