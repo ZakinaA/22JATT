@@ -163,4 +163,16 @@ public class FormMembre {
         unMembre.setMail(mail);
         return unMembre;
      }
+    
+    public Membre modifierMembre(HttpServletRequest request ) {
+        
+        Membre unMembre  = new Membre();
+
+        //récupération dans des variables des données saisies dans les champs de formulaire
+        String nom = getDataForm( request, "nom" );
+        String prenom = getDataForm( request, "prenom");
+        String mail = getDataForm(request, "mail");
+        
+        return unMembre;
+    }
 }

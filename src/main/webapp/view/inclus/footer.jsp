@@ -44,10 +44,17 @@
     }
     
     function ajoutInstrumentFunc() {
-        console.log("add instrument");
+        alert("add instrument");
+    }
+    
+
+    
+    function deleteImageProfil(source) {
+        alert(source);
     }
     
     function deleteInstrumentMembre(instrumentOrder) {
+        $('#trInstrument'+instrumentOrder).remove();
         let deleteInstrumentVal = $('#deleteInstrument'+instrumentOrder).val();
         if(deleteInstrumentVal == 0) {
             $('#deleteInstrument'+instrumentOrder).val(1);

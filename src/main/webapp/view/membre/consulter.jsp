@@ -39,7 +39,7 @@
                                 <img src="https://raw.githubusercontent.com/ZakinaA/22JATT/c5777d15cccd206839c4e50a09539670f7c48441/placeholder_default.png" class="mt-3 img-fluid mr-4 shadow-sm rounded" width="120">
                             </td>
                             <td class="align-middle" style="width: 80%">
-                                <h2 class="text-white mb-0"><% out.println(leMembre.getPrenom()); %> <% out.println(leMembre.getNom()); %></h2>
+                                <h2 class="text-white mb-0"><% out.print(leMembre.getPrenom()); %> <% out.print(leMembre.getNom()); %></h2>
                             </td>
                         </tr>
                     </tbody>
@@ -52,11 +52,11 @@
                     <tbody>
                         <tr>
                             <td>Statut</td>
-                            <td><% out.println(leMembre.getStatutMembre().getLibelleStatut()); %></td>                        
+                            <td><% out.print(leMembre.getStatutMembre().getLibelleStatut()); %></td>                        
                         </tr>
                         <tr>
                             <td>Instrument principal</td>
-                            <td><% out.println(leMembre.getInstrumentPrincipal().getLibelle()); %></td>                        
+                            <td><% out.print(leMembre.getInstrumentPrincipal().getLibelle()); %></td>                        
                         </tr>
                     </tbody>
                 </table>

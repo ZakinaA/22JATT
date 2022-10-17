@@ -145,6 +145,9 @@ public class ServletMembre extends HttpServlet {
             ArrayList<Instrument> lesInstruments = DaoInstrument.getLesInstruments(connection);
             request.setAttribute("pLesInstruments", lesInstruments);
             
+            ArrayList<Statut> lesStatuts = DaoAdmin.getLesStatuts(connection);
+            request.setAttribute("pLesStatuts", lesStatuts);
+            
             this.getServletContext().getRequestDispatcher("/view/membre/modifier.jsp" ).forward( request, response );
         }
     }
@@ -161,48 +164,63 @@ public class ServletMembre extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         FormMembre form = new FormMembre();
+        int formType = Integer.parseInt(request.getParameter("formType"));
 
-        /* Appel au traitement et à la validation de la requête, et récupération de l'objet en résultant */
-        Membre leMembreSaisi = form.ajouterMembre(request);
+        /*
+        * formtype = 1 : Modifier un profil membre
+        * formtype = vide : création d'un membre
+        */
 
-        /* Stockage du formulaire et de l'objet dans l'objet request */
-        request.setAttribute( "form", form );
-        request.setAttribute( "pMembre", leMembreSaisi );
+        System.out.println(formType);
+        if(formType == 1) {
+            Membre leMembreSaisi = form.modifierMembre(request);
+                        
+            request.setAttribute( "form", form );
+            request.setAttribute( "pMembre", leMembreSaisi );
+            
+            if (form.getErreurs().isEmpty()){
+                Membre membreModifie = DaoMembre.modifierUnMembre(connection, leMembreSaisi);
+            }
+            System.out.println("lui");
+        } else {
+            System.out.println("autre");
+            /*Membre leMembreSaisi = form.ajouterMembre(request);
 
-        if (form.getErreurs().isEmpty()){
-            System.out.println("insert 1");
-            // Il n'y a pas eu d'erreurs de saisie, donc on renvoie la vue affichant les infos du groupe
-            Membre membreAjoute = DaoMembre.ajouterMembre(connection, leMembreSaisi);
+            
+            request.setAttribute( "form", form );
+            request.setAttribute( "pMembre", leMembreSaisi );
 
-            if (membreAjoute != null ){
-                System.out.println("insert 2");
-                request.setAttribute("pMembre", membreAjoute);      
-                
-                ArrayList<Groupe> lesGroupesMembre = DaoMembre.getLesGroupesMembre(connection, membreAjoute.getId());
-                request.setAttribute("pLesGroupesMembre", lesGroupesMembre);
-                this.getServletContext().getRequestDispatcher("/view/membre/consulter.jsp" ).forward( request, response );
+            if (form.getErreurs().isEmpty()){
+                Membre membreAjoute = DaoMembre.ajouterMembre(connection, leMembreSaisi);
+
+                if (membreAjoute != null ){
+                    request.setAttribute("pMembre", membreAjoute);      
+
+                    ArrayList<Groupe> lesGroupesMembre = DaoMembre.getLesGroupesMembre(connection, membreAjoute.getId());
+                    request.setAttribute("pLesGroupesMembre", lesGroupesMembre);
+                    this.getServletContext().getRequestDispatcher("/view/membre/consulter.jsp" ).forward( request, response );
+                }
+                else
+                {
+                    // Cas où l'insertion en bdd a échoué
+                    ArrayList<Instrument> lesInstruments = DaoInstrument.getLesInstruments(connection);
+                    request.setAttribute("pLesInstruments", lesInstruments);
+
+                    ArrayList<Statut> lesStatuts = DaoAdmin.getLesStatuts(connection);
+                    request.setAttribute("pLesStatuts", lesStatuts);
+                    this.getServletContext().getRequestDispatcher("/view/membre/ajouter.jsp" ).forward( request, response );
+                }
             }
             else
             {
-                // Cas où l'insertion en bdd a échoué
                 ArrayList<Instrument> lesInstruments = DaoInstrument.getLesInstruments(connection);
                 request.setAttribute("pLesInstruments", lesInstruments);
-            
+
                 ArrayList<Statut> lesStatuts = DaoAdmin.getLesStatuts(connection);
                 request.setAttribute("pLesStatuts", lesStatuts);
                 this.getServletContext().getRequestDispatcher("/view/membre/ajouter.jsp" ).forward( request, response );
-            }
+            }*/
         }
-        else
-        {
-            ArrayList<Instrument> lesInstruments = DaoInstrument.getLesInstruments(connection);
-            request.setAttribute("pLesInstruments", lesInstruments);
-            
-            ArrayList<Statut> lesStatuts = DaoAdmin.getLesStatuts(connection);
-            request.setAttribute("pLesStatuts", lesStatuts);
-            this.getServletContext().getRequestDispatcher("/view/membre/ajouter.jsp" ).forward( request, response );
-        }
-
     }
 
     //fermeture des ressources

@@ -121,10 +121,9 @@ public class DaoMembre {
         try
         {
             //preparation de la requete
-            requete=connection.prepareStatement("SELECT nom,prenom,mail, instrumentPrincipalID,statut.libelle as statutLibelle, instrument.libelle as instrumentLibelle FROM membre,statut, instrument WHERE statut.id = membre.statutID && instrument.id = membre.instrumentPrincipalID && membre.id = ?");
+            requete=connection.prepareStatement("SELECT nom,prenom,mail, statut.libelle as statutLibelle,statut.id as statutID, instrument.libelle as instrumentLibelle,instrument.id as instrumentID FROM membre,statut, instrument WHERE statut.id = membre.statutID && instrument.id = membre.instrumentPrincipalID && membre.id = ?");
             requete.setInt(1, idMembre);
-            System.out.println("Requete" + requete);
-
+            
             //executer la requete
             rs=requete.executeQuery();
 
@@ -136,14 +135,16 @@ public class DaoMembre {
                 leMembre.setMail(rs.getString("mail"));
                 
                 Statut leStatut = new Statut();
+                leStatut.setId(rs.getInt("statutID"));                
                 leStatut.setLibelleStatut(rs.getString("statutLibelle"));                
                 leMembre.setStatutMembre(leStatut);
                 
-                Instrument leInstrument = new Instrument();
-                leInstrument.setLibelle(rs.getString("instrumentLibelle"));                
-                leInstrument.setEstInstrumentPrincipal(1);                
-                leMembre.setInstrumentPrincipal(leInstrument);    
-                lesInstruments.add(leInstrument);      
+                Instrument leInstrumentPrincipal = new Instrument();
+                leInstrumentPrincipal.setId(rs.getInt("instrumentID"));      
+                leInstrumentPrincipal.setLibelle(rs.getString("instrumentLibelle"));                
+                leInstrumentPrincipal.setEstInstrumentPrincipal(1);                
+                leMembre.setInstrumentPrincipal(leInstrumentPrincipal);    
+                lesInstruments.add(leInstrumentPrincipal);      
                 /*Instrument unInstrument = new Instrument();
                 unInstrument.setLibelle(rs.getString("instrumentLibelle"));      */ 
                 
@@ -151,8 +152,7 @@ public class DaoMembre {
                 
                 //preparation de la requete
                 requeteInstrumentMembre=connection.prepareStatement("SELECT DISTINCT libelle FROM jouer_groupe, instrument where instrument.id = instrumentID && jouer_groupe.membreID = ?");
-                requeteInstrumentMembre.setInt(1, idMembre);
-                System.out.println("Requete" + requeteInstrumentMembre);
+                requeteInstrumentMembre.setInt(1, idMembre);               
 
                 //executer la requete
                 rsInstrumentMembre=requeteInstrumentMembre.executeQuery();
@@ -160,13 +160,12 @@ public class DaoMembre {
                 //On hydrate l'objet métier Groupe et sa relation Genre avec les résultats de la requête
                 while ( rsInstrumentMembre.next() ) {
                     Instrument unInstrument = new Instrument();
+                
                     unInstrument.setLibelle(rsInstrumentMembre.getString("libelle"));                
                     unInstrument.setEstInstrumentPrincipal(0);   
                     lesInstruments.add(unInstrument);          
                 }
-                        
-                System.out.println(lesInstruments);
-                leMembre.setLesInstruments(lesInstruments);  
+                leMembre.setLesInstruments(lesInstruments); 
             }
         }
         catch (SQLException e)
@@ -249,5 +248,9 @@ public class DaoMembre {
         }
         return lesGroupes ;
     }
+    
+   /* public static Membre modifierUnMembre(Connection connection, int idMembre){
+        Membre leMembre = new Membre();
+    }*/
     
 }
