@@ -48,7 +48,7 @@
          <tbody>
              <%
     for (Membre unMembre : lesMembresGroupe) {
-        out.println("<tr><td><a href='../ServletMembre/consulter?idMembre="+unMembre.getId()+"'>");
+        out.println("<tr><td><a href='"+getServletContext().getContextPath()+"/ServletMembre/consulter?idMembre="+unMembre.getId()+"'>");
         out.println(unMembre.getPrenom());
         out.println(""); 
         out.println(unMembre.getNom());
