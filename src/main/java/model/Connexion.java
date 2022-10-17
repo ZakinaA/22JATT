@@ -15,11 +15,11 @@ public class Connexion {
     private int gradeID; 
     private String loginMail;
     private String loginPassword;
-
+    private Membre membreInfo;
     public Connexion() {
     }
     
-    public Connexion(int id, int gradeID, String loginMail, String loginPassword) {
+    public Connexion(int id, int gradeID, String loginMail, String loginPassword,Membre membreInfo) {
         this.id = id;
         this.gradeID = gradeID;
         this.loginMail = loginMail;
@@ -60,5 +60,13 @@ public class Connexion {
     }
     
     
+    public Membre getMembre() {
+        return membreInfo;
+    }
+    
+    public void setMembre(Membre membreInfo) {
+        this.membreInfo = membreInfo;
+    }
+       
 
 }

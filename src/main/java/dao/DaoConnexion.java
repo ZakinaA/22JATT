@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import model.Connexion;
+import model.Membre;
 
 /**
  *
@@ -24,7 +25,7 @@ public class DaoConnexion {
         try
         {
             //preparation de la requete
-            requete=connection.prepareStatement("SELECT id,gradeID FROM membre WHERE mail = ? && password = ?");
+            requete=connection.prepareStatement("SELECT id,gradeID,prenom,nom FROM membre WHERE mail = ? && password = ?");
             requete.setString(1, uneConnexion.getLoginMail());
             requete.setString(2, uneConnexion.getLoginPassword()); // A mettre en md5 pour le futur
             System.out.println("Requete" + requete);
@@ -33,6 +34,12 @@ public class DaoConnexion {
             if ( rs.next() ) {                
                 laConnexion.setId(rs.getInt("id"));
                 laConnexion.setGradeID(rs.getInt("gradeID"));
+                
+                Membre leMembreInformation = new Membre();
+                leMembreInformation.setPrenom(rs.getString("prenom"));
+                leMembreInformation.setNom(rs.getString("nom")); 
+                
+                laConnexion.setMembre(leMembreInformation);
             }
         }
         catch (SQLException e)

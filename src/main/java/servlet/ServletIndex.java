@@ -90,9 +90,8 @@ public class ServletIndex extends HttpServlet {
             throws ServletException, IOException {
 
         
-                String url = request.getRequestURI();
-        
-                System.out.println("ServletIndex url="+url);
+        String url = request.getRequestURI();       
+
      
 
         if(url.equals(getServletContext().getContextPath()+"/ServletIndex/index"))
@@ -130,6 +129,8 @@ public class ServletIndex extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("NormanzikAuthID", faireConnexion.getId());
                 session.setAttribute("NormanzikGradeID", faireConnexion.getGradeID());
+                
+                session.setAttribute("NormanzikNomCompte", faireConnexion.getMembre().getPrenom() + " " + faireConnexion.getMembre().getNom().toUpperCase());
                 this.getServletContext().getRequestDispatcher("/view/index/index.jsp" ).forward( request, response );
             }
         }

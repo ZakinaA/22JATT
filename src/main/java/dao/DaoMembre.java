@@ -121,7 +121,7 @@ public class DaoMembre {
         try
         {
             //preparation de la requete
-            requete=connection.prepareStatement("SELECT nom,prenom,mail, statut.libelle as statutLibelle,statut.id as statutID, instrument.libelle as instrumentLibelle,instrument.id as instrumentID FROM membre,statut, instrument WHERE statut.id = membre.statutID && instrument.id = membre.instrumentPrincipalID && membre.id = ?");
+            requete=connection.prepareStatement("SELECT nom,prenom,mail, statut.libelle as statutLibelle,statut.id as statutID, instrument.libelle as instrumentLibelle,instrument.id as instrumentID, avatar FROM membre,statut, instrument WHERE statut.id = membre.statutID && instrument.id = membre.instrumentPrincipalID && membre.id = ?");
             requete.setInt(1, idMembre);
             
             //executer la requete
@@ -133,6 +133,7 @@ public class DaoMembre {
                 leMembre.setNom(rs.getString("nom"));
                 leMembre.setPrenom(rs.getString("prenom"));
                 leMembre.setMail(rs.getString("mail"));
+                leMembre.setAvatar(rs.getString("avatar"));
                 
                 Statut leStatut = new Statut();
                 leStatut.setId(rs.getInt("statutID"));                
@@ -229,14 +230,10 @@ public class DaoMembre {
 
             //On hydrate l'objet métier Groupe et sa relation Genre avec les résultats de la requête
             while ( rs.next() ) {
-
-
                 Groupe leGroupe = new Groupe();
                 leGroupe.setId(rs.getInt("groupe.id"));
                 leGroupe.setNom(rs.getString("groupeNom"));
                 leGroupe.setDateCreation(rs.getString("dateCreationGroupe"));
-
-
                 
                 lesGroupes.add(leGroupe);
             }

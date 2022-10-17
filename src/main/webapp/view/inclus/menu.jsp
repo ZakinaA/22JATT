@@ -1,3 +1,5 @@
+<%@page import="dao.DaoConnexion"%>
+<%@page import="model.Connexion"%>
 <nav class="navbar navbar-expand-lg bg-light shadow-sm">
     
         <button class="navbar-toggler border-0 w-100 rounded-0 text-dark" style="color: #000" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,11 +30,12 @@
                 Integer NormanzikAuthID = (Integer) session.getAttribute("NormanzikAuthID"); 
                 if (NormanzikAuthID != null  && NormanzikAuthID != 0) { // Permet de vÃ©rifier si l'utilisateur est connectÃ© ou non
                     Integer NormanzikGradeID = (Integer) session.getAttribute("NormanzikGradeID"); 
+                    String NormanzikNomCompte = (String) session.getAttribute("NormanzikNomCompte"); 
             %>
                 <% if(NormanzikGradeID == 2) { %>
                 <div class="btn-group" style="margin-right: 0.7em">
                   <button type="button" class="btn border-0 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                    AccÃ¨s organisation
+                    Accès organisation (<% out.print(NormanzikNomCompte); %>)
                   </button>
                   <ul class="dropdown-menu dropdown-menu-end">
                     <li><button class="dropdown-item" type="button">Management des concerts</button></li>
@@ -40,20 +43,20 @@
                     <li><button class="dropdown-item" type="button">Management des groupes</button></li>
                     <li><hr class="dropdown-divider"></li>
                     <li><a href="<% out.print(getServletContext().getContextPath()); %>/ServletMembre/consulter?idMembre=<% out.print(NormanzikAuthID); %>" class="dropdown-item">Mon profil</a></li>
-                    <li><a href="<% out.print(getServletContext().getContextPath()); %>/ServletIndex/logout" class="dropdown-item">DÃ©connexion</a></li>
+                    <li><a href="<% out.print(getServletContext().getContextPath()); %>/ServletIndex/logout" class="dropdown-item">Déconnexion</a></li>
                   </ul>
                 </div>
                 <% } else if(NormanzikGradeID == 1) { %>
                 <% } else { %>
                     <div class="btn-group" style="margin-right: 0.7em">
                       <button type="button" class="btn border-0 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        Voir le profil
+                        Voir le profil  (<% out.print(NormanzikNomCompte); %>)
                       </button>
                       <ul class="dropdown-menu dropdown-menu-end">
                         <li><button class="dropdown-item" type="button">Consulter mes groupes</button></li>    
                         <li><hr class="dropdown-divider"></li>
                         <li><a href="<% out.print(getServletContext().getContextPath()); %>/ServletMembre/consulter?idMembre=<% out.print(NormanzikAuthID); %>" class="dropdown-item">Mon profil</a></li>
-                        <li><a href="<% out.print(getServletContext().getContextPath()); %>/ServletIndex/logout" class="dropdown-item">DÃ©connexion</a></li>
+                        <li><a href="<% out.print(getServletContext().getContextPath()); %>/ServletIndex/logout" class="dropdown-item">Déconnexion</a></li>
                       </ul>
                     </div>
                 <% } %>

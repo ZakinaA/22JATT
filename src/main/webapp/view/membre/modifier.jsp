@@ -118,7 +118,7 @@
                 </div>
                 <div class="col-md-4 mt-4">
                     <div class="card card-body">
-                        <img src="https://raw.githubusercontent.com/ZakinaA/22JATT/c5777d15cccd206839c4e50a09539670f7c48441/placeholder_default.png" class="img-fluid mr-4 shadow-sm rounded">
+                        <img src="<% out.print(getServletContext().getContextPath()); %>/libs/images/<% if(leMembre.getAvatar() != null) { out.print(leMembre.getAvatar()); } else { out.print("placeholder_default.png"); } %>" id="avatarProfil" class="img-fluid mr-4 shadow-sm rounded">
                         <div class="row mt-4">
                             <div class="col-md-6">
                                 <button type="button" class="btn btn-outline-dark w-100" data-bs-toggle="modal" data-bs-target="#openModal">Modifier l'image</button>

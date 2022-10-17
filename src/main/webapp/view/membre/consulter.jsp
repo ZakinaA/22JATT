@@ -26,7 +26,7 @@
     <div class="container-fluid" style="width: 85%;bottom: 0;top: 1">
         <% if(showBtnModifProfil == 1) { %>
             <div>
-                    <a href="/normanzik/ServletMembre/modifierprofil?idMembre=<% out.println(leMembre.getId()); %>" class="btn border-0 text-white float-end" style="background: #FD841F;text-transform: uppercase; text-align: center">Modifier mon profil</a>
+                <a href="/normanzik/ServletMembre/modifierprofil?idMembre=<% out.println(leMembre.getId()); %>" class="btn border-0 text-white float-end" style="background: #FD841F;text-transform: uppercase; text-align: center">Modifier mon profil</a>
             </div>
             <div style="clear:both;" class="mb-3"></div>
         <% } %>
@@ -36,7 +36,7 @@
                     <tbody>
                         <tr class="align-middle">
                             <td class="align-middle">
-                                <img src="https://raw.githubusercontent.com/ZakinaA/22JATT/c5777d15cccd206839c4e50a09539670f7c48441/placeholder_default.png" class="mt-3 img-fluid mr-4 shadow-sm rounded" width="120">
+                                <img src="<% out.print(getServletContext().getContextPath()); %>/libs/images/<% if(leMembre.getAvatar() != null) { out.print(leMembre.getAvatar()); } else { out.print("placeholder_default.png"); } %>" class="mt-3 img-fluid mr-4 shadow-sm rounded" width="120">
                             </td>
                             <td class="align-middle" style="width: 80%">
                                 <h2 class="text-white mb-0"><% out.print(leMembre.getPrenom()); %> <% out.print(leMembre.getNom()); %></h2>

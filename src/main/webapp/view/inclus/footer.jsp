@@ -50,7 +50,8 @@
 
     
     function deleteImageProfil(source) {
-        alert(source);
+        //$('#avatarProfil').remove();
+        $('#avatarProfil').attr('src', '<% out.print(getServletContext().getContextPath()); %>/libs/images/placeholder_default.png');
     }
     
     function deleteInstrumentMembre(instrumentOrder) {
