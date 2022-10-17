@@ -8,7 +8,7 @@
     String pageID = "festivalsection"; 
     Festival unFestival = (Festival)request.getAttribute("pFestival");
     Participer_Festival uneParticipation = (Participer_Festival)request.getAttribute("pParticiper_Festival");
-    Festival teteAffiche = (Festival)request.getAttribute("pTeteAffiche");
+    Participer_Festival teteAffiche = (Participer_Festival)request.getAttribute("pTeteAffiche");
     ArrayList<Groupe> lesGroupes = (ArrayList)request.getAttribute("pGroupes");
 %>
 <%@ include file="../inclus/head.jsp" %>
@@ -27,7 +27,7 @@
                     </tr>
                     <tr>
                         <td>Tete d'affiche</td>
-                        <td><%out.println(teteAffiche.getNom());%></td>
+                        <td><%out.println(teteAffiche.getTeteAffiche());%></td>
                     </tr>
                 </tbody>
             </table>
