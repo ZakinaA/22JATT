@@ -254,12 +254,14 @@ public class DaoMembre {
         int resultatType = -1;
         try
         {
-            requete=connection.prepareStatement("UPDATE membre SET nom = ?, prenom = ?, mail = ?,statutID = ? WHERE id = 1");
+            requete=connection.prepareStatement("UPDATE membre SET nom = ?, prenom = ?, mail = ?,statutID = ?, instrumentPrincipalID = ? WHERE id = ?");
 
             requete.setString(1, unMembre.getNom());
             requete.setString(2, unMembre.getPrenom());
             requete.setString(3, unMembre.getMail());
             requete.setInt(4, unMembre.getStatutMembre().getId());
+            requete.setInt(5, unMembre.getInstrumentPrincipal().getId());
+            requete.setInt(6, unMembre.getId());
             System.out.println(requete);
             rs=requete.executeQuery();
             resultatType = 1;

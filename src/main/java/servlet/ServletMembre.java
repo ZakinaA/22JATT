@@ -180,6 +180,22 @@ public class ServletMembre extends HttpServlet {
             
             if (form.getErreurs().isEmpty()){
                 int membreModifie = DaoMembre.modifierUnMembre(connection, leMembreSaisi);
+                
+            int idMembre = leMembreSaisi.getId();              
+            Membre leMembre = DaoMembre.getLeMembre(connection, idMembre);
+            request.setAttribute("pMembre", leMembre);
+            
+            ArrayList<Groupe> lesGroupesMembre = DaoMembre.getLesGroupesMembre(connection, idMembre);
+            request.setAttribute("pLesGroupesMembre", lesGroupesMembre);
+            
+            ArrayList<Instrument> lesInstruments = DaoInstrument.getLesInstruments(connection);
+            request.setAttribute("pLesInstruments", lesInstruments);
+            
+            ArrayList<Statut> lesStatuts = DaoAdmin.getLesStatuts(connection);
+            request.setAttribute("pLesStatuts", lesStatuts);
+            
+            this.getServletContext().getRequestDispatcher("/view/membre/modifier.jsp" ).forward( request, response );
+        
             }
             System.out.println("lui");
         } else {

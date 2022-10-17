@@ -131,7 +131,8 @@
                 </div>
             </div>
             <div class="float-end">
-                <input type="text" name="formType" value="1">
+                <input type="hidden" name="formType" value="1">
+                <input type="hidden" name="membreID" value="<% out.print(leMembre.getId()); %>">
                 <button type="submit" class="btn mt-2 text-white w-100 btnHover border-0" style="background: #FD841F;text-transform: uppercase; text-align: center">Sauvegarder mes modifications</button>          
             </div>
         </form>
