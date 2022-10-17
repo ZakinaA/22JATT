@@ -21,18 +21,18 @@
             <form class="form-inline" action="ajouter" method="POST">
                 <h3>Création d'un concert</h3>
                 <div class="mb-3">
-                    <label for="nomInput" class="form-label">Date : </label>
-                    <input id="nomInput" type="text" name="nom"  class="form-control">
+                    <label for="dateInput" class="form-label">Date : </label>
+                    <input id="dateInput" type="text" name="date"  class="form-control">
                     <span style="color: blue;">${form.erreurs['nom']}</span>
                 </div>
                 <div class="mb-3">
-                    <label for="prenomInput" class="form-label">Heure Debut : </label>
-                    <input id="prenomInput" type="text" name="prenom"  size="70" maxlength="70" class="form-control">
+                    <label for="HeureDInput" class="form-label">Heure Debut : </label>
+                    <input id="HeureDInput" type="text" name="HeureD"  size="70" maxlength="70" class="form-control">
                     <span style="color: blue;">${form.erreurs['prenom']}</span>     
                 </div>
                 <div class="mb-3">
-                    <label for="prenomInput" class="form-label">Heure Fin : </label>
-                    <input id="prenomInput" type="text" name="motdePasse"  size="70" maxlength="70" class="form-control">
+                    <label for="HeureFInput" class="form-label">Heure Fin : </label>
+                    <input id="HeureFInput" type="text" name="HeureF"  size="70" maxlength="70" class="form-control">
                     <span style="color: blue;">${form.erreurs['motdePasse']}</span>     
                 </div>
                
@@ -58,10 +58,13 @@
                             LieuConcert lieuconcert = lesLieuConcerts.get(i);
                             out.println("<option value='" + lieuconcert.getId()+"'> Nom : " + lieuconcert.getNom()+"/ Ville : "+lieuconcert.getVille()+" / CP : "+lieuconcert.getCp()+"/ Nom de la salle : "+lieuconcert.getSalleNom()+"</option>" );
                         }
+                        
                     %>
-
+                   href="/normanzik/ServletConcert/lister"
                     </select>
                 </div>
+                  <a class="btn btn-primary" href="/normanzik/ServletLieuConcert/ajouter">Ajouter une localisation </a>
+          
               
                 <button type="submit" class="btn btn-light float-end">Ajout concert</button>  
             </form> 

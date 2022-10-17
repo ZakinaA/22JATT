@@ -85,14 +85,14 @@ public class ServletDispositif extends HttpServlet {
         System.out.println("servlergroupe url="+url);
 
         //Affichage de tous les groupes (en indiquant le libellé du genre musical)
-        if(url.equals(getServletContext().getContextPath()+"/ServletDispositif/lister")){
+        if(url.equals("/normanzik/ServletDispositif/lister")){
             
             ArrayList<Dispositif> lesDispositif = DaoDispositif.getLesDispositifs(connection);
             request.setAttribute("pLesDispositif", lesDispositif);
             this.getServletContext().getRequestDispatcher("/view/dispositif/lister.jsp" ).forward( request, response );
         }
         
-        if(url.equals(getServletContext().getContextPath()+"/ServletDispositif/lister-groupe")){
+        if(url.equals("/normanzik/ServletDispositif/lister-groupe")){
             int idDispositif = Integer.parseInt(request.getParameter("idDispositif"));  
             ArrayList<Groupe> lesGroupesDispositif = DaoDispositif.getLesGroupesDispositif(connection, idDispositif);
             request.setAttribute("pLesGroupesDispositif", lesGroupesDispositif);

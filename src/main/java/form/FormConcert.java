@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import model.Concert;
+import model.Groupe;
+import model.LieuConcert;
 
 /**
  *
@@ -62,15 +64,17 @@ public class FormConcert {
 
         //récupération dans des variables des données saisies dans les champs de formulaire
         String nom = getDataForm( request, "nom" );
-        String prenom = getDataForm( request, "prenom");
-        int instrumentPrincipalID = Integer.parseInt(getDataForm( request, "instrumentPrincipalID" ));
-        int statutID = Integer.parseInt(getDataForm( request, "statutID" ));
+        String date = getDataForm( request, "dateConcert");
+        String HeureD = getDataForm( request, "HeureDebut");
+        String HeureF = getDataForm( request, "HeureFin");
+        int lieuConcertID = Integer.parseInt(getDataForm( request, "lieuConcertID" ));
+        int GroupeID = Integer.parseInt(getDataForm( request, "GroupeID" ));
         try {
             validationNom( nom );
         } catch ( Exception e ) {
             setErreur( "nom", e.getMessage() );
         }
-        unConcert.setNom(nom);
+        
       
         
         if ( erreurs.isEmpty() ) {
@@ -82,15 +86,16 @@ public class FormConcert {
 
         // hydratation de l'objet groupe avec les variables valorisées ci-dessus
 
-        Instrument leInstrumentPrincipal = new Instrument();
-        leInstrumentPrincipal.setId(instrumentPrincipalID);
-        unMembre.setInstrumentPrincipal(leInstrumentPrincipal);
+        Groupe leGroupe = new Groupe();
+        leGroupe.setId(groupeID);
+        unGroupe.setInstrumentPrincipal(setGroupeConcertId);
         
-        Statut leStatut = new Statut();
-        leStatut.setId(statutID);
+        LieuConcert lelieuConcert = new LieuConcert();
+        lelieuConcert.setId(statutID);
         
-        unMembre.setStatutMembre(leStatut);
-        return unMembre;
+        unConcert.setLieuConcertId(lelieuConcert);
+        
+        return unConcert;
      }
     
 }

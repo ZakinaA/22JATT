@@ -21,12 +21,12 @@
         <servlet-class>servlet.ServletDispositif</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>ServletFestival</servlet-name>
-        <servlet-class>servlet.ServletFestival</servlet-class>
-    </servlet>
-    <servlet>
         <servlet-name>ServletConcert</servlet-name>
         <servlet-class>servlet.ServletConcert</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletLieuConcert</servlet-name>
+        <servlet-class>servlet.ServletLieuConcert</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ServletGroupe</servlet-name>
@@ -73,8 +73,8 @@
         <url-pattern>/ServletConcert/ajouter</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ServletFestival</servlet-name>
-        <url-pattern>/ServletFestival/consulter</url-pattern>
+        <servlet-name>ServletLieuConcert</servlet-name>
+        <url-pattern>/ServletLieuConcert/ajouter</url-pattern>
     </servlet-mapping>
     <session-config>        
         <session-timeout>

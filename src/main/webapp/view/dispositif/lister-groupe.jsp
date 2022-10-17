@@ -4,9 +4,9 @@
 <%@page import="java.util.ArrayList"%>
 <%
     int cardOrder = 0;
-    ArrayList<Groupe> lesGroupesDispositif = (ArrayList)request.getAttribute("pLesGroupesDispositif");
-    String pageName = "Consulter un dispositif";
-    String pageID = "listesDispositifs";     
+    String pageName = "Liste des groupes";
+    String pageID = "listesGroupes"; 
+    ArrayList<Groupe> lesGroupesDispositif = (ArrayList)request.getAttribute("pLesGroupesDispositif");    
 %>
 
     <%@ include file="../inclus/head.jsp" %>
@@ -29,7 +29,7 @@
     
     
 
-
+}
   </style>
   
     <div class="container-fluid" style="width: 85%;bottom: 0;top: 1">
@@ -95,8 +95,7 @@
                   </table>
                 </div>
                 
-          <a href="<%out.print(getServletContext().getContextPath()); %>/ServletGroupe/consulter?idGroupe=<% out.println(unGroupe.getId()); %>" class="btn mt-2 text-white w-100 btnHover" style="background: #FD841F;text-transform: uppercase; text-align: center">VOIR PLUS</a>          
-          
+          <a href="#" class="btn mt-2 text-white w-100 btnHover" style="background: #FD841F;text-transform: uppercase; text-align: center">VOIR PLUS</a>          
                </div>
             </div>
         </div>  
@@ -106,3 +105,7 @@
         </div>
     </div>
     <%@ include file="../inclus/footer.jsp" %>
+
+
+</body>
+</html>

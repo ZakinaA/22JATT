@@ -24,6 +24,10 @@
         <servlet-name>ServletConcert</servlet-name>
         <servlet-class>servlet.ServletConcert</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletLieuConcert</servlet-name>
+        <servlet-class>servlet.ServletLieuConcert</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletGroupe</servlet-name>
         <url-pattern>/ServletGroupe/consulter</url-pattern>
@@ -67,6 +71,10 @@
     <servlet-mapping>
         <servlet-name>ServletConcert</servlet-name>
         <url-pattern>/ServletConcert/ajouter</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletLieuConcert</servlet-name>
+        <url-pattern>/ServletLieuConcert/ajouter</url-pattern>
     </servlet-mapping>
     <session-config>        
         <session-timeout>

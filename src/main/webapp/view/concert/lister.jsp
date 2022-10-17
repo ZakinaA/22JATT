@@ -28,11 +28,13 @@
        <th scope="col">Fin</th>
     </tr>
   </thead>
+   <a class="btn btn-primary" href="/normanzik/ServletConcert/ajouter">Ajouter un concert </a>
     <%
             for (Concert unConcert : lesConcerts) {
             
         %>
   <tbody>
+      
     <tr>
         
       <th scope="row"><% out.println(unConcert.getId()); %></th>

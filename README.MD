@@ -23,5 +23,4 @@ Accès aux users stories :
 ```
 git config --global user.name "votreusernameGithub" 
 git config --global user.email "votremailducompteGithub"
-
 ```

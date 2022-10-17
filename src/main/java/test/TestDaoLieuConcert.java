@@ -23,5 +23,13 @@ public class TestDaoLieuConcert {
             LieuConcert ct = lesLieuConcert.get(dispositifOrder);
             System.out.println("Nom du lieu : "+ct.getNom()+", ville : "+ct.getVille());
         }
+        
+        LieuConcert lieuconcert =  new LieuConcert();  
+        lieuconcert.setNom("LesEtoiles");
+        lieuconcert.setVille("Caen");
+        lieuconcert.setCp(14000);
+        lieuconcert.setSalleNom("Théâtre ");
+                
+        LieuConcert leConcertInserer = DaoLieuConcert.ajouterLieuConcert(con,lieuconcert);
    }
 }

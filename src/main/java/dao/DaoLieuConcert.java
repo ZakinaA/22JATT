@@ -67,12 +67,12 @@ public class DaoLieuConcert {
             // gpe_id (clé primaire de la table groupe) est en auto_increment,donc on ne renseigne pas cette valeur
             // le paramètre RETURN_GENERATED_KEYS est ajouté à la requête afin de pouvoir récupérer l'id généré par la bdd (voir ci-dessous)
             // supprimer ce paramètre en cas de requête sans auto_increment.
-            requete=connection.prepareStatement("INSERT INTO membre ( id, nom, ville, salleNom)\n" +
+            requete=connection.prepareStatement("INSERT INTO lieuconcert ( nom, ville, salleNom, codePostal)\n" +
                     "VALUES (?,?,?, ?)", requete.RETURN_GENERATED_KEYS );
-            requete.setInt(1, unLieuConcert.getId());
-            requete.setString(2, unLieuConcert.getNom());
-            requete.setString(3, unLieuConcert.getVille());
-            requete.setString(4, unLieuConcert.getSalleNom());
+            requete.setString(1, unLieuConcert.getNom());
+            requete.setString(2, unLieuConcert.getVille());
+            requete.setString(3, unLieuConcert.getSalleNom());
+            requete.setInt(4, unLieuConcert.getCp());
 
             System.out.println("requeteInsertion=" + requete);
             /* Exécution de la requête */
