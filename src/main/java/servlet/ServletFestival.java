@@ -114,7 +114,7 @@ public class ServletFestival extends HttpServlet {
             this.getServletContext().getRequestDispatcher("/view/festival/consulter.jsp" ).forward( request, response );
         }
         
-        if(url.equals("/normanzik/ServletGroupe/ajouter"))
+        if(url.equals("/normanzik/ServletFestival/ajouter"))
         {
             ArrayList<Groupe> lesGroupes = DaoGroupe.getLesGroupes(connection);
             request.setAttribute("pLesGroupes", lesGroupes);
@@ -143,7 +143,7 @@ public class ServletFestival extends HttpServlet {
         request.setAttribute( "form", form );
         request.setAttribute( "pFestival", leFestivalSaisi );
         
-        if (form.getErreurs().isEmpty()){
+        /*if (form.getErreurs().isEmpty()){
             Festival festivalAjoute = DaoFestival.ajouterFestival(connection, leFestivalSaisi);
             
             if (festivalAjoute != null ){
@@ -175,9 +175,8 @@ public class ServletFestival extends HttpServlet {
             ArrayList<Groupe> lesGroupes = DaoGroupe.getLesGroupes(connection);
             request.setAttribute("pLesGroupes", lesGroupes);
             this.getServletContext().getRequestDispatcher("/view/festival/ajouter.jsp" ).forward( request, response );
-        }
-            
-        }
+        }  */
+    }
     
         
     

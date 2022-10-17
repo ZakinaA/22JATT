@@ -16,6 +16,14 @@ import model.Participer_Festival;
  */
 public class FormFestival {
 
+    public Object getErreurs() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    public Festival ajouterFestival(HttpServletRequest request) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 
 
 public class FormGroupe {
