@@ -88,6 +88,7 @@ public class FormGroupe {
         String dateDebut = getDataForm( request, "dateDebut");
         String dateFin = getDataForm( request, "dateFin");
         int idGroupe = Integer.parseInt(getDataForm( request, "idGroupe" ));
+        int teteAfficheID = Integer.parseInt(getDataForm( request, "teteAfficheID" ));
         //int dispositifID = Integer.parseInt(getDataForm( request, "dispositifID" ));
         
         try {
@@ -126,11 +127,20 @@ public class FormGroupe {
         uneParticipation.setTeteAffiche(leGroupe.getNom());
         
         
+        
+        uneParticipation.setUnFestival(unFestival);
+        teteAfficheID = uneParticipation.getUnFestival().getId();
+        if(teteAfficheID == -1) {
+            String groupeAjout = getDataForm(request, "groupeAjout");
+            uneParticipation.setTeteAffiche(groupeAjout);
+        }
+        //uneParticipation.setTeteAffiche(teteAffiche);
+        
         /*Dispositif leDispositif = new Dispositif();
         leDispositif.setId(dispositifID);
         unGroupe.setDispositifGroupe(leDispositif);*/
         return unFestival ;
     }
-}
+    }
 
 }

@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@page import="model.Groupe"%>
-<%@ page import="form.FormGroupe" %>
-<%@ page import="model.Genre" %>
+<%@page import="model.Festival"%>
+<%@ page import="form.FormFestival" %>
+<%@ page import="model.Groupe" %>
 <%@ page import="java.util.ArrayList" %>
 <%
     String pageName = "Création d'un festival";
@@ -14,7 +14,7 @@
     
       <%
       //Client client=(Client)request.getAttribute("client");
-      FormGroupe form = (formFestival)request.getAttribute("form");
+      FormFestival form = (FormFestival)request.getAttribute("form");
   %>
       <section class="vh-100 bg-image"
       >
@@ -24,39 +24,34 @@
             <div class="col-12 col-md-9 col-lg-7 ">
               <div class="card" style="  ">
                 <div class="card-body p-5">
-                  <h2 class="text-uppercase text-center mb-5">Inscription des groupes</h2>
+                  <h2 class="text-uppercase text-center mb-5">Nouveau festival</h2>
                       <form class="form-inline" action="ajouter" method="POST">    
                     <div class="form-outline mb-4">
-                      <label class="form-label" for="nom">Nom</label>
+                      <label class="form-label" for="nom">Nom du festival</label>
                       <input type="text" id="nom" name="nom" class="form-control form-control-lg" />
                       <span style="color: blue;">${form.erreurs['nom']}</span>
                     </div>
     
                     <div class="form-outline mb-4">
                       <label class="form-label" for="dateCreation">Date de début</label>
-                      <input type="date" id="dateCreation" name="dateCreation" class="form-control form-control-lg" />
+                      <input type="date" id="dateDebut" name="dateDebut" class="form-control form-control-lg" />
                       <span style="color: blue;">${form.erreurs['dateCreation']}</span>
                     </div>
     
                     <div class="form-outline mb-4">
                       <label class="form-label" for="numTelInput">Date de Fin</label>
-                      <input type="text" id="numTelInput" name="numTel" class="form-control form-control-lg" />
+                      <input type="date" id="dateFin" name="dateFin" class="form-control form-control-lg" />
                       <span style="color: blue;">${form.erreurs['numTel']}</span>
                     </div>
-
-                    <div class="form-outline mb-4">
-                      <label class="form-label" for="mailAddressInput">Tete d'affiche</label>
-                      <input type="mail" id="mailAddressInput" name="mailAddress" class="form-control form-control-lg" />
-                      <span style="color: blue;">${form.erreurs['addressMail']}</span>
-                    </div>
+                  
                   <div class="form-outline mb-4">
-                    <label class="form-label" for="genre">Genre</label> 
-                    <select class="form-select" aria-label="Default select example" name="idGenre">
+                    <label class="form-label" for="genre">Tete d'affiche</label> 
+                    <select class="form-select" aria-label="Default select example" id="teteAfficheID" name="teteAfficheID">
                       <%
                       ArrayList<Groupe> lesGroupes = (ArrayList)request.getAttribute("pLesGroupes");
                       for (int i=0; i<lesGroupes.size();i++){
                           Groupe g = lesGroupes.get(i);
-                          out.println("<option value='" + g.getId()+"'>" + g.getNom()+"</option>" );
+                          out.println("<option value='" + g.getId()+"'>"+ g.getNom()+"</option>" );
                       }
                   %>
                     </select> 

@@ -31,7 +31,7 @@ public class DaoGroupe {
         try
         {
             //preparation de la requete
-            requete=connection.prepareStatement("select * from groupe, genre_musical where genreID = genre_musical.id");
+            requete=connection.prepareStatement("select * from groupe, genremusical where genreID = genre_musical.id");
             //System.out.println("Requete" + requete);
 
             //executer la requete
@@ -51,8 +51,8 @@ public class DaoGroupe {
 
                 
                 Genre leGenre = new Genre();
-                leGenre.setId(rs.getInt("genre_musical.id"));
-                leGenre.setLibelle(rs.getString("genre_musical.libelle"));
+                leGenre.setId(rs.getInt("genremusical.id"));
+                leGenre.setLibelle(rs.getString("genremusical.libelle"));
                 
                 
                 //preparation de la requete

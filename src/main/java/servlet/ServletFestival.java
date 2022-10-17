@@ -119,6 +119,9 @@ public class ServletFestival extends HttpServlet {
             ArrayList<Groupe> lesGroupes = DaoGroupe.getLesGroupes(connection);
             request.setAttribute("pLesGroupes", lesGroupes);
             
+            ArrayList<Festival> lesFestivals = DaoFestival.getLesFestivals(connection);
+            request.setAttribute("pLesFestivals", lesFestivals);
+            
             this.getServletContext().getRequestDispatcher("/view/festival/ajouter.jsp" ).forward( request, response );
         }
         
@@ -143,7 +146,7 @@ public class ServletFestival extends HttpServlet {
         request.setAttribute( "form", form );
         request.setAttribute( "pFestival", leFestivalSaisi );
         
-        /*if (form.getErreurs().isEmpty()){
+        if (form.getErreurs().equals("null")){
             Festival festivalAjoute = DaoFestival.ajouterFestival(connection, leFestivalSaisi);
             
             if (festivalAjoute != null ){
@@ -175,7 +178,7 @@ public class ServletFestival extends HttpServlet {
             ArrayList<Groupe> lesGroupes = DaoGroupe.getLesGroupes(connection);
             request.setAttribute("pLesGroupes", lesGroupes);
             this.getServletContext().getRequestDispatcher("/view/festival/ajouter.jsp" ).forward( request, response );
-        }  */
+        }  
     }
     
         
