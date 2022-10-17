@@ -249,16 +249,19 @@ public class DaoMembre {
         return lesGroupes ;
     }
     
-    public static Membre modifierUnMembre(Connection connection, int idMembre){
+    public static int modifierUnMembre(Connection connection, Membre unMembre){
         Membre leMembre = new Membre();
         int resultatType = -1;
         try
         {
-            requete=connection.prepareStatement("UPDATE membre SET nom = ?, prenom = ?, mail = ? WHERE id = 1");
-            requete.setString(1, leMembre.getNom());
-            requete.setString(2, leMembre.getPrenom());
-            requete.setString(3, leMembre.getMail());
-            
+            requete=connection.prepareStatement("UPDATE membre SET nom = ?, prenom = ?, mail = ?,statutID = ? WHERE id = 1");
+
+            requete.setString(1, unMembre.getNom());
+            requete.setString(2, unMembre.getPrenom());
+            requete.setString(3, unMembre.getMail());
+            requete.setInt(4, unMembre.getStatutMembre().getId());
+            System.out.println(requete);
+            rs=requete.executeQuery();
             resultatType = 1;
         }
             

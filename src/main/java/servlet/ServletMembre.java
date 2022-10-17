@@ -179,7 +179,7 @@ public class ServletMembre extends HttpServlet {
             request.setAttribute( "pMembre", leMembreSaisi );
             
             if (form.getErreurs().isEmpty()){
-                Membre membreModifie = DaoMembre.modifierUnMembre(connection, leMembreSaisi);
+                int membreModifie = DaoMembre.modifierUnMembre(connection, leMembreSaisi);
             }
             System.out.println("lui");
         } else {
