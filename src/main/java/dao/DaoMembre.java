@@ -249,8 +249,26 @@ public class DaoMembre {
         return lesGroupes ;
     }
     
-   /* public static Membre modifierUnMembre(Connection connection, int idMembre){
+    public static Membre modifierUnMembre(Connection connection, int idMembre){
         Membre leMembre = new Membre();
-    }*/
+        int resultatType = -1;
+        try
+        {
+            requete=connection.prepareStatement("UPDATE membre SET nom = ?, prenom = ?, mail = ? WHERE id = 1");
+            requete.setString(1, leMembre.getNom());
+            requete.setString(2, leMembre.getPrenom());
+            requete.setString(3, leMembre.getMail());
+            
+            resultatType = 1;
+        }
+            
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+            //out.println("Erreur lors de l’établissement de la connexion");            
+            resultatType = 0;
+        }
+        return resultatType;
+    }
     
 }
