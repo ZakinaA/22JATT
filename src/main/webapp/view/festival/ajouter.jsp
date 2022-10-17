@@ -27,35 +27,37 @@
                   <h2 class="text-uppercase text-center mb-5">Nouveau festival</h2>
                       <form class="form-inline" action="ajouter" method="POST">    
                     <div class="form-outline mb-4">
-                      <label class="form-label" for="nom">Nom du festival</label>
+                      <label class="form-label" for="nom">Nom du festival :</label>
                       <input type="text" id="nom" name="nom" class="form-control form-control-lg" />
                       <span style="color: blue;">${form.erreurs['nom']}</span>
                     </div>
     
                     <div class="form-outline mb-4">
-                      <label class="form-label" for="dateCreation">Date de début</label>
+                      <label class="form-label" for="dateCreation">Date de début :</label>
                       <input type="date" id="dateDebut" name="dateDebut" class="form-control form-control-lg" />
                       <span style="color: blue;">${form.erreurs['dateCreation']}</span>
                     </div>
     
                     <div class="form-outline mb-4">
-                      <label class="form-label" for="numTelInput">Date de Fin</label>
+                      <label class="form-label" for="numTelInput">Date de Fin :</label>
                       <input type="date" id="dateFin" name="dateFin" class="form-control form-control-lg" />
                       <span style="color: blue;">${form.erreurs['numTel']}</span>
                     </div>
-                  
-                  <div class="form-outline mb-4">
-                    <label class="form-label" for="genre">Tete d'affiche</label> 
-                    <select class="form-select" aria-label="Default select example" id="teteAfficheID" name="teteAfficheID">
-                      <%
-                      ArrayList<Groupe> lesGroupes = (ArrayList)request.getAttribute("pLesGroupes");
-                      for (int i=0; i<lesGroupes.size();i++){
-                          Groupe g = lesGroupes.get(i);
-                          out.println("<option value='" + g.getId()+"'>"+ g.getNom()+"</option>" );
-                      }
-                  %>
-                    </select> 
-                  </div>      
+            
+                    
+                       <div class="mb-3">
+                    <label for="genre" class="form-label">Tete d'affiche : </label>
+                    <select id="instrumentPrincipalID" name="instrumentPrincipalID" class="form-select" onchange="selectInstrumentPrincipal()">
+                    <%
+                        ArrayList<Groupe> lesGroupes = (ArrayList)request.getAttribute("pLesGroupes");
+                        for (int i=0; i<lesGroupes.size();i++){
+                            Groupe ins = lesGroupes.get(i);
+                            out.println("<option value='" + ins.getId()+"'>" + ins.getNom()+"</option>" );
+                        }
+                    %>
+       
+                    </select>
+                </div>
                     
                        
     

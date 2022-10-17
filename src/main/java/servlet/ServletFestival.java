@@ -116,7 +116,7 @@ public class ServletFestival extends HttpServlet {
         
         if(url.equals("/normanzik/ServletFestival/ajouter"))
         {
-            ArrayList<Groupe> lesGroupes = DaoGroupe.getLesGroupes(connection);
+           ArrayList<Groupe> lesGroupes = DaoGroupe.getLesGroupes(connection);
             request.setAttribute("pLesGroupes", lesGroupes);
             
             ArrayList<Festival> lesFestivals = DaoFestival.getLesFestivals(connection);
