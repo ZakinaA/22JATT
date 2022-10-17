@@ -55,9 +55,9 @@
                             out.println("<option value='" + ins.getId()+"'>" + ins.getNom()+"</option>" );
                         }
                     %>
-       
                     </select>
                 </div>
+                <input type="hidden" id="nouveauGroupe" name="groupeAjout" value="">
                     
                        
     
