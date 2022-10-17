@@ -26,7 +26,7 @@ import model.Groupe;
 import model.Instrument;
 import model.Membre;
 import model.Statut;
-
+import javax.servlet.http.HttpSession;
 /**
  *
  * @author Zakina
@@ -97,7 +97,7 @@ public class ServletMembre extends HttpServlet {
         System.out.println("servlermembre url="+url);
 
         
-        if(url.equals("/normanzik/ServletMembre/lister"))
+        if(url.equals(getServletContext().getContextPath()+"/ServletMembre/lister"))
         {
             ArrayList<Membre> lesMembres = DaoMembre.getLesMembres(connection);
             request.setAttribute("pLesMembres", lesMembres);
@@ -108,18 +108,21 @@ public class ServletMembre extends HttpServlet {
             request.setAttribute("pMembre", leMembre);*/
             this.getServletContext().getRequestDispatcher("/view/membre/lister.jsp" ).forward( request, response );
         }
-        if(url.equals("/normanzik/ServletMembre/consulter"))
+        if(url.equals(getServletContext().getContextPath()+"/ServletMembre/consulter"))
         {
-            int idMembre = Integer.parseInt(request.getParameter("idMembre"));  
-            
+           
+            int idMembre = Integer.parseInt(request.getParameter("idMembre"));              
             Membre leMembre = DaoMembre.getLeMembre(connection, idMembre);
-
             request.setAttribute("pMembre", leMembre);
+            
+            ArrayList<Groupe> lesGroupesMembre = DaoMembre.getLesGroupesMembre(connection, idMembre);
+            request.setAttribute("pLesGroupesMembre", lesGroupesMembre);
+
             this.getServletContext().getRequestDispatcher("/view/membre/consulter.jsp" ).forward( request, response );
         }
         
         
-        if(url.equals("/normanzik/ServletMembre/ajouter"))
+        if(url.equals(getServletContext().getContextPath()+"/ServletMembre/ajouter"))
         {
            
             ArrayList<Instrument> lesInstruments = DaoInstrument.getLesInstruments(connection);
@@ -128,6 +131,24 @@ public class ServletMembre extends HttpServlet {
             ArrayList<Statut> lesStatuts = DaoAdmin.getLesStatuts(connection);
             request.setAttribute("pLesStatuts", lesStatuts);
             this.getServletContext().getRequestDispatcher("/view/membre/ajouter.jsp" ).forward( request, response );
+        }
+        
+        if(url.equals(getServletContext().getContextPath()+"/ServletMembre/modifierprofil"))
+        {
+            int idMembre = Integer.parseInt(request.getParameter("idMembre"));              
+            Membre leMembre = DaoMembre.getLeMembre(connection, idMembre);
+            request.setAttribute("pMembre", leMembre);
+            
+            ArrayList<Groupe> lesGroupesMembre = DaoMembre.getLesGroupesMembre(connection, idMembre);
+            request.setAttribute("pLesGroupesMembre", lesGroupesMembre);
+            
+            ArrayList<Instrument> lesInstruments = DaoInstrument.getLesInstruments(connection);
+            request.setAttribute("pLesInstruments", lesInstruments);
+            
+            ArrayList<Statut> lesStatuts = DaoAdmin.getLesStatuts(connection);
+            request.setAttribute("pLesStatuts", lesStatuts);
+            
+            this.getServletContext().getRequestDispatcher("/view/membre/modifier.jsp" ).forward( request, response );
         }
     }
 
@@ -143,43 +164,82 @@ public class ServletMembre extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         FormMembre form = new FormMembre();
+        int formType = Integer.parseInt(request.getParameter("formType"));
 
-        /* Appel au traitement et à la validation de la requête, et récupération de l'objet en résultant */
-        Membre leMembreSaisi = form.ajouterMembre(request);
+        /*
+        * formtype = 1 : Modifier un profil membre
+        * formtype = vide : création d'un membre
+        */
 
-        /* Stockage du formulaire et de l'objet dans l'objet request */
-        request.setAttribute( "form", form );
-        request.setAttribute( "pMembre", leMembreSaisi );
+        System.out.println(formType);
+        if(formType == 1) {
+            Membre leMembreSaisi = form.modifierMembre(request);
+                        
+            request.setAttribute( "form", form );
+            request.setAttribute( "pMembre", leMembreSaisi );
+            
+            if (form.getErreurs().isEmpty()){
+                int membreModifie = DaoMembre.modifierUnMembre(connection, leMembreSaisi);
+                
+                int idMembre = leMembreSaisi.getId();              
+                Membre leMembre = DaoMembre.getLeMembre(connection, idMembre);
+                request.setAttribute("pMembre", leMembre);
+            
+                ArrayList<Groupe> lesGroupesMembre = DaoMembre.getLesGroupesMembre(connection, idMembre);
+                request.setAttribute("pLesGroupesMembre", lesGroupesMembre);
+            
+                ArrayList<Instrument> lesInstruments = DaoInstrument.getLesInstruments(connection);
+                request.setAttribute("pLesInstruments", lesInstruments);
+            
+                ArrayList<Statut> lesStatuts = DaoAdmin.getLesStatuts(connection);
+                request.setAttribute("pLesStatuts", lesStatuts);
+                HttpSession session = request.getSession();
+                session.setAttribute("NormanzikNomCompte", leMembreSaisi.getPrenom() + " " + leMembreSaisi.getNom().toUpperCase());
+                session.setAttribute("notifMessage", "Votre profil a bien été mis à jour."); // On met un '1' à l'attribut permettant d'afficher les notifications   
+                session.setAttribute("showNotifMessage", 1); // On met un '1' à l'attribut permettant d'afficher les notifications   
+                this.getServletContext().getRequestDispatcher("/view/membre/modifier.jsp" ).forward( request, response );
+            
+            }
+            System.out.println("lui");
+        } else {
+            System.out.println("autre");
+            /*Membre leMembreSaisi = form.ajouterMembre(request);
 
-        if (form.getErreurs().isEmpty()){
-            System.out.println("insert 1");
-            // Il n'y a pas eu d'erreurs de saisie, donc on renvoie la vue affichant les infos du groupe
-            Membre membreAjoute = DaoMembre.ajouterMembre(connection, leMembreSaisi);
+            
+            request.setAttribute( "form", form );
+            request.setAttribute( "pMembre", leMembreSaisi );
 
-            if (membreAjoute != null ){
-                System.out.println("insert 2");
-                request.setAttribute("pMembre", membreAjoute);
-                this.getServletContext().getRequestDispatcher("/view/membre/consulter.jsp" ).forward( request, response );
+            if (form.getErreurs().isEmpty()){
+                Membre membreAjoute = DaoMembre.ajouterMembre(connection, leMembreSaisi);
+
+                if (membreAjoute != null ){
+                    request.setAttribute("pMembre", membreAjoute);      
+
+                    ArrayList<Groupe> lesGroupesMembre = DaoMembre.getLesGroupesMembre(connection, membreAjoute.getId());
+                    request.setAttribute("pLesGroupesMembre", lesGroupesMembre);
+                    this.getServletContext().getRequestDispatcher("/view/membre/consulter.jsp" ).forward( request, response );
+                }
+                else
+                {
+                    // Cas où l'insertion en bdd a échoué
+                    ArrayList<Instrument> lesInstruments = DaoInstrument.getLesInstruments(connection);
+                    request.setAttribute("pLesInstruments", lesInstruments);
+
+                    ArrayList<Statut> lesStatuts = DaoAdmin.getLesStatuts(connection);
+                    request.setAttribute("pLesStatuts", lesStatuts);
+                    this.getServletContext().getRequestDispatcher("/view/membre/ajouter.jsp" ).forward( request, response );
+                }
             }
             else
             {
-                // Cas où l'insertion en bdd a échoué
-                //On renvoie vers le formulaire
-               /* ArrayList<Genre> lesGenres = DaoAdmin.getLesGenres(connection);
-                request.setAttribute("pLesGenres", lesGenres);
-                System.out.println("le groupe est null en bdd- echec en bdd");*/
+                ArrayList<Instrument> lesInstruments = DaoInstrument.getLesInstruments(connection);
+                request.setAttribute("pLesInstruments", lesInstruments);
+
+                ArrayList<Statut> lesStatuts = DaoAdmin.getLesStatuts(connection);
+                request.setAttribute("pLesStatuts", lesStatuts);
                 this.getServletContext().getRequestDispatcher("/view/membre/ajouter.jsp" ).forward( request, response );
-            }
+            }*/
         }
-        else
-        {
-
-            // il y a des erreurs de saisie. On réaffiche le formulaire avec des messages d'erreurs
-            ArrayList<Instrument> lesInstruments = DaoInstrument.getLesInstruments(connection);
-            request.setAttribute("pLesInstruments", lesInstruments);
-            this.getServletContext().getRequestDispatcher("/view/membre/ajouter.jsp" ).forward( request, response );
-        }
-
     }
 
     //fermeture des ressources

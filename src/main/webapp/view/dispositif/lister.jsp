@@ -7,32 +7,32 @@
 <%@page import="java.util.ArrayList"%>
 <%
     ArrayList<Dispositif> lesDispositif = (ArrayList)request.getAttribute("pLesDispositif");    
+    String pageName = "Consulter les dispositifs";
+    String pageID = "listesDispositifs"; 
 %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
-    <body>
-    <div class="container px-4 px-lg-5">
-        <table  class="table table-bordered table-striped table-condensed">
+    <%@ include file="../inclus/head.jsp" %>  
+    <%@ include file="../inclus/header.jsp" %>
+    <%@ include file="../inclus/menu.jsp" %>     
+    <div class="container-fluid" style="width: 85%;bottom: 0;top: 1"> 
+        <table class="table table-striped">
             <thead>
-            <tr>
-                <th>Nom du dispositif</th>
-            </tr>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Annee</th>
+                </tr>
             </thead>
-            <tbody>
+            <tbody>   
                 <%
-                for (Dispositif unDispositif : lesDispositif) {
-                    out.println("<tr><td><a href='../ServletDispositif/lister-groupe?idDispositif="+unDispositif.getId()+"'>");
-                    out.println(unDispositif.getLibelle());
-                    out.println("</a></td></tr>");
-                }
-                %>
-            </tbody>
+                for (Dispositif unDispositif : lesDispositif) { %>
+                <tr>
+                    <th scope="row"><% out.println(unDispositif.getId()); %> </th>
+                    <td><% out.println("<a href='"+getServletContext().getContextPath()+"/ServletDispositif/lister-groupe?idDispositif="+unDispositif.getId()+"'>");%><% out.println(unDispositif.getLibelle()); %></td>
+                    <td><% out.println(unDispositif.getAnnee()); %></td>
+                </tr>
+                <% }%>
+            </tbody>  
         </table>
     </div>
-    </body>
-</html>
+    <%@ include file="../inclus/footer.jsp" %>

@@ -14,6 +14,7 @@ import model.Groupe;
  *
  * @author sio2
  */
+/*
 public class TestDaoDispositif {
         
     public static void main(String[] args) {
@@ -32,3 +33,4 @@ public class TestDaoDispositif {
         Dispositif leDispositifInserer = DaoDispositif.ajouterDispositif(con,dispositif);
     }
 }
+*/

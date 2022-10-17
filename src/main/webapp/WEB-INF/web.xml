@@ -28,6 +28,14 @@
         <servlet-name>ServletDispositif</servlet-name>
         <servlet-class>servlet.ServletDispositif</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ServletFestival</servlet-name>
+        <servlet-class>servlet.ServletFestival</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ServletConcert</servlet-name>
+        <servlet-class>servlet.ServletConcert</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>ServletGroupe</servlet-name>
         <url-pattern>/ServletGroupe/consulter</url-pattern>
@@ -51,10 +59,22 @@
     <servlet-mapping>
         <servlet-name>ServletMembre</servlet-name>
         <url-pattern>/ServletMembre/ajouter</url-pattern>
+    </servlet-mapping>    
+    <servlet-mapping>
+        <servlet-name>ServletMembre</servlet-name>
+        <url-pattern>/ServletMembre/modifierprofil</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ServletIndex</servlet-name>
         <url-pattern>/ServletIndex/index</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletIndex</servlet-name>
+        <url-pattern>/ServletIndex/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletMembre</servlet-name>
+        <url-pattern>/ServletMembre/modifier</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ServletDispositif</servlet-name>
@@ -63,6 +83,18 @@
     <servlet-mapping>
         <servlet-name>ServletDispositif</servlet-name>
         <url-pattern>/ServletDispositif/lister-groupe</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletConcert</servlet-name>
+        <url-pattern>/ServletConcert/lister</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletFestival</servlet-name>
+        <url-pattern>/ServletFestival/lister</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletFestival</servlet-name>
+        <url-pattern>/ServletFestival/consulter</url-pattern>
     </servlet-mapping>
     <session-config>        
         <session-timeout>

@@ -21,10 +21,14 @@ public class Groupe {
     private int estSelectionne;
     private ArrayList<Membre> lesMembres;
     private ArrayList<Titre> lesTitres;
+    private ArrayList<Concert> GroupeConcertId;
     private Membre MembreContact;
     private Dispositif DispositifGroupe;
 
-    public Groupe(int id, String nom, String dateCreation, Genre genre, String telephone, String melSiteWeb, String lieuRepetition, int estSelectionne, ArrayList<Membre> lesMembres, ArrayList<Titre> lesTitres, Membre MembreContact, Dispositif DispositifGroupe) {
+    public Groupe() {
+    }
+
+    public Groupe(int id, String nom, String dateCreation, Genre genre, String telephone, String melSiteWeb, String lieuRepetition, int estSelectionne, ArrayList<Membre> lesMembres, ArrayList<Titre> lesTitres, ArrayList<Concert> GroupeConcertId, Membre MembreContact, Dispositif DispositifGroupe) {
         this.id = id;
         this.nom = nom;
         this.dateCreation = dateCreation;
@@ -35,60 +39,9 @@ public class Groupe {
         this.estSelectionne = estSelectionne;
         this.lesMembres = lesMembres;
         this.lesTitres = lesTitres;
+        this.GroupeConcertId = GroupeConcertId;
         this.MembreContact = MembreContact;
         this.DispositifGroupe = DispositifGroupe;
-    }
-
-    public Dispositif getDispositifGroupe() {
-        return DispositifGroupe;
-    }
-
-    public void setDispositifGroupe(Dispositif DispositifGroupe) {
-        this.DispositifGroupe = DispositifGroupe;
-    }
-    
-
-    public Membre getMembreContact() {
-        return MembreContact;
-    }
-
-    public void setMembreContact(Membre MembreContact) {
-        this.MembreContact = MembreContact;
-    }
-    
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
-    }
-
-    public String getMelSiteWeb() {
-        return melSiteWeb;
-    }
-
-    public void setMelSiteWeb(String melSiteWeb) {
-        this.melSiteWeb = melSiteWeb;
-    }
-
-    public String getLieuRepetition() {
-        return lieuRepetition;
-    }
-
-    public void setLieuRepetition(String lieuRepetition) {
-        this.lieuRepetition = lieuRepetition;
-    }
-
-    public int getEstSelectionne() {
-        return estSelectionne;
-    }
-
-    public void setEstSelectionne(int estSelectionne) {
-        this.estSelectionne = estSelectionne;
-    }
-
-    public Groupe() {
     }
 
     public int getId() {
@@ -122,7 +75,39 @@ public class Groupe {
     public void setGenre(Genre genre) {
         this.genre = genre;
     }
-    
+
+    public String getTelephone() {
+        return telephone;
+    }
+
+    public void setTelephone(String telephone) {
+        this.telephone = telephone;
+    }
+
+    public String getMelSiteWeb() {
+        return melSiteWeb;
+    }
+
+    public void setMelSiteWeb(String melSiteWeb) {
+        this.melSiteWeb = melSiteWeb;
+    }
+
+    public String getLieuRepetition() {
+        return lieuRepetition;
+    }
+
+    public void setLieuRepetition(String lieuRepetition) {
+        this.lieuRepetition = lieuRepetition;
+    }
+
+    public int getEstSelectionne() {
+        return estSelectionne;
+    }
+
+    public void setEstSelectionne(int estSelectionne) {
+        this.estSelectionne = estSelectionne;
+    }
+
     public ArrayList<Membre> getLesMembres() {
         return lesMembres;
     }
@@ -130,14 +115,7 @@ public class Groupe {
     public void setLesMembres(ArrayList<Membre> lesMembres) {
         this.lesMembres = lesMembres;
     }
-    
-    public void addLesMembres(Membre unMembre){
-        if (lesMembres == null){
-            lesMembres = new ArrayList<>();
-        }
-        lesMembres.add(unMembre);
-    }
-    
+
     public ArrayList<Titre> getLesTitres() {
         return lesTitres;
     }
@@ -145,15 +123,30 @@ public class Groupe {
     public void setLesTitres(ArrayList<Titre> lesTitres) {
         this.lesTitres = lesTitres;
     }
-    
-    public void addLesTitres(Titre unTitre){
-        if (lesTitres == null){
-            lesTitres = new ArrayList<>();
-        }
-        lesTitres.add(unTitre);
+
+    public ArrayList<Concert> getGroupeConcertId() {
+        return GroupeConcertId;
     }
 
-   
-    
-    
+    public void setGroupeConcertId(ArrayList<Concert> GroupeConcertId) {
+        this.GroupeConcertId = GroupeConcertId;
+    }
+
+    public Membre getMembreContact() {
+        return MembreContact;
+    }
+
+    public void setMembreContact(Membre MembreContact) {
+        this.MembreContact = MembreContact;
+    }
+
+    public Dispositif getDispositifGroupe() {
+        return DispositifGroupe;
+    }
+
+    public void setDispositifGroupe(Dispositif DispositifGroupe) {
+        this.DispositifGroupe = DispositifGroupe;
+    }
+
+ 
 }
