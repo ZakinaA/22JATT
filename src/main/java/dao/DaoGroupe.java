@@ -31,7 +31,7 @@ public class DaoGroupe {
         try
         {
             //preparation de la requete
-            requete=connection.prepareStatement("select * from groupe, genre_musical where genreID = genre_musical.id");
+            requete=connection.prepareStatement("select * from groupe, genremusical where idGenreMusical = genremusical.id");
             //System.out.println("Requete" + requete);
 
             //executer la requete
@@ -51,13 +51,13 @@ public class DaoGroupe {
 
                 
                 Genre leGenre = new Genre();
-                leGenre.setId(rs.getInt("genre_musical.id"));
-                leGenre.setLibelle(rs.getString("genre_musical.libelle"));
+                leGenre.setId(rs.getInt("genremusical.id"));
+                leGenre.setLibelle(rs.getString("genremusical.libelle"));
                 
                 
                 //preparation de la requete
                 requeteMembreGroupe=connection.prepareStatement("select * from membre where id = ?");
-                requeteMembreGroupe.setInt(1, rs.getInt("groupe.contactMembreID"));
+                requeteMembreGroupe.setInt(1, rs.getInt("groupe.idMembre"));
                 //System.out.println("Requete" + requete);
 
                 //executer la requete
@@ -93,7 +93,7 @@ public class DaoGroupe {
         try
         {
             //preparation de la requete
-            requete=connection.prepareStatement("select * from groupe, genre_musical,membre where groupe.genreID = genre_musical.id  and groupe.id=?");
+            requete=connection.prepareStatement("select * from groupe, genremusical,membre where groupe.idgenremusical = genremusical.id  and groupe.id=?");
             requete.setInt(1, idGroupe);
             //System.out.println("Requete" + requete);
 
@@ -108,8 +108,8 @@ public class DaoGroupe {
                 leGroupe.setLieuRepetition(rs.getString("groupe.lieuRepetition"));
 
                 Genre leGenre = new Genre();
-                leGenre.setId(rs.getInt("genre_musical.id"));
-                leGenre.setLibelle(rs.getString("genre_musical.libelle"));
+                leGenre.setId(rs.getInt("genremusical.id"));
+                leGenre.setLibelle(rs.getString("genremusical.libelle"));
                                                                
                 leGroupe.setGenre(leGenre);
                 
@@ -134,7 +134,7 @@ public class DaoGroupe {
         try
         {   
             //preparation de la requete
-            requete=connection.prepareStatement("select membre.nom,membre.prenom FROM membre, groupe WHERE membre.id = groupe.contactMembreID and groupe.id = ?");
+            requete=connection.prepareStatement("select membre.nom,membre.prenom FROM membre, groupe WHERE membre.id = groupe.idMembre and groupe.id = ?");
             requete.setInt(1, idGroupe);
             
             //executer la requete
@@ -159,7 +159,7 @@ public class DaoGroupe {
         try
         {                    
             //preparation de la requete
-            requete=connection.prepareStatement("select numero,intitule,duree,lienURL from titre where groupeID = ?");
+            requete=connection.prepareStatement("select numero,intitule,duree,lienURL from titre where idgroupe = ?");
             requete.setInt(1, idGroupe);
             //System.out.println("Requete" + requete);
 
@@ -189,7 +189,7 @@ public class DaoGroupe {
         try
         {                    
             //preparation de la requete
-            requeteMembreGroupe=connection.prepareStatement("select * from groupe_membres, membre where membre.id = membreID && groupeID = ?");
+            requeteMembreGroupe=connection.prepareStatement("select * from groupemembre, membre where membre.id = idMembre && idGroupe = ?");
             requeteMembreGroupe.setInt(1, idGroupe);
             //System.out.println("Requete" + requeteMembreGroupe);
 
@@ -259,7 +259,7 @@ public class DaoGroupe {
         try
         {
             //preparation de la requete
-            requete=connection.prepareStatement("select * from groupe, dispositif where dispositifID = dispositif.id && dispositif.id = ?");
+            requete=connection.prepareStatement("select * from groupe, dispositif where Iddispositif = dispositif.id && dispositif.id = ?");
             requete.setInt(1, idDispositif);
             System.out.println("Requete" + requete);
 

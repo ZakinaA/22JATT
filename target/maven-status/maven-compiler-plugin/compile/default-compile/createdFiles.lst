@@ -1,0 +1,10 @@
+model\Festival.class
+dao\DaoAdmin.class
+model\Genre.class
+model\Titre.class
+model\LieuConcert.class
+model\Connexion.class
+test\TestDaoConcert.class
+model\Concert.class
+model\Groupe.class
+test\ConnexionBdd.class

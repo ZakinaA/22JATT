@@ -6,14 +6,15 @@ package servlet;
 
 import dao.DaoFestival;
 import dao.DaoGroupe;
+import dao.DaoParticiper_Festival;
 import dao.Utilitaire;
+import form.FormFestival;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import javax.servlet.GenericServlet;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -21,7 +22,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Festival;
 import model.Groupe;
-import model.Jouer_Groupe;
 import model.Participer_Festival;
 
 /**
@@ -105,10 +105,24 @@ public class ServletFestival extends HttpServlet {
             Participer_Festival uneParticipation = new Participer_Festival();
             request.setAttribute("pParticiper_Festival", uneParticipation);
             
-            Festival teteAffiche = DaoFestival.getLaTeteAffiche(connection, idFestival);
+            /*Festival teteAffiche = DaoFestival.getLaTeteAffiche(connection, idFestival);
+            request.setAttribute("pTeteAffiche", teteAffiche);*/
+            
+            Participer_Festival teteAffiche = DaoParticiper_Festival.getLaTeteAffiche(connection, idFestival);
             request.setAttribute("pTeteAffiche", teteAffiche);
             
             this.getServletContext().getRequestDispatcher("/view/festival/consulter.jsp" ).forward( request, response );
+        }
+        
+        if(url.equals("/normanzik/ServletFestival/ajouter"))
+        {
+           ArrayList<Groupe> lesGroupes = DaoGroupe.getLesGroupes(connection);
+            request.setAttribute("pLesGroupes", lesGroupes);
+            
+            ArrayList<Festival> lesFestivals = DaoFestival.getLesFestivals(connection);
+            request.setAttribute("pLesFestivals", lesFestivals);
+            
+            this.getServletContext().getRequestDispatcher("/view/festival/ajouter.jsp" ).forward( request, response );
         }
         
     }
@@ -125,11 +139,70 @@ public class ServletFestival extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        FormFestival form = new FormFestival();
         
+        Festival leFestivalSaisi = form.ajouterFestival(request);
         
+        request.setAttribute( "form", form );
+        request.setAttribute( "pFestival", leFestivalSaisi );
+        
+        if (form.getErreurs().equals("null")){
+            Festival festivalAjoute = DaoFestival.ajouterFestival(connection, leFestivalSaisi);
+            
+            if (festivalAjoute != null ){
+                request.setAttribute("pFestival", festivalAjoute);
+            
+                ArrayList<Groupe> lesGroupes = DaoGroupe.getLesGroupes(connection);
+                request.setAttribute("pGroupes", lesGroupes);
+
+                Participer_Festival uneParticipation = new Participer_Festival();
+                request.setAttribute("pParticiper_Festival", uneParticipation);
+
+                Participer_Festival teteAffiche = DaoParticiper_Festival.getLaTeteAffiche(connection, festivalAjoute.getId());
+                request.setAttribute("pTeteAffiche", teteAffiche);
+
+                this.getServletContext().getRequestDispatcher("/view/festival/consulter.jsp" ).forward( request, response );
+            }
+            else
+            {
+                // Cas où l'insertion en bdd a échoué
+                //On renvoie vers le formulaire
+                ArrayList<Groupe> lesGroupes = DaoGroupe.getLesGroupes(connection);
+                request.setAttribute("pLesGroupes", lesGroupes);
+                this.getServletContext().getRequestDispatcher("/view/festival/ajouter.jsp" ).forward( request, response );
+            }
+        }
+        else
+        {
+            // il y a des erreurs de saisie. On réaffiche le formulaire avec des messages d'erreurs
+            ArrayList<Groupe> lesGroupes = DaoGroupe.getLesGroupes(connection);
+            request.setAttribute("pLesGroupes", lesGroupes);
+            this.getServletContext().getRequestDispatcher("/view/festival/ajouter.jsp" ).forward( request, response );
+        }  
     }
     
+        
     
+    
+    public void destroy(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException
+    {
+        try
+        {
+            //fermeture
+            System.out.println("Connexion fermée");
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            System.out.println("Erreur lors de l’établissement de la connexion");
+        }
+        finally
+        {
+            //Utilitaire.fermerConnexion(rs);
+            //Utilitaire.fermerConnexion(requete);
+            Utilitaire.fermerConnexion(connection);
+        }
+    }
 
     /**
      * Returns a short description of the servlet.
