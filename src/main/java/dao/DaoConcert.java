@@ -30,7 +30,7 @@ public class DaoConcert {
         try
         {
             //preparation de la requete
-            requete=connection.prepareStatement("select * from jouer_concert,lieuconcert,groupe WHERE jouer_concert.lieuConcertID=lieuconcert.id AND jouer_concert.groupeID = groupe.id");
+            requete=connection.prepareStatement("select * from jouer_concert,lieuconcert,groupe WHERE jouer_concert.lieuConcertID=lieuconcert.id AND jouer_concert.groupeID = groupe.id ");
             System.out.println("Requete" + requete);
 
             //executer la requete
@@ -86,9 +86,14 @@ public class DaoConcert {
             // gpe_id (clé primaire de la table groupe) est en auto_increment,donc on ne renseigne pas cette valeur
             // le paramètre RETURN_GENERATED_KEYS est ajouté à la requête afin de pouvoir récupérer l'id généré par la bdd (voir ci-dessous)
             // supprimer ce paramètre en cas de requête sans auto_increment.
-            requete=connection.prepareStatement("INSERT INTO concert ( annee, libelle)\n" +
-                    "VALUES (?,?)", requete.RETURN_GENERATED_KEYS );
+            requete=connection.prepareStatement("INSERT INTO jouer_concert ( dateConcert, HeureDebut, HeureFin, groupeID, lieuConcertID)\n" +
+                    "VALUES (?,?,?,?,?)", requete.RETURN_GENERATED_KEYS );
             requete.setString(1, unConcert.getDateConcert());
+            requete.setString(2, unConcert.getHeureDebut());
+            requete.setString(3, unConcert.getHeureFin());
+            requete.setInt(4, unConcert.getGroupeConcertId().getId());
+            requete.setInt(5, unConcert.getLieuConcertId().getId());
+
 
             System.out.println("requeteInsertion=" + requete);
             /* Exécution de la requête */

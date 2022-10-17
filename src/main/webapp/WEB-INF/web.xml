@@ -64,6 +64,10 @@
         <servlet-name>ServletConcert</servlet-name>
         <url-pattern>/ServletConcert/lister</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletConcert</servlet-name>
+        <url-pattern>/ServletConcert/ajouter</url-pattern>
+    </servlet-mapping>
     <session-config>        
         <session-timeout>
             30
