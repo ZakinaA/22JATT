@@ -17,6 +17,9 @@
               <li class="nav-item">
                 <a class="nav-link <% if(pageID == "listesMembres") { out.println("active"); } %>" aria-current="page" href="/normanzik/ServletMembre/lister">Les Membres</a>
               </li>
+               <li class="nav-item">
+                <a class="nav-link <% if(pageID == "listesConcerts") { out.println("active"); } %>" aria-current="page" href="/normanzik/ServletConcert/lister">Les Concerts</a>
+              </li>
             </ul>
             <!--<div class="btn-group">
               <button type="button" class="btn border-0 dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">

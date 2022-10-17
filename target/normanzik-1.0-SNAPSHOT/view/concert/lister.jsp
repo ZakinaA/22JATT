@@ -17,12 +17,15 @@
            <table class="table table-striped">
   <thead>
     <tr>
-      <th scope="col">#</th>
+      <th scope="col">Numéro Concert</th>  
+      <th scope="col">Nom groupe</th>
       <th scope="col">Date</th>
       <th scope="col">Ville</th>
       <th scope="col">Code Postal</th>
       <th scope="col">Nom salle</th>
        <th scope="col">Nom du groupe</th>
+       <th scope="col">Début</th>
+       <th scope="col">Fin</th>
     </tr>
   </thead>
     <%
@@ -31,12 +34,16 @@
         %>
   <tbody>
     <tr>
-      <th scope="row"><% out.println(unConcert.getGroupeConcertId().getId()); %></th>
+        
+      <th scope="row"><% out.println(unConcert.getId()); %></th>
+      <td><% out.println(unConcert.getGroupeConcertId().getNom()); %></td>
       <td> <% out.println(unConcert.getDateConcert()); %></td>
       <td> <% out.println(unConcert.getLieuConcertId().getVille()); %> </td>
       <td> <% out.println(unConcert.getLieuConcertId().getCp()); %> </td>
       <td> <% out.println(unConcert.getLieuConcertId().getSalleNom()); %> </td>
       <td> <% out.println(unConcert.getGroupeConcertId().getNom()); %> </td>
+      <td><% out.println(unConcert.getHeureDebut()); %></td>
+      <td><% out.println(unConcert.getHeureFin()); %></td>
 
     </tr>
    

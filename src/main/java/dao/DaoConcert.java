@@ -40,7 +40,9 @@ public class DaoConcert {
             while ( rs.next() ) {
                 Concert leConcert = new Concert();
                 leConcert.setDateConcert(rs.getString("jouer_concert.dateConcert"));
-               
+                leConcert.setHeureDebut(rs.getString("jouer_concert.HeureDebut"));
+               leConcert.setHeureFin(rs.getString("jouer_concert.HeureFin"));
+               leConcert.setId(rs.getInt("jouer_concert.id"));
  
                 
                 LieuConcert lieuConcertId = new LieuConcert();
@@ -74,5 +76,45 @@ public class DaoConcert {
             //out.println("Erreur lors de l’établissement de la connexion");
         }
         return lesConcerts;
+    }
+    
+        public static Concert ajouterConcert(Connection connection, Concert unConcert){
+    int idGenere = -1;
+        try
+        {
+            //preparation de la requete
+            // gpe_id (clé primaire de la table groupe) est en auto_increment,donc on ne renseigne pas cette valeur
+            // le paramètre RETURN_GENERATED_KEYS est ajouté à la requête afin de pouvoir récupérer l'id généré par la bdd (voir ci-dessous)
+            // supprimer ce paramètre en cas de requête sans auto_increment.
+            requete=connection.prepareStatement("INSERT INTO concert ( annee, libelle)\n" +
+                    "VALUES (?,?)", requete.RETURN_GENERATED_KEYS );
+            requete.setString(1, unConcert.getDateConcert());
+
+            System.out.println("requeteInsertion=" + requete);
+            /* Exécution de la requête */
+            int resultatRequete = requete.executeUpdate();
+            System.out.println("resultatrequete=" + resultatRequete);
+
+            // Récupération de id auto-généré par la bdd dans la table groupe
+            rs = requete.getGeneratedKeys();
+            while ( rs.next() ) {
+                idGenere = rs.getInt( 1 );
+                unConcert.setId(idGenere);
+            }
+
+            // si le résultat de la requete est différent de 1, c'est que la requête a échoué.
+            // Dans ce cas, on remet l'objet groupe à null
+            if (resultatRequete != 1){
+                unConcert= null;
+            }
+
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+            //out.println("Erreur lors de l’établissement de la connexion");
+            unConcert= null;
+        }
+        return unConcert ;
     }
 }
