@@ -114,7 +114,7 @@ public class ServletFestival extends HttpServlet {
             this.getServletContext().getRequestDispatcher("/view/festival/consulter.jsp" ).forward( request, response );
         }
         
-        if(url.equals("/normanzik/ServletFestival/ajouter"))
+        if(url.equals(getServletContext().getContextPath()+"/ServletFestival/ajouter"))
         {
            ArrayList<Groupe> lesGroupes = DaoGroupe.getLesGroupes(connection);
             request.setAttribute("pLesGroupes", lesGroupes);

@@ -134,21 +134,31 @@ public class ServletMembre extends HttpServlet {
         }
         
         if(url.equals(getServletContext().getContextPath()+"/ServletMembre/modifierprofil"))
-        {
-            int idMembre = Integer.parseInt(request.getParameter("idMembre"));              
-            Membre leMembre = DaoMembre.getLeMembre(connection, idMembre);
-            request.setAttribute("pMembre", leMembre);
-            
-            ArrayList<Groupe> lesGroupesMembre = DaoMembre.getLesGroupesMembre(connection, idMembre);
-            request.setAttribute("pLesGroupesMembre", lesGroupesMembre);
-            
-            ArrayList<Instrument> lesInstruments = DaoInstrument.getLesInstruments(connection);
-            request.setAttribute("pLesInstruments", lesInstruments);
-            
-            ArrayList<Statut> lesStatuts = DaoAdmin.getLesStatuts(connection);
-            request.setAttribute("pLesStatuts", lesStatuts);
-            
-            this.getServletContext().getRequestDispatcher("/view/membre/modifier.jsp" ).forward( request, response );
+        {            
+            HttpSession session = request.getSession();
+            Integer NormanzikAuthID = (Integer) session.getAttribute("NormanzikAuthID"); 
+            Integer NormanzikGradeID = (Integer) session.getAttribute("NormanzikGradeID"); 
+            int idMembre = Integer.parseInt(request.getParameter("idMembre"));     
+            if (NormanzikAuthID != null  && NormanzikAuthID != 0) {
+                if(NormanzikAuthID == idMembre || NormanzikGradeID == 2) {
+         
+                Membre leMembre = DaoMembre.getLeMembre(connection, idMembre);
+                request.setAttribute("pMembre", leMembre);
+
+                ArrayList<Groupe> lesGroupesMembre = DaoMembre.getLesGroupesMembre(connection, idMembre);
+                request.setAttribute("pLesGroupesMembre", lesGroupesMembre);
+
+                ArrayList<Instrument> lesInstruments = DaoInstrument.getLesInstruments(connection);
+                request.setAttribute("pLesInstruments", lesInstruments);
+
+                ArrayList<Statut> lesStatuts = DaoAdmin.getLesStatuts(connection);
+                request.setAttribute("pLesStatuts", lesStatuts);
+
+                this.getServletContext().getRequestDispatcher("/view/membre/modifier.jsp" ).forward( request, response );
+                }            
+            } else {
+                this.getServletContext().getRequestDispatcher("/view/membre/lister.jsp" ).forward( request, response );
+            }
         }
     }
 
