@@ -55,21 +55,14 @@ https://docs.google.com/document/d/1RDJOMEgdQg4mM5iiU_OkZe2QGI0LP5IlHVLhpDP6AcI/
 
 ## Comptes de test : 
 
-Utilisateur normal : 
-
 ```
-Mail : gregoire@normanzik.fr
-Password : mpHerve
-```
-
-```
-Compte 1 : 
+Compte 1 : (Compte administrateur)
 
 Mail : john@normanzik.fr
 Mot de passe : W364i7rSDHpk
 
 Compte 2 : 
 
-Mail : jasper@jasper-music.fr
-Mot de passe : eTNsM834Bt4r
+Mail : gregoire@normanzik.fr
+Password : mpHerve
 ```
