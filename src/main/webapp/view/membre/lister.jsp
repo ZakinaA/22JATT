@@ -1,3 +1,4 @@
+<%@page import="java.time.format.DateTimeFormatter"%>
 <%@page import="model.Membre"%>
 <%@page import="java.util.ArrayList"%>
 <%
@@ -16,6 +17,7 @@
                         <%
                             for (Membre unMembre : lesMembres) {     
                                 String firstName = unMembre.getNom().toUpperCase();
+
                         %>
                         <tr class="align-middle">
                             <td class="align-middle"><% out.print(firstName); %> <% out.print(unMembre.getPrenom()); %></td>
