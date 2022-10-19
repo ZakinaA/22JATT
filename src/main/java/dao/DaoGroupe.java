@@ -31,7 +31,7 @@ public class DaoGroupe {
         try
         {
             //preparation de la requete
-            requete=connection.prepareStatement("select * from groupe, genremusical where idGenreMusical = genremusical.id");
+            requete=connection.prepareStatement("select * from groupe, genre_musical where genreID = genre_musical.id");
             //System.out.println("Requete" + requete);
 
             //executer la requete
@@ -51,13 +51,13 @@ public class DaoGroupe {
 
                 
                 Genre leGenre = new Genre();
-                leGenre.setId(rs.getInt("genremusical.id"));
-                leGenre.setLibelle(rs.getString("genremusical.libelle"));
+                leGenre.setId(rs.getInt("genre_musical.id"));
+                leGenre.setLibelle(rs.getString("genre_musical.libelle"));
                 
                 
                 //preparation de la requete
                 requeteMembreGroupe=connection.prepareStatement("select * from membre where id = ?");
-                requeteMembreGroupe.setInt(1, rs.getInt("groupe.idMembre"));
+                requeteMembreGroupe.setInt(1, rs.getInt("groupe.contactMembreID"));
                 //System.out.println("Requete" + requete);
 
                 //executer la requete
@@ -93,7 +93,7 @@ public class DaoGroupe {
         try
         {
             //preparation de la requete
-            requete=connection.prepareStatement("select * from groupe, genremusical,membre where groupe.idgenremusical = genremusical.id  and groupe.id=?");
+            requete=connection.prepareStatement("select * from groupe, genre_musical,membre where groupe.genreID = genre_musical.id  and groupe.id=?");
             requete.setInt(1, idGroupe);
             //System.out.println("Requete" + requete);
 
@@ -108,8 +108,8 @@ public class DaoGroupe {
                 leGroupe.setLieuRepetition(rs.getString("groupe.lieuRepetition"));
 
                 Genre leGenre = new Genre();
-                leGenre.setId(rs.getInt("genremusical.id"));
-                leGenre.setLibelle(rs.getString("genremusical.libelle"));
+                leGenre.setId(rs.getInt("genre_musical.id"));
+                leGenre.setLibelle(rs.getString("genre_musical.libelle"));
                                                                
                 leGroupe.setGenre(leGenre);
                 
@@ -134,7 +134,7 @@ public class DaoGroupe {
         try
         {   
             //preparation de la requete
-            requete=connection.prepareStatement("select membre.nom,membre.prenom FROM membre, groupe WHERE membre.id = groupe.idMembre and groupe.id = ?");
+            requete=connection.prepareStatement("select membre.nom,membre.prenom FROM membre, groupe WHERE membre.id = groupe.contactMembreID and groupe.id = ?");
             requete.setInt(1, idGroupe);
             
             //executer la requete
@@ -159,7 +159,7 @@ public class DaoGroupe {
         try
         {                    
             //preparation de la requete
-            requete=connection.prepareStatement("select numero,intitule,duree,lienURL from titre where idgroupe = ?");
+            requete=connection.prepareStatement("select numero,intitule,duree,lienURL from titre where groupeID = ?");
             requete.setInt(1, idGroupe);
             //System.out.println("Requete" + requete);
 
@@ -189,7 +189,7 @@ public class DaoGroupe {
         try
         {                    
             //preparation de la requete
-            requeteMembreGroupe=connection.prepareStatement("select * from groupemembre, membre where membre.id = idMembre && idGroupe = ?");
+            requeteMembreGroupe=connection.prepareStatement("select * from groupe_membres, membre where membre.id = membreID && groupeID = ?");
             requeteMembreGroupe.setInt(1, idGroupe);
             //System.out.println("Requete" + requeteMembreGroupe);
 
@@ -219,13 +219,14 @@ public class DaoGroupe {
             // gpe_id (clé primaire de la table groupe) est en auto_increment,donc on ne renseigne pas cette valeur
             // le paramètre RETURN_GENERATED_KEYS est ajouté à la requête afin de pouvoir récupérer l'id généré par la bdd (voir ci-dessous)
             // supprimer ce paramètre en cas de requête sans auto_increment.
-            requete=connection.prepareStatement("INSERT INTO GROUPE ( nom, dateCreation, genreID, telephone, melSiteWeb)\n" +
-                    "VALUES (?,?,?, ?, ?)", requete.RETURN_GENERATED_KEYS );
+            requete=connection.prepareStatement("INSERT INTO GROUPE ( nom, dateCreation, genreID, telephone, melSiteWeb, dispositifID)\n" +
+                    "VALUES (?,?,?, ?, ?, ?)", requete.RETURN_GENERATED_KEYS );
             requete.setString(1, unGroupe.getNom());
             requete.setString(2, unGroupe.getDateCreation());
             requete.setInt(3, unGroupe.getGenre().getId());
             requete.setString(4, unGroupe.getTelephone());
-            requete.setString(5, unGroupe.getMelSiteWeb());            
+            requete.setString(5, unGroupe.getMelSiteWeb());
+            requete.setInt(6, unGroupe.getDispositifGroupe().getId());
             System.out.println("requeteInsertion=" + requete);
             /* Exécution de la requête */
             int resultatRequete = requete.executeUpdate();
@@ -259,7 +260,7 @@ public class DaoGroupe {
         try
         {
             //preparation de la requete
-            requete=connection.prepareStatement("select * from groupe, dispositif where Iddispositif = dispositif.id && dispositif.id = ?");
+            requete=connection.prepareStatement("select * from groupe, dispositif where dispositifID = dispositif.id && dispositif.id = ?");
             requete.setInt(1, idDispositif);
             System.out.println("Requete" + requete);
 
