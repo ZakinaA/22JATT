@@ -139,15 +139,8 @@ public class DaoFestival {
             //preparation de la requete
             // gpe_id (clé primaire de la table groupe) est en auto_increment,donc on ne renseigne pas cette valeur
             // le paramètre RETURN_GENERATED_KEYS est ajouté à la requête afin de pouvoir récupérer l'id généré par la bdd (voir ci-dessous)
-            // supprimer ce paramètre en cas de requête sans auto_increment.
-            requete=connection.prepareStatement("INSERT INTO FESTIVAL ( nom, dateDebut, dateFin)\n" +
-                    "VALUES (?,?,?)", requete.RETURN_GENERATED_KEYS );
-            requete.setString(1, unFestival.getNom());
-            requete.setString(2, unFestival.getDateDebutFestival());
-            requete.setString(3, unFestival.getDateFinFestival());
-                      
-            System.out.println("requeteInsertion=" + requete);
-            /* Exécution de la requête */
+            // supprimer ce paramètre en cas de requête sans auto_increment.   
+            /* Exécution de la requête*/ 
             int resultatRequete = requete.executeUpdate();
             System.out.println("resultatrequete=" + resultatRequete);
 
@@ -157,7 +150,13 @@ public class DaoFestival {
                 idGenere = rs.getInt( 1 );
                 unFestival.setId(idGenere);
             }
-
+            if(rs.next()){
+                requete=connection.prepareStatement("INSERT INTO FESTIVAL ( nom, dateDebut, dateFin)\n" +
+                    "VALUES (?,?,?)", requete.RETURN_GENERATED_KEYS );
+                requete.setString(1, unFestival.getNom());
+                requete.setString(2, unFestival.getDateDebutFestival());
+                requete.setString(3, unFestival.getDateFinFestival());
+            }
             // si le résultat de la requete est différent de 1, c'est que la requête a échoué.
             // Dans ce cas, on remet l'objet groupe à null
             if (resultatRequete != 1){

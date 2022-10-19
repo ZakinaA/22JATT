@@ -16,18 +16,6 @@ import model.Participer_Festival;
  */
 public class FormFestival {
 
-    public Object getErreurs() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public Festival ajouterFestival(HttpServletRequest request) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-
-
-public class FormGroupe {
-
     private String resultat;
     private Map<String, String> erreurs      = new HashMap<String, String>();
 
@@ -87,9 +75,7 @@ public class FormGroupe {
         String nom = getDataForm( request, "nom" );
         String dateDebut = getDataForm( request, "dateDebut");
         String dateFin = getDataForm( request, "dateFin");
-        int idGroupe = Integer.parseInt(getDataForm( request, "idGroupe" ));
-        int teteAfficheID = Integer.parseInt(getDataForm( request, "teteAfficheID" ));
-        //int dispositifID = Integer.parseInt(getDataForm( request, "dispositifID" ));
+        
         
         try {
             validationNom( nom );
@@ -120,27 +106,9 @@ public class FormGroupe {
         System.out.println("resultat erreurs="+resultat);
 
         // hydratation de l'objet groupe avec les variables valorisées ci-dessus
-
-        Groupe leGroupe = new Groupe();
-        leGroupe.setId(idGroupe);
-        Participer_Festival uneParticipation = new Participer_Festival();
-        uneParticipation.setTeteAffiche(leGroupe.getNom());
-        
-        
-        
-        uneParticipation.setUnFestival(unFestival);
-        teteAfficheID = uneParticipation.getUnFestival().getId();
-        if(teteAfficheID == -1) {
-            String groupeAjout = getDataForm(request, "groupeAjout");
-            uneParticipation.setTeteAffiche(groupeAjout);
-        }
-        //uneParticipation.setTeteAffiche(teteAffiche);
-        
         /*Dispositif leDispositif = new Dispositif();
         leDispositif.setId(dispositifID);
         unGroupe.setDispositifGroupe(leDispositif);*/
         return unFestival ;
     }
     }
-
-}

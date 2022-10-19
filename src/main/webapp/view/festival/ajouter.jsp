@@ -44,7 +44,7 @@
                       <span style="color: blue;">${form.erreurs['numTel']}</span>
                     </div>
             
-                    
+                    <!--
                        <div class="mb-3">
                     <label for="genre" class="form-label">Tete d'affiche : </label>
                     <select id="instrumentPrincipalID" name="instrumentPrincipalID" class="form-select" onchange="selectInstrumentPrincipal()">
@@ -58,7 +58,7 @@
                     </select>
                 </div>
                 <input type="hidden" id="nouveauGroupe" name="groupeAjout" value="">
-                    
+                    -->
                        
     
                     <div class="d-flex justify-content-center">
