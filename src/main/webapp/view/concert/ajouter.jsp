@@ -1,4 +1,4 @@
-<%@page import="model.LieuConcert"%>
+ <%@page import="model.LieuConcert"%>
 <%@page import="model.Groupe"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@page import="model.Concert"%>
@@ -28,17 +28,17 @@
                 <div class="mb-3">
                     <label for="HeureDInput" class="form-label">Heure Debut : </label>
                     <input id="HeureDInput" type="text" name="HeureD"  size="70" maxlength="70" class="form-control">
-                    <span style="color: blue;">${form.erreurs['prenom']}</span>     
+                      
                 </div>
                 <div class="mb-3">
                     <label for="HeureFInput" class="form-label">Heure Fin : </label>
                     <input id="HeureFInput" type="text" name="HeureF"  size="70" maxlength="70" class="form-control">
-                    <span style="color: blue;">${form.erreurs['motdePasse']}</span>     
+                    
                 </div>
                
                 <div class="mb-3">
                     <label for="genre" class="form-label">Groupe : </label>
-                    <select id="instrumentPrincipalID" name="instrumentPrincipalID" class="form-select" onchange="selectInstrumentPrincipal()">
+                    <select id="instrumentPrincipalID" name="groupe" class="form-select" onchange="selectInstrumentPrincipal()">
                     <%
                         ArrayList<Groupe> lesGroupes = (ArrayList)request.getAttribute("pLesGroupes");
                         for (int i=0; i<lesGroupes.size();i++){
@@ -51,7 +51,7 @@
                 </div>
                 <div class="mb-3">                    
                     <label for="genre" class="form-label">Localisation : </label>
-                    <select name="statutID" class="form-select">
+                    <select name="localisation" class="form-select">
                      <%
                         ArrayList<LieuConcert> lesLieuConcerts = (ArrayList)request.getAttribute("pLesLieuConcerts");
                         for (int i=0; i<lesLieuConcerts.size();i++){

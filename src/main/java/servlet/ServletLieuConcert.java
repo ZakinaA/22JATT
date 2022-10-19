@@ -4,17 +4,16 @@
  */
 package servlet;
 
-import dao.DaoConcert;
 import dao.DaoLieuConcert;
+import dao.Utilitaire;
+import form.FormLieuConcert;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Concert;
 import model.LieuConcert;
 import static test.ConnexionBdd.connection;
 
@@ -87,9 +86,48 @@ public class ServletLieuConcert extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
-    }
+       FormLieuConcert form = new FormLieuConcert();
+        
+         LieuConcert leLieuConcertSaisi = form.ajouterLieuConcert(request);
+         request.setAttribute( "form", form );
+        request.setAttribute( "pLieuConcert", leLieuConcertSaisi );
+        
+        if (form.getErreurs().isEmpty()){
+            System.out.println("insert 1");
+            // Il n'y a pas eu d'erreurs de saisie, donc on renvoie la vue affichant les infos du groupe
+            LieuConcert lieuConcertAjoute = DaoLieuConcert.ajouterLieuConcert(connection, leLieuConcertSaisi);
 
+            if (lieuConcertAjoute != null ){
+                System.out.println("insert 2");
+                request.setAttribute("pLieuConcert", lieuConcertAjoute);
+                this.getServletContext().getRequestDispatcher("/view/concert/lister.jsp" ).forward( request, response );
+            } 
+             else
+            {
+                
+                this.getServletContext().getRequestDispatcher("/view/concert/lister.jsp" ).forward( request, response );
+            }
+    }
+   }
+     public void destroy(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException
+    {
+        try
+        {
+            //fermeture
+            System.out.println("Connexion fermée");
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            System.out.println("Erreur lors de l’établissement de la connexion");
+        }
+        finally
+        {
+            //Utilitaire.fermerConnexion(rs);
+            //Utilitaire.fermerConnexion(requete);
+            Utilitaire.fermerConnexion(connection);
+        }
+    }
     /**
      * Returns a short description of the servlet.
      *
@@ -98,6 +136,5 @@ public class ServletLieuConcert extends HttpServlet {
     @Override
     public String getServletInfo() {
         return "Short description";
-    }// </editor-fold>
-
+    }// </editor-f
 }

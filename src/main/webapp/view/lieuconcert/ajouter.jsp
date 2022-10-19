@@ -21,24 +21,24 @@
             <form class="form-inline" action="ajouter" method="POST">
                 <h3>Ajout d'un lieu</h3>
                 <div class="mb-3">
-                    <label for="dateInput" class="form-label">Nom : </label>
-                    <input id="dateInput" type="text" name="date"  class="form-control">
+                    <label for="NomInput" class="form-label">Nom : </label>
+                    <input id="NomInput" type="text" name="Nom"  class="form-control">
                     <span style="color: blue;">${form.erreurs['nom']}</span>
                 </div>
                 <div class="mb-3">
-                    <label for="HeureDInput" class="form-label">Ville : </label>
-                    <input id="HeureDInput" type="text" name="HeureD"  size="70" maxlength="70" class="form-control">
+                    <label for="VilleInput" class="form-label">Ville : </label>
+                    <input id="VilleInput" type="text" name="Ville"  size="70" maxlength="70" class="form-control">
                     <span style="color: blue;">${form.erreurs['prenom']}</span>     
                 </div>
                 <div class="mb-3">
-                    <label for="HeureFInput" class="form-label">Code Postal : </label>
-                    <input id="HeureFInput" type="text" name="HeureF"  size="70" maxlength="70" class="form-control">
+                    <label for="CodePostalInput" class="form-label">Code Postal : </label>
+                    <input id="CodePostalInput" type="text" name="Cp"  size="70" maxlength="70" class="form-control">
                     <span style="color: blue;">${form.erreurs['motdePasse']}</span>     
                 </div>
                 
                  <div class="mb-3">
-                    <label for="HeureFInput" class="form-label">Nom de la salle : </label>
-                    <input id="HeureFInput" type="text" name="HeureF"  size="70" maxlength="70" class="form-control">
+                    <label for="HeureFInputInput" class="form-label">Nom de la salle : </label>
+                    <input id="HeureFInputInput" type="text" name="salle"  size="70" maxlength="70" class="form-control">
                     <span style="color: blue;">${form.erreurs['motdePasse']}</span>     
                 </div>
                

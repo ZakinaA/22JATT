@@ -41,11 +41,7 @@ public class DaoLieuConcert {
                 leLieuConcert.setVille(rs.getString("lieuconcert.ville"));
                leLieuConcert.setSalleNom(rs.getString("lieuconcert.salleNom"));
                leLieuConcert.setCp(rs.getInt("lieuconcert.codePostal"));
-   
- 
-
-                
-                
+  
                 lesLieuConcerts.add(leLieuConcert);
 
             }

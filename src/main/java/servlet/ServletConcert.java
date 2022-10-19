@@ -7,6 +7,7 @@ package servlet;
 import dao.DaoConcert;
 import dao.DaoGroupe;
 import dao.DaoLieuConcert;
+import dao.Utilitaire;
 import form.FormConcert;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -111,13 +112,9 @@ public class ServletConcert extends HttpServlet {
             ArrayList<LieuConcert> lesLieuConcerts = DaoLieuConcert.getLesLieuConcerts(connection);
             request.setAttribute("pLesLieuConcerts", lesLieuConcerts);
             
-            this.getServletContext().getRequestDispatcher("/view/concert/ajouter.jsp" ).forward( request, response );
-            
-            
+            this.getServletContext().getRequestDispatcher("/view/concert/ajouter.jsp" ).forward( request, response );   
         }
-        
-        
-        
+  
     }
 
     /**
@@ -133,11 +130,32 @@ public class ServletConcert extends HttpServlet {
             throws ServletException, IOException {
          FormConcert form = new FormConcert();
          
-          Membre leMembreSaisi = form.ajouterMembre(request);
+          Concert leConcertSaisi = form.ajouterConcert(request);
 
         /* Stockage du formulaire et de l'objet dans l'objet request */
         request.setAttribute( "form", form );
-        request.setAttribute( "pMembre", leMembreSaisi );
+        request.setAttribute( "pConcert", leConcertSaisi );
+        
+         if (form.getErreurs().isEmpty()){
+            System.out.println("insert 1");
+            // Il n'y a pas eu d'erreurs de saisie, donc on renvoie la vue affichant les infos du groupe
+            Concert NewConcert = DaoConcert.ajouterConcert(connection, leConcertSaisi);
+
+            if (NewConcert != null ){
+                System.out.println("insert 2");
+                request.setAttribute("pConcert", NewConcert);
+                this.getServletContext().getRequestDispatcher("/view/concert/lister.jsp" ).forward( request, response );
+            }
+            else
+            {
+                // Cas où l'insertion en bdd a échoué
+                //On renvoie vers le formulaire
+               /* ArrayList<Genre> lesGenres = DaoAdmin.getLesGenres(connection);
+                request.setAttribute("pLesGenres", lesGenres);
+                System.out.println("le groupe est null en bdd- echec en bdd");*/
+                this.getServletContext().getRequestDispatcher("/view/concert/lister.jsp" ).forward( request, response );
+            }
+        }
     }
 
     /**
@@ -149,5 +167,24 @@ public class ServletConcert extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+public void destroy(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException
+    {
+        try
+        {
+            //fermeture
+            System.out.println("Connexion fermée");
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            System.out.println("Erreur lors de l’établissement de la connexion");
+        }
+        finally
+        {
+            //Utilitaire.fermerConnexion(rs);
+            //Utilitaire.fermerConnexion(requete);
+            Utilitaire.fermerConnexion(connection);
+        }
+    }
 
 }

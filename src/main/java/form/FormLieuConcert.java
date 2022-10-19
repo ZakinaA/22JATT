@@ -7,15 +7,14 @@ package form;
 import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
-import model.Concert;
-import model.Groupe;
 import model.LieuConcert;
 
 /**
  *
  * @author sio2
  */
-public class FormConcert {
+public class FormLieuConcert {
+    
     
     private String resultat;
     private Map<String, String> erreurs      = new HashMap<String, String>(); 
@@ -37,25 +36,29 @@ public class FormConcert {
     }
     
     //méthode de validation du champ de saisie nom
-    private void validationDate( String date ) throws Exception {
-        if ( date != null && date.length() < 3 ) {
-            throw new Exception( "La date du Concert n'est pas valide." );
+    private void validationNom( String Nom ) throws Exception {
+        if ( Nom != null && Nom.length() < 3 ) {
+            throw new Exception( "Le nom du concert doit contenir au moins 3 caractères." );
         }
     }
     
-    private void validationHeureD( String HeureD ) throws Exception {
-        if ( HeureD != null && HeureD.length() < 3 ) {
-            throw new Exception( "L'heure du début du concert n'est pas valide." );
+    private void validationVille( String Ville ) throws Exception {
+        if ( Ville != null && Ville.length() < 3 ) {
+            throw new Exception( "La Ville doit contenir au moins 3 caractères." );
         }
     }
-    
-    private void validationHeureF( String HeureF ) throws Exception {
-        if ( HeureF != null && HeureF.length() < 3 ) {
-            throw new Exception( "L'heure de fin du concert n'est pas valide." );
+     private void validationCp( String Cp ) throws Exception {
+        if ( Cp != null && Cp.length() < 3 ) {
+            throw new Exception( "La CodePostal doit contenir au moins 5 caractères." );
         }
     }
 
-   
+     private void validationSalle( String Salle ) throws Exception {
+        if ( Salle != null && Salle.length() < 3 ) {
+            throw new Exception( "La Salle contenir au moins 5 caractères." );
+        }
+    }
+    
     private void setErreur( String champ, String message ) {
         erreurs.put(champ, message );
     }
@@ -71,37 +74,40 @@ public class FormConcert {
         }
     }
     
-      public Concert ajouterConcert(HttpServletRequest request ) {
+      public LieuConcert ajouterLieuConcert(HttpServletRequest request ) {
 
-        Concert unConcert  = new Concert();
+        LieuConcert unLieuConcert  = new LieuConcert();
 
         //récupération dans des variables des données saisies dans les champs de formulaire
-        String date = getDataForm( request, "date");
-        String HeureD = getDataForm( request, "HeureD");
-        String HeureF = getDataForm( request, "HeureF");
-        int localisation = Integer.parseInt(getDataForm( request, "localisation" ));
-        int groupe = Integer.parseInt(getDataForm( request, "groupe" ));
+        String Nom = getDataForm( request, "Nom" );
+        String Ville = getDataForm( request, "Ville");
+        String Cp = getDataForm( request, "Cp");
+        String Salle = getDataForm( request, "Salle");
         try {
-            validationDate( date );
+            validationNom( Nom );
         } catch ( Exception e ) {
-            setErreur( "date", e.getMessage() );
+            setErreur( "Nom", e.getMessage() );
         }
-         unConcert.setDateConcert(date);
+        unLieuConcert.setNom(Nom);
+         
+        try {
+            validationVille( Ville );
+        } catch ( Exception e ) {
+            setErreur( "Ville", e.getMessage() );
+        }
         
-         try {
-            validationHeureD( HeureD );
+        try {
+            validationCp( Cp );
         } catch ( Exception e ) {
-            setErreur( "HeureD", e.getMessage() );
+            setErreur( "Cp", e.getMessage() );
         }
-         unConcert.setHeureDebut(HeureD);
-          try {
-            validationHeureF( HeureF );
-        } catch ( Exception e ) {
-            setErreur( "HeureF", e.getMessage() );
-        }
-         unConcert.setHeureFin(HeureF);
         
-      
+        try {
+            validationSalle( Salle );
+        } catch ( Exception e ) {
+            setErreur( "Salle", e.getMessage() );
+        }
+        unLieuConcert.setVille(Ville);
         
         if ( erreurs.isEmpty() ) {
             resultat = "Succès de l'ajout.";
@@ -112,15 +118,11 @@ public class FormConcert {
 
         // hydratation de l'objet groupe avec les variables valorisées ci-dessus
 
-        Groupe leGroupe = new Groupe();
-        leGroupe.setId(groupe);
-        
-        LieuConcert lelieuConcert = new LieuConcert();
-        lelieuConcert.setId(localisation);
-        
-        unConcert.setLieuConcertId(lelieuConcert);
-        
-        return unConcert;
+
+    
+        return unLieuConcert;
      }
+
+    
     
 }
