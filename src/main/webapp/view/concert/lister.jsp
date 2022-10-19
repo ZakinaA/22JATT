@@ -14,6 +14,8 @@
     <%@ include file="../inclus/header.jsp" %>
     <%@ include file="../inclus/menu.jsp" %>
     <div class="container-fluid" style="width: 85%;bottom: 0;top: 1">
+        <a class="btn btn-primary" href="<%out.print(getServletContext().getContextPath());%>/ServletConcert/ajouter">Ajouter un concert </a>
+   
         <div class="card mt-4 shadow-sm mb-0"> 
             <table class="table table-striped mb-0">
                 <thead>

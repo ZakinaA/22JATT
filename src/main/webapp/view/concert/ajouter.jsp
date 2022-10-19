@@ -63,7 +63,7 @@
                    href="/normanzik/ServletConcert/lister"
                     </select>
                 </div>
-                  <a class="btn btn-primary" href="/normanzik/ServletLieuConcert/ajouter">Ajouter une localisation </a>
+                  <a class="btn btn-primary" href="<%out.print(getServletContext().getContextPath());%>/ServletLieuConcert/ajouter">Ajouter une localisation </a>
           
               
                 <button type="submit" class="btn btn-light float-end">Ajout concert</button>  
