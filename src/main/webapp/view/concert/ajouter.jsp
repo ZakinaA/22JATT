@@ -22,7 +22,7 @@
                 <h3>Création d'un concert</h3>
                 <div class="mb-3">
                     <label for="dateInput" class="form-label">Date : </label>
-                    <input id="dateInput" type="text" name="date"  class="form-control">
+                    <input id="dateInput" type="date" name="date"  class="form-control">
                     <span style="color: blue;">${form.erreurs['nom']}</span>
                 </div>
                 <div class="mb-3">
