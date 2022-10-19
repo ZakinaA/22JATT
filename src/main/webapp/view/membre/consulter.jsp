@@ -19,6 +19,8 @@
         if (NormanzikAuthID != null  && NormanzikAuthID != 0) {
             if(NormanzikAuthID == leMembre.getId()) {
                 showBtnModifProfil = 1;
+            } else if(NormanzikGradeID == 2) {
+                showBtnModifProfil = 2;
             }
         }
     %>
@@ -27,6 +29,11 @@
         <% if(showBtnModifProfil == 1) { %>
             <div>
                 <a href="/normanzik/ServletMembre/modifierprofil?idMembre=<% out.println(leMembre.getId()); %>" class="btn border-0 text-white float-end" style="background: #FD841F;text-transform: uppercase; text-align: center">Modifier mon profil</a>
+            </div>
+            <div style="clear:both;" class="mb-3"></div>
+        <% } else if(showBtnModifProfil == 2) { %>
+            <div>
+                <a href="/normanzik/ServletMembre/modifierprofil?idMembre=<% out.println(leMembre.getId()); %>" class="btn border-0 text-white float-end" style="background: #FD841F;text-transform: uppercase; text-align: center">Modifier le profil de <% out.print(leMembre.getPrenom()); %> <% out.print(leMembre.getNom()); %></a>
             </div>
             <div style="clear:both;" class="mb-3"></div>
         <% } %>
@@ -62,28 +69,48 @@
                 </table>
             </div>
         </div>
-                        
-        <h4>Les groupes de l'utilisateur : </h4>                
-                        
-        <div class="card mb-3">
-            <div class="table-responsive rounded mb-0">
-                <table class="table table-borderless mb-0 table-striped">
-                    <tbody>
-                        <%
-                        for (Groupe unGroupe : lesGroupesMembre) {
-                        %>    
-                        <tr>
-                            <td class="align-middle"><% out.print(unGroupe.getNom()); %></td>
-                            <td class="align-middle"><% out.print(unGroupe.getDateCreation()); %></td>  
-                            <td class="align-middle text-end" style="width: 20%"><a class="btn text-white btnHover rounded-pill btn-sm" href="<%out.print(getServletContext().getContextPath()); %>/ServletGroupe/consulter?idGroupe=<% out.print(unGroupe.getId()); %>" style="background: #FD841F;text-transform: uppercase; text-align: center">VOIR LE PROFIL du groupe</a></td>                    
-                        </tr>
-                        <% } %>
-                    </tbody>
-                </table>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card card-body shadow-sm mb-3 border-0 fw-bold"  style="background-color: #FD841F;">
+                    <h4 class="mb-0 fw-bold">Les groupes de l'utilisateur : </h4>       
+                </div>
             </div>
-        </div>    
+            <div class="col-md-8">
+            </div>                  
+        </div> 
+        <%if(lesGroupesMembre.size() != 0) { %>
+            <div class="card mb-3">
+                <div class="table-responsive rounded mb-0">
+                    <table class="table table-borderless mb-0 table-striped">
+                        <tbody>
+                            <%
+                            for (Groupe unGroupe : lesGroupesMembre) {
+                            %>    
+                            <tr>
+                                <td class="align-middle"><% out.print(unGroupe.getNom()); %></td>
+                                <td class="align-middle"><% out.print(unGroupe.getDateCreation()); %></td>  
+                                <td class="align-middle text-end" style="width: 20%"><a class="btn text-white btnHover rounded-pill btn-sm" href="<%out.print(getServletContext().getContextPath()); %>/ServletGroupe/consulter?idGroupe=<% out.print(unGroupe.getId()); %>" style="background: #FD841F;text-transform: uppercase; text-align: center">VOIR LE PROFIL du groupe</a></td>                    
+                            </tr>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>   
+        <% } else { %>        
+            <div class="card card-body shadow-sm mb-3">
+                Cet utilisateur n'est dans aucun groupe.
+            </div>
+        <% } %>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card card-body shadow-sm mb-3 border-0 fw-bold"  style="background-color: #FD841F;">
+                    <h4 class="mb-0 fw-bold">Les instruments de l'utilisateur : </h4>     
+                </div>
+            </div>
+            <div class="col-md-8">
+            </div>                  
+        </div> 
 
-        <h4>Les instruments de l'utilisateur : </h4>   
         
         <div class="card mb-3">
             <div class="table-responsive rounded mb-0">

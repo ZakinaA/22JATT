@@ -28,8 +28,8 @@
             </ul>
             <% 
                 Integer NormanzikAuthID = (Integer) session.getAttribute("NormanzikAuthID"); 
-                if (NormanzikAuthID != null  && NormanzikAuthID != 0) { // Permet de vérifier si l'utilisateur est connecté ou non
-                    Integer NormanzikGradeID = (Integer) session.getAttribute("NormanzikGradeID"); 
+                Integer NormanzikGradeID = (Integer) session.getAttribute("NormanzikGradeID"); 
+                if (NormanzikAuthID != null  && NormanzikAuthID != 0) {                     
                     String NormanzikNomCompte = (String) session.getAttribute("NormanzikNomCompte"); 
             %>
                 <% if(NormanzikGradeID == 2) { %>

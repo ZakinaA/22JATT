@@ -61,3 +61,15 @@ Utilisateur normal :
 Mail : gregoire@normanzik.fr
 Password : mpHerve
 ```
+
+```
+Compte 1 : 
+
+Mail : john@normanzik.fr
+Mot de passe : W364i7rSDHpk
+
+Compte 2 : 
+
+Mail : jasper@jasper-music.fr
+Mot de passe : eTNsM834Bt4r
+```

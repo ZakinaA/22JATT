@@ -20,6 +20,7 @@
         <div class="card card-body mt-4 shadow-sm">
             
             <form class="form-inline" action="ajouter" method="POST">
+                <input type="hidden" name="formType" value="0">
                 <h3>Création d'un compte membre</h3>
                 
                 <div class="mb-3">

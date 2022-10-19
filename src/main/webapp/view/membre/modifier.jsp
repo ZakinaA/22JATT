@@ -75,7 +75,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="card mb-3">
+                    <!--<div class="card mb-3">
                         <div class="table-responsive">
                             <table class="table table-striped mb-0">
                                 <tbody>
@@ -96,7 +96,7 @@
                                 </tbody>
                             </table>
                         </div>
-                    </div>
+                    </div>-->
                     <div class="card mb-3">
                         <div class="table-responsive">
                             <table class="table table-striped mb-0">
@@ -108,7 +108,7 @@
                                     <tr id="trInstrument<% out.print(instrumentOrder); %>">
                                         <td class="align-middle"><% out.print(unInstrument.getLibelle()); %></td>
                                         <td class="align-middle">Instrument <% if(unInstrument.getEstInstrumentPrincipal() == 1) { out.print("<b>Principal</b>"); } %></td>
-                                        <td class="align-middle text-end"><% if(unInstrument.getEstInstrumentPrincipal() == 0) { %><button class="btn btn-danger btn-sm" onclick="deleteInstrumentMembre(<% out.print(instrumentOrder); %>)">X</button><input type="hidden" name="deleteInstrument" id="deleteInstrument<%out.print(instrumentOrder);%>" value="0"><% } %></td>
+                                        <!--<td class="align-middle text-end"><% if(unInstrument.getEstInstrumentPrincipal() == 0) { %><button class="btn btn-danger btn-sm" onclick="deleteInstrumentMembre(<% out.print(instrumentOrder); %>)">X</button><input type="hidden" name="deleteInstrument" id="deleteInstrument<%out.print(instrumentOrder);%>" value="0"><% } %></td>-->
                                     </tr>
                                     <% instrumentOrder++; } %>
                                 </tbody>
@@ -120,9 +120,9 @@
                     <div class="card card-body">
                         <img src="<% out.print(getServletContext().getContextPath()); %>/libs/images/<% if(leMembre.getAvatar() != null) { out.print(leMembre.getAvatar()); } else { out.print("placeholder_default.png"); } %>" id="avatarProfil" class="img-fluid mr-4 shadow-sm rounded">
                         <div class="row mt-4">
-                            <div class="col-md-6">
+                            <!--<div class="col-md-6">
                                 <button type="button" class="btn btn-outline-dark w-100" onclick="updateProfilImage()">Modifier l'image</button>
-                            </div> 
+                            </div>--> 
                             <div class="col-md-6">
                                 <button type="button" class="btn btn-outline-danger w-100" onclick="deleteImageProfil('profilMembre')">Supprimer l'image</button>
                             </div> 

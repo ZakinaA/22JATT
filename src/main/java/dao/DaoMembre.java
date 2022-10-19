@@ -28,6 +28,7 @@ public class DaoMembre {
     
     public static Membre ajouterMembre(Connection connection, Membre unMembre){
         int idGenere = -1;
+
         ArrayList<Instrument> lesInstruments = new  ArrayList<Instrument>();
         try
             {
@@ -70,9 +71,7 @@ public class DaoMembre {
             }   
                 
 
-            System.out.println("requeteInsertion=" + requete);
-            
-            
+          
             /* Exécution de la requête */
             int resultatRequete = requete.executeUpdate();
             System.out.println("resultatrequete=" + resultatRequete);
@@ -83,19 +82,18 @@ public class DaoMembre {
                 idGenere = rs.getInt( 1 );
                 
                 Instrument leInstrument = new Instrument();
-                leInstrument.setLibelle("Test insert");                
+                
                 leInstrument.setEstInstrumentPrincipal(1);                
                 unMembre.setInstrumentPrincipal(leInstrument);    
                 lesInstruments.add(leInstrument);      
-                unMembre.setId(idGenere);     
+                unMembre.setId(idGenere);    
                 
+                unMembre.setPrenom(unMembre.getPrenom());     
+                unMembre.setNom(unMembre.getNom());    
                 
-                Instrument unInstrument = new Instrument();
-                unInstrument.setLibelle("Test insert");  
-                
+                Instrument unInstrument = new Instrument();                
                 unInstrument.setEstInstrumentPrincipal(0);   
-                lesInstruments.add(unInstrument);   
-                
+                lesInstruments.add(unInstrument);                   
                 unMembre.setLesInstruments(lesInstruments);  
             }
 
@@ -182,7 +180,7 @@ public class DaoMembre {
         try
         {
             //preparation de la requete
-            requete=connection.prepareStatement("SELECT * FROM membre,  statut WHERE statut.id = membre.statutID");
+            requete=connection.prepareStatement("SELECT * FROM membre,  statut WHERE statut.id = membre.statutID ORDER by membre.id ASC");
             System.out.println("Requete" + requete);
 
             //executer la requete
