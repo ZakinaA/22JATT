@@ -41,7 +41,8 @@ public class DaoConcert {
                 Concert leConcert = new Concert();
                 leConcert.setDateConcert(rs.getString("jouer_concert.dateConcert"));
                
- 
+                leConcert.setHeureDebut(rs.getString("jouer_concert.HeureDebut"));
+                leConcert.setHeureFin(rs.getString("jouer_concert.HeureFin"));
                 
                 LieuConcert lieuConcertId = new LieuConcert();
                 lieuConcertId.setId(rs.getInt("lieuconcert.id"));

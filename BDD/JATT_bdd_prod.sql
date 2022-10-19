@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:3306
--- Généré le : mer. 19 oct. 2022 à 09:17
+-- Généré le : mer. 19 oct. 2022 à 09:26
 -- Version du serveur :  10.5.12-MariaDB-0+deb11u1
 -- Version de PHP : 7.4.25
 
@@ -202,17 +202,19 @@ INSERT INTO `instrument` (`id`, `libelle`) VALUES
 CREATE TABLE `jouer_concert` (
   `groupeID` int(11) NOT NULL,
   `lieuConcertID` int(11) NOT NULL,
-  `dateConcert` date DEFAULT NULL
+  `dateConcert` date DEFAULT NULL,
+  `heureDebut` time NOT NULL,
+  `heureFin` time NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `jouer_concert`
 --
 
-INSERT INTO `jouer_concert` (`groupeID`, `lieuConcertID`, `dateConcert`) VALUES
-(1, 2, '2022-12-08'),
-(2, 1, '2022-10-05'),
-(7, 1, '2022-06-09');
+INSERT INTO `jouer_concert` (`groupeID`, `lieuConcertID`, `dateConcert`, `heureDebut`, `heureFin`) VALUES
+(1, 2, '2022-12-08', '11:00:00', '17:00:00'),
+(2, 1, '2022-10-05', '00:00:00', '00:00:00'),
+(7, 1, '2022-06-09', '00:00:00', '00:00:00');
 
 -- --------------------------------------------------------
 

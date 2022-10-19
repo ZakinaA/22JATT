@@ -24,7 +24,8 @@
                         <th scope="col">Ville</th>
                         <th scope="col">Code Postal</th>
                         <th scope="col">Nom de la salle</th>
-                        <th scope="col">Nom du groupe</th>
+                        <th scope="col">Début</th>
+                        <th scope="col">Fin</th>
                     </tr>
                 </thead>        
                 <tbody>
@@ -38,7 +39,8 @@
                         <td class="align-middle"><% out.print(unConcert.getLieuConcertId().getVille()); %> </td>
                         <td class="align-middle"><% out.print(unConcert.getLieuConcertId().getCp()); %> </td>
                         <td class="align-middle"><% out.print(unConcert.getLieuConcertId().getSalleNom()); %> </td>
-                        <td class="align-middle"><% out.print(unConcert.getGroupeConcertId().getNom()); %> </td>
+                        <td class="align-middle"><% out.print(unConcert.getHeureDebut()); %> </td>
+                        <td class="align-middle"><% out.print(unConcert.getHeureFin()); %> </td>
                     </tr>
                     <% } %>
                 </tbody>     
