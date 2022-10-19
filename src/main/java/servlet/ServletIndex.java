@@ -122,19 +122,29 @@ public class ServletIndex extends HttpServlet {
         FormConnexion form = new FormConnexion(); 
         Connexion laConnexion = form.uneConnexion(request);
         request.setAttribute("form", form);        
-        request.setAttribute("pConnexion", laConnexion);        
+        request.setAttribute("pConnexion", laConnexion);    
+        HttpSession session = request.getSession();
         if (form.getErreurs().isEmpty()){
             Connexion faireConnexion = DaoConnexion.getCompte(connection,laConnexion);
             
-            if(faireConnexion != null) {
-                HttpSession session = request.getSession();
+            System.out.println(faireConnexion);
+            if(faireConnexion.getId() != 0) {
+
                 session.setAttribute("NormanzikAuthID", faireConnexion.getId());
                 session.setAttribute("NormanzikGradeID", faireConnexion.getGradeID());
                 session.setAttribute("NormanzikNomCompte", faireConnexion.getMembre().getPrenom() + " " + faireConnexion.getMembre().getNom().toUpperCase());
                 session.setAttribute("notifMessage", "Bonjour "+faireConnexion.getMembre().getPrenom() + " " + faireConnexion.getMembre().getNom().toUpperCase()); // On met un '1' à l'attribut permettant d'afficher les notifications   
                 session.setAttribute("showNotifMessage", 1); // On met un '1' à l'attribut permettant d'afficher les notifications 
                 this.getServletContext().getRequestDispatcher("/view/index/index.jsp" ).forward( request, response );
+            } else {
+                session.setAttribute("notifMessage", "Aucun compte n'existe avec cette adresse mail/mot de passe.");
+                session.setAttribute("showNotifMessage", 1); // On met un '1' à l'attribut permettant d'afficher les notifications 
+                response.sendRedirect(getServletContext().getContextPath());
             }
+        } else {
+            session.setAttribute("notifMessage", "Merci de renseigner des champs valides");
+            session.setAttribute("showNotifMessage", 1); // On met un '1' à l'attribut permettant d'afficher les notifications 
+            response.sendRedirect(getServletContext().getContextPath());
         }
     }
 

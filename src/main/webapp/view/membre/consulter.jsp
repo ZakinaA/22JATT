@@ -28,12 +28,12 @@
     <div class="container-fluid" style="width: 85%;bottom: 0;top: 1">
         <% if(showBtnModifProfil == 1) { %>
             <div>
-                <a href="/normanzik/ServletMembre/modifierprofil?idMembre=<% out.println(leMembre.getId()); %>" class="btn border-0 text-white float-end" style="background: #FD841F;text-transform: uppercase; text-align: center">Modifier mon profil</a>
+                <a href="<% out.print(getServletContext().getContextPath()); %>/ServletMembre/modifierprofil?idMembre=<% out.println(leMembre.getId()); %>" class="btn border-0 text-white float-end" style="background: #FD841F;text-transform: uppercase; text-align: center">Modifier mon profil</a>
             </div>
             <div style="clear:both;" class="mb-3"></div>
         <% } else if(showBtnModifProfil == 2) { %>
             <div>
-                <a href="/normanzik/ServletMembre/modifierprofil?idMembre=<% out.println(leMembre.getId()); %>" class="btn border-0 text-white float-end" style="background: #FD841F;text-transform: uppercase; text-align: center">Modifier le profil de <% out.print(leMembre.getPrenom()); %> <% out.print(leMembre.getNom()); %></a>
+                <a href="<% out.print(getServletContext().getContextPath()); %>/ServletMembre/modifierprofil?idMembre=<% out.println(leMembre.getId()); %>" class="btn border-0 text-white float-end" style="background: #FD841F;text-transform: uppercase; text-align: center">Modifier le profil de <% out.print(leMembre.getPrenom()); %> <% out.print(leMembre.getNom()); %></a>
             </div>
             <div style="clear:both;" class="mb-3"></div>
         <% } %>

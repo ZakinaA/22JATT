@@ -40,13 +40,15 @@ public class DaoConnexion {
                 leMembreInformation.setNom(rs.getString("nom")); 
                 
                 laConnexion.setMembre(leMembreInformation);
+            } else {
+                laConnexion.setId(0);
             }
         }
         catch (SQLException e)
         {
             e.printStackTrace();
             //out.println("Erreur lors de l’établissement de la connexion");
-            laConnexion = null;
+            laConnexion.setId(0);
         }
         return laConnexion;
     }
