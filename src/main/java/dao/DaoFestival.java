@@ -57,8 +57,7 @@ public class DaoFestival {
         try
         {
             //preparation de la requete
-            requete=connection.prepareStatement("select * from festival, groupe,participer_festival "
-                    + "where groupe.id = participer_festival.idGroupe and festival.idFestival = participer_festival.idFestival and festival.idFestival=?");
+            requete=connection.prepareStatement("SELECT * FROM festival, groupe,jouer_festival WHERE groupe.id = jouer_festival.groupeID && jouer_festival.festivalID = festival.idFestival && festival.idFestival=?");
             requete.setInt(1, idFestival);
             //System.out.println("Requete" + requete);
 
@@ -77,7 +76,7 @@ public class DaoFestival {
                 leGroupe.setNom(rs.getString("groupe.nom"));
                 
                 Participer_Festival uneParticipation = new Participer_Festival();
-                uneParticipation.setTeteAffiche(rs.getString("participer_festival.teteAffiche"));
+                uneParticipation.setTeteAffiche(rs.getString("jouer_festival.teteAffiche"));
                 
             }
         }
@@ -87,50 +86,8 @@ public class DaoFestival {
             //out.println("Erreur lors de l’établissement de la connexion");
         }
         return leFestival ;
-    }
-    
-    /*public static Festival getLaTeteAffiche(Connection connection, int idFestival){
-        Festival leFestival = new Festival();
-        
-        
-        try
-        {
-            //preparation de la requete
-            requete=connection.prepareStatement("select * from festival, groupe,participer_festival "
-                    + "where groupe.id = participer_festival.idGroupe and festival.idFestival = participer_festival.idFestival and festival.idFestival=? and participer_festival.teteAffiche=1");
-            requete.setInt(1, idFestival);
-            //System.out.println("Requete" + requete);
+    }   
 
-            //executer la requete
-            rs=requete.executeQuery();
-
-            //On hydrate l'objet métier Groupe et sa relation Genre avec les résultats de la requête
-            if ( rs.next() ) {
-                
-                leFestival.setId(rs.getInt("festival.idFestival"));
-                leFestival.setDateDebutFestival(rs.getString("festival.dateDebut"));
-                leFestival.setDateFinFestival(rs.getString("festival.dateFin"));
-                leFestival.setNom(rs.getString("festival.nom"));
-                
-                Groupe leGroupe = new Groupe();
-                leGroupe.setId(rs.getInt("groupe.id"));
-                leGroupe.setNom(rs.getString("groupe.nom"));
-                
-                Participer_Festival uneParticipation = new Participer_Festival();
-                uneParticipation.setUnFestival(leFestival);
-                uneParticipation.setUnGroupe(leGroupe);
-                uneParticipation.setTeteAffiche(leGroupe.getNom());
-                
-                
-            }
-        }
-        catch (SQLException e)
-        {
-            e.printStackTrace();
-            //out.println("Erreur lors de l’établissement de la connexion");
-        }
-        return leFestival;
-    }*/
 
     public static Festival ajouterFestival(Connection connection, Festival unFestival){
         int idGenere = -1;

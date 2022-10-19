@@ -28,8 +28,7 @@ public class DaoParticiper_Festival {
         try
         {
             //preparation de la requete
-            requete=connection.prepareStatement("select * from festival, groupe,participer_festival "
-                    + "where groupe.id = participer_festival.idGroupe and festival.idFestival = participer_festival.idFestival and festival.idFestival=? and participer_festival.teteAffiche=1");
+            requete=connection.prepareStatement("SELECT * FROM festival, groupe,jouer_festival WHERE groupe.id = jouer_festival.groupeID and festival.idFestival = jouer_festival.festivalID and festival.idFestival=? and jouer_festival.teteAffiche=1");
             requete.setInt(1, idFestival);
             //System.out.println("Requete" + requete);
 
