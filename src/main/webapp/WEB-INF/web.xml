@@ -25,6 +25,10 @@
         <servlet-class>servlet.ServletMembre</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>ServletLieuConcert</servlet-name>
+        <servlet-class>servlet.ServletLieuConcert</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>ServletDispositif</servlet-name>
         <servlet-class>servlet.ServletDispositif</servlet-class>
     </servlet>
@@ -85,16 +89,28 @@
         <url-pattern>/ServletDispositif/lister-groupe</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>ServletConcert</servlet-name>
-        <url-pattern>/ServletConcert/lister</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>ServletFestival</servlet-name>
         <url-pattern>/ServletFestival/lister</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>ServletFestival</servlet-name>
         <url-pattern>/ServletFestival/consulter</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletFestival</servlet-name>
+        <url-pattern>/ServletFestival/ajouter</url-pattern>
+    </servlet-mapping>
+        <servlet-mapping>
+        <servlet-name>ServletConcert</servlet-name>
+        <url-pattern>/ServletConcert/lister</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletConcert</servlet-name>
+        <url-pattern>/ServletConcert/ajouter</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletLieuConcert</servlet-name>
+        <url-pattern>/ServletLieuConcert/ajouter</url-pattern>
     </servlet-mapping>
     <session-config>        
         <session-timeout>

@@ -12,17 +12,32 @@ import java.util.ArrayList;
  */
 public class Concert {
     
+    private int id;
     private String dateConcert;
     private LieuConcert lieuConcertId;
     private Groupe GroupeConcertId;
+    private String HeureDebut;
+    private String HeureFin;
+            
 
     public Concert() {
     }
 
-    public Concert(String dateConcert, LieuConcert lieuConcertId, Groupe GroupeConcertId) {
+    public Concert(int id, String dateConcert, LieuConcert lieuConcertId, Groupe GroupeConcertId, String HeureDebut, String HeureFin) {
+        this.id = id;
         this.dateConcert = dateConcert;
         this.lieuConcertId = lieuConcertId;
         this.GroupeConcertId = GroupeConcertId;
+        this.HeureDebut = HeureDebut;
+        this.HeureFin = HeureFin;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getDateConcert() {
@@ -49,9 +64,19 @@ public class Concert {
         this.GroupeConcertId = GroupeConcertId;
     }
 
-  
-    
-    
-    
-    
+    public String getHeureDebut() {
+        return HeureDebut;
+    }
+
+    public void setHeureDebut(String HeureDebut) {
+        this.HeureDebut = HeureDebut;
+    }
+
+    public String getHeureFin() {
+        return HeureFin;
+    }
+
+    public void setHeureFin(String HeureFin) {
+        this.HeureFin = HeureFin;
+    }    
 }

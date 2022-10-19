@@ -134,18 +134,40 @@ public class ServletMembre extends HttpServlet {
         }
         
         if(url.equals(getServletContext().getContextPath()+"/ServletMembre/modifierprofil"))
-        {
-            int idMembre = Integer.parseInt(request.getParameter("idMembre"));              
-            Membre leMembre = DaoMembre.getLeMembre(connection, idMembre);
-            request.setAttribute("pMembre", leMembre);
-            
-            ArrayList<Groupe> lesGroupesMembre = DaoMembre.getLesGroupesMembre(connection, idMembre);
-            request.setAttribute("pLesGroupesMembre", lesGroupesMembre);
-            
-            ArrayList<Instrument> lesInstruments = DaoInstrument.getLesInstruments(connection);
-            request.setAttribute("pLesInstruments", lesInstruments);
-            
-            this.getServletContext().getRequestDispatcher("/view/membre/modifier.jsp" ).forward( request, response );
+        {            
+            HttpSession session = request.getSession();
+            Integer NormanzikAuthID = (Integer) session.getAttribute("NormanzikAuthID"); 
+            Integer NormanzikGradeID = (Integer) session.getAttribute("NormanzikGradeID"); 
+            int idMembre = Integer.parseInt(request.getParameter("idMembre"));     
+            if (NormanzikAuthID != null  && NormanzikAuthID != 0) {
+                if(NormanzikAuthID == idMembre || NormanzikGradeID == 2) {
+         
+                Membre leMembre = DaoMembre.getLeMembre(connection, idMembre);
+                request.setAttribute("pMembre", leMembre);
+
+                ArrayList<Groupe> lesGroupesMembre = DaoMembre.getLesGroupesMembre(connection, idMembre);
+                request.setAttribute("pLesGroupesMembre", lesGroupesMembre);
+
+                ArrayList<Instrument> lesInstruments = DaoInstrument.getLesInstruments(connection);
+                request.setAttribute("pLesInstruments", lesInstruments);
+
+                ArrayList<Statut> lesStatuts = DaoAdmin.getLesStatuts(connection);
+                request.setAttribute("pLesStatuts", lesStatuts);
+
+                this.getServletContext().getRequestDispatcher("/view/membre/modifier.jsp" ).forward( request, response );
+                } else {
+                    session.setAttribute("notifMessage", "Vous n'avez pas le droit de modifier ce profil."); // On met un '1' à l'attribut permettant d'afficher les notifications   
+                    session.setAttribute("showNotifMessage", 1); // On met un '1' à l'attribut permettant d'afficher les notifications   
+                
+                    response.sendRedirect(getServletContext().getContextPath()+"/ServletMembre/lister");
+                }            
+            } else {
+                session.setAttribute("notifMessage", "Vous devez être connecté pour pouvoir modifier un profil."); // On met un '1' à l'attribut permettant d'afficher les notifications   
+                session.setAttribute("showNotifMessage", 1); // On met un '1' à l'attribut permettant d'afficher les notifications   
+                
+                response.sendRedirect(getServletContext().getContextPath()+"/ServletMembre/lister");
+
+            }
         }
     }
 
@@ -161,48 +183,89 @@ public class ServletMembre extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         FormMembre form = new FormMembre();
+        int formType = Integer.parseInt(request.getParameter("formType"));
 
-        /* Appel au traitement et à la validation de la requête, et récupération de l'objet en résultant */
-        Membre leMembreSaisi = form.ajouterMembre(request);
-
-        /* Stockage du formulaire et de l'objet dans l'objet request */
-        request.setAttribute( "form", form );
-        request.setAttribute( "pMembre", leMembreSaisi );
-
-        if (form.getErreurs().isEmpty()){
-            System.out.println("insert 1");
-            // Il n'y a pas eu d'erreurs de saisie, donc on renvoie la vue affichant les infos du groupe
-            Membre membreAjoute = DaoMembre.ajouterMembre(connection, leMembreSaisi);
-
-            if (membreAjoute != null ){
-                System.out.println("insert 2");
-                request.setAttribute("pMembre", membreAjoute);      
+        /*
+        * formtype = 1 : Modifier un profil membre
+        * formtype = vide : création d'un membre
+        */
+        if(formType == 1) {
+            Membre leMembreSaisi = form.modifierMembre(request);
+                        
+            request.setAttribute( "form", form );
+            request.setAttribute( "pMembre", leMembreSaisi );
+            
+            if (form.getErreurs().isEmpty()){
+                int membreModifie = DaoMembre.modifierUnMembre(connection, leMembreSaisi);
                 
-                ArrayList<Groupe> lesGroupesMembre = DaoMembre.getLesGroupesMembre(connection, membreAjoute.getId());
+                int idMembre = leMembreSaisi.getId();              
+                Membre leMembre = DaoMembre.getLeMembre(connection, idMembre);
+                request.setAttribute("pMembre", leMembre);
+            
+                ArrayList<Groupe> lesGroupesMembre = DaoMembre.getLesGroupesMembre(connection, idMembre);
                 request.setAttribute("pLesGroupesMembre", lesGroupesMembre);
-                this.getServletContext().getRequestDispatcher("/view/membre/consulter.jsp" ).forward( request, response );
-            }
-            else
-            {
-                // Cas où l'insertion en bdd a échoué
+            
                 ArrayList<Instrument> lesInstruments = DaoInstrument.getLesInstruments(connection);
                 request.setAttribute("pLesInstruments", lesInstruments);
             
                 ArrayList<Statut> lesStatuts = DaoAdmin.getLesStatuts(connection);
                 request.setAttribute("pLesStatuts", lesStatuts);
+                HttpSession session = request.getSession();
+                int NormanzikAuthID = (int) session.getAttribute("NormanzikAuthID"); 
+                if(NormanzikAuthID == idMembre) {
+                    session.setAttribute("NormanzikNomCompte", leMembreSaisi.getPrenom() + " " + leMembreSaisi.getNom().toUpperCase());
+                    session.setAttribute("notifMessage", "Votre profil a bien été mis à jour."); // On met un '1' à l'attribut permettant d'afficher les notifications   
+                } else {
+                    session.setAttribute("notifMessage", "Le profil de " + leMembreSaisi.getPrenom() + " " + leMembreSaisi.getNom().toUpperCase() + " a bien été mis à jour."); // On met un '1' à l'attribut permettant d'afficher les notifications   
+                }
+                
+                session.setAttribute("showNotifMessage", 1); // On met un '1' à l'attribut permettant d'afficher les notifications   
+                this.getServletContext().getRequestDispatcher("/view/membre/modifier.jsp" ).forward( request, response );
+            
+            }
+            System.out.println("lui");
+        } else {
+            Membre leMembreSaisi = form.ajouterMembre(request);
+
+            
+            request.setAttribute( "form", form );
+            request.setAttribute( "pMembre", leMembreSaisi );
+
+            if (form.getErreurs().isEmpty()){
+                Membre membreAjoute = DaoMembre.ajouterMembre(connection, leMembreSaisi);
+
+                if (membreAjoute != null ){
+                    HttpSession session = request.getSession();
+                    request.setAttribute("pMembre", membreAjoute);      
+                    session.setAttribute("notifMessage", "Votre profil a bien été créé."); // On met un '1' à l'attribut permettant d'afficher les notifications 
+                    session.setAttribute("showNotifMessage", 1); // On met un '1' à l'attribut permettant d'afficher les notifications   
+                    session.setAttribute("NormanzikAuthID", membreAjoute.getId());
+                    session.setAttribute("NormanzikGradeID", 0);
+                    session.setAttribute("NormanzikNomCompte", membreAjoute.getPrenom() + " " + membreAjoute.getNom().toUpperCase());
+               
+                    response.sendRedirect(getServletContext().getContextPath()+"/ServletMembre/consulter?idMembre="+membreAjoute.getId());
+                }
+                else
+                {
+                    // Cas où l'insertion en bdd a échoué
+                    ArrayList<Instrument> lesInstruments = DaoInstrument.getLesInstruments(connection);
+                    request.setAttribute("pLesInstruments", lesInstruments);
+
+                    ArrayList<Statut> lesStatuts = DaoAdmin.getLesStatuts(connection);
+                    request.setAttribute("pLesStatuts", lesStatuts);
+                    this.getServletContext().getRequestDispatcher("/view/membre/ajouter.jsp" ).forward( request, response );
+                }
+            }
+            else
+            {
+                ArrayList<Instrument> lesInstruments = DaoInstrument.getLesInstruments(connection);
+                request.setAttribute("pLesInstruments", lesInstruments);
+
+                ArrayList<Statut> lesStatuts = DaoAdmin.getLesStatuts(connection);
+                request.setAttribute("pLesStatuts", lesStatuts);
                 this.getServletContext().getRequestDispatcher("/view/membre/ajouter.jsp" ).forward( request, response );
             }
         }
-        else
-        {
-            ArrayList<Instrument> lesInstruments = DaoInstrument.getLesInstruments(connection);
-            request.setAttribute("pLesInstruments", lesInstruments);
-            
-            ArrayList<Statut> lesStatuts = DaoAdmin.getLesStatuts(connection);
-            request.setAttribute("pLesStatuts", lesStatuts);
-            this.getServletContext().getRequestDispatcher("/view/membre/ajouter.jsp" ).forward( request, response );
-        }
-
     }
 
     //fermeture des ressources

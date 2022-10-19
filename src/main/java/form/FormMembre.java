@@ -163,4 +163,49 @@ public class FormMembre {
         unMembre.setMail(mail);
         return unMembre;
      }
+    
+    public Membre modifierMembre(HttpServletRequest request ) {        
+        Membre leMembre  = new Membre();
+
+        //récupération dans des variables des données saisies dans les champs de formulaire
+        String nom = getDataForm( request, "nom" );
+        String prenom = getDataForm( request, "prenom");
+        String mail = getDataForm(request, "mail");
+        int membreID = Integer.parseInt(getDataForm(request, "membreID"));
+        leMembre.setId(membreID);
+        int statutID = Integer.parseInt(getDataForm( request, "selectStatut" ));
+        int instrumentPrincipalID = Integer.parseInt(getDataForm( request, "selectInstrumentPrincipal" ));
+        try {
+            validationNom( nom );
+        } catch ( Exception e ) {
+            setErreur( "nom", e.getMessage() );
+        }
+        leMembre.setNom(nom);
+        
+        try {
+            validationNom( prenom );
+        } catch ( Exception e ) {
+            setErreur( "nom", e.getMessage() );
+        }
+        leMembre.setPrenom(prenom);  
+        
+        leMembre.setMail(mail);
+        
+        if ( erreurs.isEmpty() ) {
+            resultat = "Succès de l'ajout.";
+        } else {
+            resultat = "Échec de l'ajout.";
+        }
+        System.out.println("resultat erreurs="+resultat);
+        
+        Statut leStatut = new Statut();
+        leStatut.setId(statutID);        
+        leMembre.setStatutMembre(leStatut);  
+        
+        Instrument leInstrumentPrincipal = new Instrument();
+        leInstrumentPrincipal.setId(instrumentPrincipalID);        
+        leMembre.setInstrumentPrincipal(leInstrumentPrincipal);
+        
+        return leMembre;
+    }
 }

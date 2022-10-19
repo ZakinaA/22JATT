@@ -89,8 +89,10 @@ public class DaoFestival {
         return leFestival ;
     }
     
-    public static Festival getLaTeteAffiche(Connection connection, int idFestival){
+    /*public static Festival getLaTeteAffiche(Connection connection, int idFestival){
         Festival leFestival = new Festival();
+        
+        
         try
         {
             //preparation de la requete
@@ -104,15 +106,21 @@ public class DaoFestival {
 
             //On hydrate l'objet métier Groupe et sa relation Genre avec les résultats de la requête
             if ( rs.next() ) {
+                
                 leFestival.setId(rs.getInt("festival.idFestival"));
                 leFestival.setDateDebutFestival(rs.getString("festival.dateDebut"));
                 leFestival.setDateFinFestival(rs.getString("festival.dateFin"));
                 leFestival.setNom(rs.getString("festival.nom"));
-
+                
                 Groupe leGroupe = new Groupe();
                 leGroupe.setId(rs.getInt("groupe.id"));
                 leGroupe.setNom(rs.getString("groupe.nom"));
-
+                
+                Participer_Festival uneParticipation = new Participer_Festival();
+                uneParticipation.setUnFestival(leFestival);
+                uneParticipation.setUnGroupe(leGroupe);
+                uneParticipation.setTeteAffiche(leGroupe.getNom());
+                
                 
             }
         }
@@ -121,7 +129,49 @@ public class DaoFestival {
             e.printStackTrace();
             //out.println("Erreur lors de l’établissement de la connexion");
         }
-        return leFestival ;
+        return leFestival;
+    }*/
+
+    public static Festival ajouterFestival(Connection connection, Festival unFestival){
+        int idGenere = -1;
+        try
+        {
+            //preparation de la requete
+            // gpe_id (clé primaire de la table groupe) est en auto_increment,donc on ne renseigne pas cette valeur
+            // le paramètre RETURN_GENERATED_KEYS est ajouté à la requête afin de pouvoir récupérer l'id généré par la bdd (voir ci-dessous)
+            // supprimer ce paramètre en cas de requête sans auto_increment.
+            requete=connection.prepareStatement("INSERT INTO FESTIVAL ( nom, dateDebut, dateFin)\n" +
+                    "VALUES (?,?,?)", requete.RETURN_GENERATED_KEYS );
+            requete.setString(1, unFestival.getNom());
+            requete.setString(2, unFestival.getDateDebutFestival());
+            requete.setString(3, unFestival.getDateFinFestival());
+                      
+            System.out.println("requeteInsertion=" + requete);
+            /* Exécution de la requête */
+            int resultatRequete = requete.executeUpdate();
+            System.out.println("resultatrequete=" + resultatRequete);
+
+            // Récupération de id auto-généré par la bdd dans la table groupe
+            rs = requete.getGeneratedKeys();
+            while ( rs.next() ) {
+                idGenere = rs.getInt( 1 );
+                unFestival.setId(idGenere);
+            }
+
+            // si le résultat de la requete est différent de 1, c'est que la requête a échoué.
+            // Dans ce cas, on remet l'objet groupe à null
+            if (resultatRequete != 1){
+                unFestival= null;
+            }
+
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+            //out.println("Erreur lors de l’établissement de la connexion");
+            unFestival= null;
+        }
+        return unFestival ;
     }
     
     

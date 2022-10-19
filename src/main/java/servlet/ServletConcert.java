@@ -5,6 +5,8 @@
 package servlet;
 
 import dao.DaoConcert;
+import dao.DaoGroupe;
+import dao.DaoLieuConcert;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -18,6 +20,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Concert;
+import model.Groupe;
+import model.LieuConcert;
 
 /**
  *
@@ -94,6 +98,21 @@ public class ServletConcert extends HttpServlet {
            ArrayList<Concert> lesConcert = DaoConcert.getLesConcerts(connection);
             request.setAttribute("pLesConcert", lesConcert);
             this.getServletContext().getRequestDispatcher("/view/concert/lister.jsp" ).forward( request, response );
+        }
+        
+        if(url.equals(getServletContext().getContextPath()+"/ServletConcert/ajouter"))
+        {
+           
+            ArrayList<Concert> lesConcert = DaoConcert.getLesConcerts(connection);
+            request.setAttribute("pLesConcerts", lesConcert);
+            
+            ArrayList<Groupe> lesGroupes = DaoGroupe.getLesGroupes(connection);
+            request.setAttribute("pLesGroupes", lesGroupes);
+            
+            ArrayList<LieuConcert> lesLieuConcerts = DaoLieuConcert.getLesLieuConcerts(connection);
+            request.setAttribute("pLesLieuConcerts", lesLieuConcerts);
+            
+            this.getServletContext().getRequestDispatcher("/view/concert/ajouter.jsp" ).forward( request, response );   
         }
         
         

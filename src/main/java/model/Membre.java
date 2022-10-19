@@ -15,6 +15,7 @@ public class Membre {
     private String prenom;
     private String motDePasse;
     private String mail;
+    private String avatar;
     private ArrayList<Groupe> lesGroupes;
     private ArrayList<Instrument> lesInstruments;
     private Instrument instrumentPrincipal; // On récupère l'instrument principal du membre
@@ -22,7 +23,7 @@ public class Membre {
     
     public Membre() {
     }
-    public Membre(int id, String nom, String prenom, Instrument instrumentPrincipal, Statut StatutMembre, String motDePasse, String mail) {
+    public Membre(int id, String nom, String prenom, Instrument instrumentPrincipal, Statut StatutMembre, String motDePasse, String mail, String avatar) {
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
@@ -30,6 +31,7 @@ public class Membre {
         this.StatutMembre = StatutMembre;
         this.motDePasse = motDePasse;
         this.mail = mail;
+        this.avatar = avatar;
     }
 
     public int getId() {
@@ -118,6 +120,14 @@ public class Membre {
             lesInstruments = new ArrayList<>();
         }
         lesInstruments.add(unInstrument);
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
     
     

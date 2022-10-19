@@ -24,11 +24,12 @@ public class Groupe {
     private ArrayList<Concert> GroupeConcertId;
     private Membre MembreContact;
     private Dispositif DispositifGroupe;
+    private String avatar;
 
     public Groupe() {
     }
 
-    public Groupe(int id, String nom, String dateCreation, Genre genre, String telephone, String melSiteWeb, String lieuRepetition, int estSelectionne, ArrayList<Membre> lesMembres, ArrayList<Titre> lesTitres, ArrayList<Concert> GroupeConcertId, Membre MembreContact, Dispositif DispositifGroupe) {
+    public Groupe(int id, String nom, String dateCreation, Genre genre, String telephone, String melSiteWeb,String avatar, String lieuRepetition, int estSelectionne, ArrayList<Membre> lesMembres, ArrayList<Titre> lesTitres, ArrayList<Concert> GroupeConcertId, Membre MembreContact, Dispositif DispositifGroupe) {
         this.id = id;
         this.nom = nom;
         this.dateCreation = dateCreation;
@@ -42,6 +43,15 @@ public class Groupe {
         this.GroupeConcertId = GroupeConcertId;
         this.MembreContact = MembreContact;
         this.DispositifGroupe = DispositifGroupe;
+        this.avatar = avatar;
+    }
+
+    public String getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
     }
 
     public int getId() {

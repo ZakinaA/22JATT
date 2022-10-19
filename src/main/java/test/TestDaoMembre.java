@@ -23,10 +23,19 @@ public class TestDaoMembre {
         Connection con = ConnexionBdd.ouvrirConnexion();
         
         Membre membre = new Membre();
-        membre.setNom("Lorem");
-        membre.setPrenom("Ipsum");
+        membre.setNom("Lemoine");
+        membre.setPrenom("Julien");        
+        membre.setMail("test@normanzik.fr");
+
+        Statut leStatut = new Statut();
+        leStatut.setId(1);        
+        membre.setStatutMembre(leStatut);
         
-        Instrument instrumentPrincipal = new Instrument();
+        int membreModifie = DaoMembre.modifierUnMembre(con, membre);
+        
+        System.out.println(membreModifie);
+        
+        /*Instrument instrumentPrincipal = new Instrument();
         instrumentPrincipal.setId(1);
         
         Statut statut = new Statut();
@@ -35,7 +44,7 @@ public class TestDaoMembre {
         membre.setInstrumentPrincipal(instrumentPrincipal);
         membre.setStatutMembre(statut);
         
-        Membre leMembreInserer = DaoMembre.ajouterMembre(con, membre);
+        Membre leMembreInserer = DaoMembre.ajouterMembre(con, membre);*/
         
         ConnexionBdd.fermerConnexion(con);
     }

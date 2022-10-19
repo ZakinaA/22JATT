@@ -55,9 +55,14 @@ https://docs.google.com/document/d/1RDJOMEgdQg4mM5iiU_OkZe2QGI0LP5IlHVLhpDP6AcI/
 
 ## Comptes de test : 
 
-Utilisateur normal : 
-
 ```
+Compte 1 : (Compte administrateur)
+
+Mail : john@normanzik.fr
+Mot de passe : W364i7rSDHpk
+
+Compte 2 : 
+
 Mail : gregoire@normanzik.fr
 Password : mpHerve
 ```
