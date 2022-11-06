@@ -16,7 +16,7 @@
     <%@ include file="../inclus/menu.jsp" %>
     <div class="container-fluid" style="width: 85%;bottom: 0;top: 1">
         <div class="card card-body border-0 shadow-sm py-5 mt-4" style="background-color: #FD841F;">
-            <h1 class="mb-0" style="margin-left: 3%;"><% out.println(unGroupe.getNom()); %></h1>
+            <h1 class="mb-0" style="margin-left: 3%;"><% out.print(unGroupe.getNom()); %></h1>
         </div>
         <div class="card mt-4">
             <table class="table table-striped mb-0">

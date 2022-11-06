@@ -72,7 +72,13 @@
                   </table>
                 </div>
                 <a href="<%out.print(getServletContext().getContextPath()); %>/ServletGroupe/consulter?idGroupe=<% out.println(unGroupe.getId()); %>" class="btn mt-2 text-white w-100 btnHover" style="background: #FD841F;text-transform: uppercase; text-align: center">VOIR PLUS</a>          
-               </div>
+                <% 
+                if (NormanzikAuthID != null  && NormanzikAuthID != 0) { 
+                    if(NormanzikGradeID == 2) {
+                %>                
+                    <a href="<%out.print(getServletContext().getContextPath()); %>/ServletGroupe/modifier?idGroupe=<% out.println(unGroupe.getId()); %>" class="btn btn-danger mt-2 text-dark w-100" style="text-transform: uppercase; text-align: center">Modifier le groupe</a>          
+                <% }} %> 
+                </div>
             </div>
         </div>  
         <% cardOrder++; } %>

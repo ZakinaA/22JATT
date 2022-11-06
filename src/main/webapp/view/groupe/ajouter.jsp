@@ -71,7 +71,7 @@
                     </div>
     
                     
-    
+                    <input type="hidden" name="formType" value="0">
                   </form>
     
                 </div>

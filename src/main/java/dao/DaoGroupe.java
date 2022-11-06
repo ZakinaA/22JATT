@@ -106,7 +106,9 @@ public class DaoGroupe {
                 leGroupe.setNom(rs.getString("groupe.nom"));
                 leGroupe.setDateCreation(rs.getString("groupe.dateCreation"));
                 leGroupe.setLieuRepetition(rs.getString("groupe.lieuRepetition"));
-
+                leGroupe.setMelSiteWeb(rs.getString("groupe.melSiteWeb"));
+                leGroupe.setTelephone(rs.getString("groupe.telephone"));
+                
                 Genre leGenre = new Genre();
                 leGenre.setId(rs.getInt("genre_musical.id"));
                 leGenre.setLibelle(rs.getString("genre_musical.libelle"));
@@ -262,8 +264,7 @@ public class DaoGroupe {
             //preparation de la requete
             requete=connection.prepareStatement("select * from groupe, dispositif where dispositifID = dispositif.id && dispositif.id = ?");
             requete.setInt(1, idDispositif);
-            System.out.println("Requete" + requete);
-
+            
             //executer la requete
             rs=requete.executeQuery();
 
@@ -293,5 +294,28 @@ public class DaoGroupe {
         }
         return lesGroupes ;
     }
+    
+    public static int modifierGroupe(Connection connection, Groupe unGroupe){
+        int resultatType = -1;
+        try
+        {
+            requete=connection.prepareStatement("UPDATE groupe SET nom = ?,telephone = ?, melSiteWeb = ? WHERE id = ?");
+
+            requete.setString(1, unGroupe.getNom());
+            requete.setString(2, unGroupe.getTelephone());
+            requete.setString(3, unGroupe.getMelSiteWeb());
+            requete.setInt(4, unGroupe.getId());
+            rs=requete.executeQuery();
+            resultatType = 1;
+        }
+            
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+            //out.println("Erreur lors de l’établissement de la connexion");            
+            resultatType = 0;
+        }
+        return resultatType;
+    }    
     
 }

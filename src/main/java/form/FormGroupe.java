@@ -127,4 +127,33 @@ public class FormGroupe {
         unGroupe.setDispositifGroupe(leDispositif);*/
         return unGroupe ;
     }
+    
+    public Groupe modifierGroupe(HttpServletRequest request ) {
+        Groupe unGroupe  = new Groupe();
+
+        //récupération dans des variables des données saisies dans les champs de formulaire
+        String nom = getDataForm( request, "nom" );
+        String numTel = getDataForm( request, "telSiteWeb");
+        String addressMail = getDataForm( request, "melSiteWeb");
+        int idGroupe = Integer.parseInt(getDataForm( request, "groupeID" ));
+        //int dispositifID = Integer.parseInt(getDataForm( request, "dispositifID" ));
+        
+        try {
+            validationNom( nom );
+        } catch ( Exception e ) {
+            setErreur( "nom", e.getMessage() );
+        }
+        
+        
+        unGroupe.setTelephone(numTel); 
+        unGroupe.setId(idGroupe);   
+        unGroupe.setNom(nom);        
+        unGroupe.setMelSiteWeb(addressMail); 
+        
+        
+        /*Dispositif leDispositif = new Dispositif();
+        leDispositif.setId(dispositifID);
+        unGroupe.setDispositifGroupe(leDispositif);*/
+        return unGroupe ;
+    }
 }

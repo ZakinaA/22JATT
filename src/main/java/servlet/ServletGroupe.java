@@ -20,6 +20,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import model.Dispositif;
 import model.Genre;
 import model.Groupe;
@@ -93,7 +94,7 @@ public class ServletGroupe extends HttpServlet {
          // récupération de l url saisie dans le navigateur
         String url = request.getRequestURI();
         
-        System.out.println("servlergroupe url="+url);
+
 
         //Affichage de tous les groupes (en indiquant le libellé du genre musical)
         if(url.equals(getServletContext().getContextPath()+"/ServletGroupe/lister")){
@@ -118,6 +119,19 @@ public class ServletGroupe extends HttpServlet {
             ArrayList<Titre> lesTitres = DaoGroupe.getLesTitresDuGroupe(connection, idGroupe);
             request.setAttribute("pTitreGroupe", lesTitres);
             this.getServletContext().getRequestDispatcher("/view/groupe/consulter.jsp" ).forward( request, response );
+        }
+        
+        if(url.equals(getServletContext().getContextPath()+"/ServletGroupe/modifier")){
+            System.out.println("servlergroupe url0="+url);
+
+            int idGroupe = Integer.parseInt(request.getParameter("idGroupe"));
+            Groupe leGroupe = DaoGroupe.getLeGroupe(connection, idGroupe);
+            request.setAttribute("pGroupe", leGroupe);
+            
+            Membre leMembreContact = DaoGroupe.getLeMembreContact(connection, idGroupe);
+            request.setAttribute("pMembreContact", leMembreContact);                   
+            
+            this.getServletContext().getRequestDispatcher("/view/groupe/modifier.jsp" ).forward( request, response );
         }
 
         if(url.equals(getServletContext().getContextPath()+"/ServletGroupe/ajouter"))
@@ -144,49 +158,69 @@ public class ServletGroupe extends HttpServlet {
             throws ServletException, IOException {
        
         FormGroupe form = new FormGroupe();
+        int formType = Integer.parseInt(request.getParameter("formType"));
 
         /* Appel au traitement et à la validation de la requête, et récupération de l'objet en résultant */
-        Groupe leGroupeSaisi = form.ajouterGroupe(request);
+        System.out.print("id formtype : "+formType);
+        if(formType == 0) {
+            Groupe leGroupeSaisi = form.ajouterGroupe(request);
+        
 
-        /* Stockage du formulaire et de l'objet dans l'objet request */
-        request.setAttribute( "form", form );
-        request.setAttribute( "pGroupe", leGroupeSaisi );
+            /* Stockage du formulaire et de l'objet dans l'objet request */
+            request.setAttribute( "form", form );
+            request.setAttribute( "pGroupe", leGroupeSaisi );
 
-        if (form.getErreurs().isEmpty()){
-            // Il n'y a pas eu d'erreurs de saisie, donc on renvoie la vue affichant les infos du groupe
-            Groupe groupeAjoute = DaoGroupe.ajouterGroupe(connection, leGroupeSaisi);
+            if (form.getErreurs().isEmpty()){
 
-            if (groupeAjoute != null ){
-                request.setAttribute("pGroupe", groupeAjoute);
-                
-                Membre leMembreContact = DaoGroupe.getLeMembreContact(connection, groupeAjoute.getId());
-                request.setAttribute("pMembreContact", leMembreContact);
-                
-                ArrayList<Membre> lesMembres = DaoGroupe.getLesMembresGroupe(connection, groupeAjoute.getId());
-                request.setAttribute("pMembreGroupe", lesMembres);
-            
-                ArrayList<Titre> lesTitres = DaoGroupe.getLesTitresDuGroupe(connection, groupeAjoute.getId());
-                request.setAttribute("pTitreGroupe", lesTitres);
-                
-                this.getServletContext().getRequestDispatcher("/view/groupe/consulter.jsp" ).forward( request, response );
+
+                // Il n'y a pas eu d'erreurs de saisie, donc on renvoie la vue affichant les infos du groupe
+                Groupe groupeAjoute = DaoGroupe.ajouterGroupe(connection, leGroupeSaisi);
+
+                if (groupeAjoute != null ){
+                    request.setAttribute("pGroupe", groupeAjoute);
+
+                    Membre leMembreContact = DaoGroupe.getLeMembreContact(connection, groupeAjoute.getId());
+                    request.setAttribute("pMembreContact", leMembreContact);
+
+                    ArrayList<Membre> lesMembres = DaoGroupe.getLesMembresGroupe(connection, groupeAjoute.getId());
+                    request.setAttribute("pMembreGroupe", lesMembres);
+
+                    ArrayList<Titre> lesTitres = DaoGroupe.getLesTitresDuGroupe(connection, groupeAjoute.getId());
+                    request.setAttribute("pTitreGroupe", lesTitres);
+
+                    this.getServletContext().getRequestDispatcher("/view/groupe/consulter.jsp" ).forward( request, response );
+                }
+                else
+                {
+                    // Cas où l'insertion en bdd a échoué
+                    //On renvoie vers le formulaire
+                    ArrayList<Genre> lesGenres = DaoAdmin.getLesGenres(connection);
+                    request.setAttribute("pLesGenres", lesGenres);
+                    System.out.println("le groupe est null en bdd- echec en bdd");
+                    this.getServletContext().getRequestDispatcher("/view/groupe/ajouter.jsp" ).forward( request, response );
+                }
             }
             else
             {
-                // Cas où l'insertion en bdd a échoué
-                //On renvoie vers le formulaire
+
+                // il y a des erreurs de saisie. On réaffiche le formulaire avec des messages d'erreurs
                 ArrayList<Genre> lesGenres = DaoAdmin.getLesGenres(connection);
                 request.setAttribute("pLesGenres", lesGenres);
-                System.out.println("le groupe est null en bdd- echec en bdd");
                 this.getServletContext().getRequestDispatcher("/view/groupe/ajouter.jsp" ).forward( request, response );
             }
-        }
-        else
-        {
+        } else {
+            Groupe leGroupeSaisi = form.modifierGroupe(request);
+        
 
-            // il y a des erreurs de saisie. On réaffiche le formulaire avec des messages d'erreurs
-            ArrayList<Genre> lesGenres = DaoAdmin.getLesGenres(connection);
-            request.setAttribute("pLesGenres", lesGenres);
-            this.getServletContext().getRequestDispatcher("/view/groupe/ajouter.jsp" ).forward( request, response );
+            /* Stockage du formulaire et de l'objet dans l'objet request */
+            request.setAttribute( "form", form );
+            request.setAttribute( "pGroupe", leGroupeSaisi );
+            int groupeModifie = DaoGroupe.modifierGroupe(connection, leGroupeSaisi);
+            
+            HttpSession session = request.getSession();
+            session.setAttribute("notifMessage", "Le groupe " + leGroupeSaisi.getNom() + " a bien été mis à jour."); // On met un '1' à l'attribut permettant d'afficher les notifications   
+            session.setAttribute("showNotifMessage", 1); // On met un '1' à l'attribut permettant d'afficher les notifications   
+            this.getServletContext().getRequestDispatcher("/view/groupe/modifier.jsp" ).forward( request, response );    
         }
     }
 

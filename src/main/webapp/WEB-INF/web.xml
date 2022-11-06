@@ -57,6 +57,10 @@
         <url-pattern>/ServletGroupe/ajouter</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>ServletGroupe</servlet-name>
+        <url-pattern>/ServletGroupe/modifier</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>ServletMembre</servlet-name>
         <url-pattern>/ServletMembre/consulter</url-pattern>
     </servlet-mapping>
