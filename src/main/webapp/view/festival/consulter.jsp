@@ -58,7 +58,7 @@
          </thead>
          <tbody>
             <%  for (Groupe unGroupe : lesGroupes) {
-                out.print("<tr><td><a href='../ServletMembre/consulter?idMembre="+unGroupe.getId()+"' class='text-decoration-none'>"+unGroupe.getNom()+"</a></td></tr>");
+                out.print("<tr><td><a href='"+getServletContext().getContextPath()+"/ServletGroupe/consulter?idGroupe="+unGroupe.getId()+"' class='text-decoration-none'>"+unGroupe.getNom()+"</a></td></tr>");
                 }
             %>
          </tbody>

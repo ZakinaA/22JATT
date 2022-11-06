@@ -15,6 +15,12 @@
     <%@ include file="../inclus/header.jsp" %>
     <%@ include file="../inclus/menu.jsp" %>
     <div class="container-fluid mb-4" style="width: 85%;bottom: 0;top: 1">
+        <div class="float-end">
+            <a href="<%out.print(getServletContext().getContextPath()); %>/ServletGroupe/ajouter" class="btn mt-2 text-white w-100 btnHover" style="background: #FD841F;text-transform: uppercase; text-align: center">
+                Créer un groupe
+            </a>            
+        </div>
+                            
         <div class="row">
         <%
             for (Groupe unGroupe : lesGroupes) {
@@ -29,7 +35,7 @@
             <div class="card-body">
                 <img src="<% out.print(getServletContext().getContextPath()); %>/libs/images/<% if(unGroupe.getAvatar() != null) { out.print(unGroupe.getAvatar()); } else { out.print("placeholder_default.png"); } %>" class="rounded img-fluid">
                 <h4 class="mt-2">                  
-                    <a href="../ServletGroupe/consulter?idGroupe=<% out.print(unGroupe.getId()); %>" class="text-decoration-none text-dark fw-bold mb-0">
+                    <a href="<%out.print(getServletContext().getContextPath()); %>/ServletGroupe/consulter?idGroupe=<% out.print(unGroupe.getId()); %>" class="text-decoration-none text-dark fw-bold mb-0">
                       <% out.print(unGroupe.getNom()); %>
                     </a>
                 </h4>             

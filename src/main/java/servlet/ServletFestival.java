@@ -146,12 +146,12 @@ public class ServletFestival extends HttpServlet {
             if (festivalAjoute != null ){
                 request.setAttribute("pFestival", festivalAjoute);
             
-                ArrayList<Groupe> lesGroupes = DaoGroupe.getLesGroupes(connection);
+                Festival leFestival = DaoFestival.getLeFestival(connection, festivalAjoute.getId());
+                request.setAttribute("pFestival", leFestival);
+            
+                ArrayList<Groupe> lesGroupes = DaoFestival.getLesGroupesDuFestival(connection, festivalAjoute.getId());
                 request.setAttribute("pGroupes", lesGroupes);
-
-                Participer_Festival uneParticipation = new Participer_Festival();
-                request.setAttribute("pParticiper_Festival", uneParticipation);
-
+            
                 Participer_Festival teteAffiche = DaoParticiper_Festival.getLaTeteAffiche(connection, festivalAjoute.getId());
                 request.setAttribute("pTeteAffiche", teteAffiche);
 

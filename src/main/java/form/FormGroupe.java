@@ -6,6 +6,8 @@ import model.Groupe;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
+import model.Dispositif;
+import model.Membre;
 
 public class FormGroupe {
 
@@ -75,9 +77,9 @@ public class FormGroupe {
         String dateCreation = getDataForm( request, "dateCreation");
         String numTel = getDataForm( request, "numTel");
         String addressMail = getDataForm( request, "mailAddress");
+        String lieuRepetition = getDataForm( request, "lieuRepetition");
         int idGenre = Integer.parseInt(getDataForm( request, "idGenre" ));
-        //int dispositifID = Integer.parseInt(getDataForm( request, "dispositifID" ));
-        
+        int membreContactID = Integer.parseInt(getDataForm( request, "membreContactID" ));
         try {
             validationNom( nom );
         } catch ( Exception e ) {
@@ -113,18 +115,16 @@ public class FormGroupe {
         } else {
             resultat = "Échec de l'ajout.";
         }
-        System.out.println("resultat erreurs="+resultat);
 
         // hydratation de l'objet groupe avec les variables valorisées ci-dessus
-
+        unGroupe.setLieuRepetition(lieuRepetition);
         Genre leGenre = new Genre();
         leGenre.setId(idGenre);
-        unGroupe.setGenre(leGenre);
+        unGroupe.setGenre(leGenre);         
         
-        
-        /*Dispositif leDispositif = new Dispositif();
-        leDispositif.setId(dispositifID);
-        unGroupe.setDispositifGroupe(leDispositif);*/
+        Membre leMembreContact = new Membre();
+        leMembreContact.setId(membreContactID);
+        unGroupe.setMembreContact(leMembreContact);
         return unGroupe ;
     }
     

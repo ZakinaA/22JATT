@@ -1,3 +1,4 @@
+<%@page import="model.Membre"%>
 <%@page import="model.Dispositif"%>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@page import="model.Groupe"%>
@@ -7,6 +8,7 @@
 <%
     String pageName = "Création d'un groupe";
     String pageID = "creerGroupe"; 
+    ArrayList<Membre> lesMembresDisponible = (ArrayList)request.getAttribute("pLesMembres");
 %>
 
     <%@ include file="../inclus/head.jsp" %>
@@ -50,19 +52,35 @@
                       <input type="mail" id="mailAddressInput" name="mailAddress" class="form-control form-control-lg" />
                       <span style="color: blue;">${form.erreurs['addressMail']}</span>
                     </div>
-                  <div class="form-outline mb-4">
-                    <label class="form-label" for="genre">Genre</label> 
-                    <select class="form-select" aria-label="Default select example" name="idGenre">
-                      <%
-                      ArrayList<Genre> lesGenres = (ArrayList)request.getAttribute("pLesGenres");
-                      for (int i=0; i<lesGenres.size();i++){
-                          Genre g = lesGenres.get(i);
-                          out.println("<option value='" + g.getId()+"'>" + g.getLibelle()+"</option>" );
-                      }
-                  %>
-                    </select> 
-                  </div>      
-                    
+                    <div class="form-outline mb-4">
+                      <label class="form-label" for="lieuRepetitionInput">Lieu de répétion</label>
+                      <input type="text" id="lieuRepetitionInput" name="lieuRepetition" class="form-control form-control-lg" />
+                      <span style="color: blue;">${form.erreurs['lieuRepetition']}</span>
+                    </div>
+                    <div class="form-outline mb-4">
+                      <label class="form-label" for="genre">Genre</label> 
+                      <select class="form-select" name="idGenre">
+                        <%
+                        ArrayList<Genre> lesGenres = (ArrayList)request.getAttribute("pLesGenres");
+                        for (int i=0; i<lesGenres.size();i++){
+                            Genre g = lesGenres.get(i);
+                            out.println("<option value='" + g.getId()+"'>" + g.getLibelle()+"</option>" );
+                        }
+                    %>
+                      </select> 
+                    </div>    
+                    <div class="form-outline mb-4">
+                      <label class="form-label" for="selectMembreContact">Membre Contact</label> 
+                      <select class="form-select" id="selectMembreContact" name="membreContactID">
+                        <%                        
+                        for (Membre unMembre : lesMembresDisponible) {  
+                            out.print("<option value='" + unMembre.getId()+"'>" + unMembre.getPrenom()+ " " + unMembre.getNom()+ "</option>" );
+                        }
+                    %>
+                      </select> 
+                    </div>      
+  
+
                        
     
                     <div class="d-flex justify-content-center">

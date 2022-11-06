@@ -7,6 +7,7 @@ package servlet;
 import dao.DaoAdmin;
 import dao.DaoDispositif;
 import dao.DaoGroupe;
+import dao.DaoMembre;
 import dao.Utilitaire;
 import form.FormGroupe;
 import java.io.IOException;
@@ -139,8 +140,12 @@ public class ServletGroupe extends HttpServlet {
             ArrayList<Genre> lesGenres = DaoAdmin.getLesGenres(connection);
             request.setAttribute("pLesGenres", lesGenres);
             
+            ArrayList<Membre> lesMembres = DaoMembre.getLesMembres(connection);
+            request.setAttribute("pLesMembres", lesMembres);
+            
             ArrayList<Dispositif> lesDispositifsForm = DaoDispositif.getLesDispositifs(connection);
-            request.setAttribute("pLesDispositifsForm", lesDispositifsForm);
+            request.setAttribute("pLesDispositifsForm", lesDispositifsForm);            
+
             this.getServletContext().getRequestDispatcher("/view/groupe/ajouter.jsp" ).forward( request, response );
         }
     }
@@ -195,8 +200,8 @@ public class ServletGroupe extends HttpServlet {
                     // Cas où l'insertion en bdd a échoué
                     //On renvoie vers le formulaire
                     ArrayList<Genre> lesGenres = DaoAdmin.getLesGenres(connection);
-                    request.setAttribute("pLesGenres", lesGenres);
-                    System.out.println("le groupe est null en bdd- echec en bdd");
+                    request.setAttribute("pLesGenres", lesGenres);                    
+                    
                     this.getServletContext().getRequestDispatcher("/view/groupe/ajouter.jsp" ).forward( request, response );
                 }
             }

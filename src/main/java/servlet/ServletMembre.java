@@ -96,11 +96,6 @@ public class ServletMembre extends HttpServlet {
         {
             ArrayList<Membre> lesMembres = DaoMembre.getLesMembres(connection);
             request.setAttribute("pLesMembres", lesMembres);
-            /*int idMembre = Integer.parseInt(request.getParameter("idMembre"));  
-            
-            Membre leMembre = DaoMembre.getLeMembre(connection, idMembre);
-
-            request.setAttribute("pMembre", leMembre);*/
             this.getServletContext().getRequestDispatcher("/view/membre/lister.jsp" ).forward( request, response );
         }
         if(url.equals(getServletContext().getContextPath()+"/ServletMembre/consulter"))
