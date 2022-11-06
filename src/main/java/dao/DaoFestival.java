@@ -29,7 +29,6 @@ public class DaoFestival {
         {
             //preparation de la requete
             requete=connection.prepareStatement("select * from festival");
-            System.out.println("Requete" + requete);
 
             //executer la requete
             rs=requete.executeQuery();
@@ -87,7 +86,34 @@ public class DaoFestival {
         }
         return leFestival ;
     }   
+    
+    public static ArrayList<Groupe> getLesGroupesDuFestival(Connection connection, int idFestival) {
+        ArrayList<Groupe> lesGroupes = new  ArrayList<Groupe>();
+        try
+        {                    
+            //preparation de la requete
+            requete=connection.prepareStatement("SELECT groupeID, nom FROM jouer_festival, groupe WHERE groupe.id = groupeID && jouer_festival.festivalID = ?");
+            requete.setInt(1, idFestival);
+            System.out.println("Requete" + requete);
 
+            //executer la requete
+            rs=requete.executeQuery();
+
+            //On hydrate l'objet métier Groupe et sa relation Genre avec les résultats de la requête
+            while ( rs.next() ) {
+                Groupe unGroupe = new Groupe();
+                unGroupe.setId(rs.getInt("groupeID"));
+                unGroupe.setNom(rs.getString("nom"));
+                lesGroupes.add(unGroupe);
+            }
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+            //out.println("Erreur lors de l’établissement de la connexion");
+        }
+        return lesGroupes ;
+    }
 
     public static Festival ajouterFestival(Connection connection, Festival unFestival){
         int idGenere = -1;
@@ -110,9 +136,18 @@ public class DaoFestival {
 
             // Récupération de id auto-généré par la bdd dans la table groupe
             rs = requete.getGeneratedKeys();
-            while ( rs.next() ) {
+            if ( rs.next() ) {
                 idGenere = rs.getInt( 1 );
                 unFestival.setId(idGenere);
+                
+                requete=connection.prepareStatement("INSERT INTO jouer_festival ( groupeID, festivalID, datePassage, teteAffiche)\n" +
+                            "VALUES (?,?,?,?)", requete.RETURN_GENERATED_KEYS );
+                requete.setInt(1, unFestival.getTeteAffiche().getId());
+                requete.setInt(2, idGenere);
+                requete.setString(3, unFestival.getTeteAfficheDate());
+                requete.setInt(4, 1);            
+                int resultatRequeteTeteAffiche = requete.executeUpdate();
+                System.out.println("resultatrequete=" + resultatRequeteTeteAffiche);
             }
 
             // si le résultat de la requete est différent de 1, c'est que la requête a échoué.

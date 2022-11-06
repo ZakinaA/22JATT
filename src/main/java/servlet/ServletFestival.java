@@ -99,14 +99,8 @@ public class ServletFestival extends HttpServlet {
             Festival leFestival = DaoFestival.getLeFestival(connection, idFestival);
             request.setAttribute("pFestival", leFestival);
             
-            ArrayList<Groupe> lesGroupes = DaoGroupe.getLesGroupes(connection);
+            ArrayList<Groupe> lesGroupes = DaoFestival.getLesGroupesDuFestival(connection, idFestival);
             request.setAttribute("pGroupes", lesGroupes);
-            
-            Participer_Festival uneParticipation = new Participer_Festival();
-            request.setAttribute("pParticiper_Festival", uneParticipation);
-            
-            /*Festival teteAffiche = DaoFestival.getLaTeteAffiche(connection, idFestival);
-            request.setAttribute("pTeteAffiche", teteAffiche);*/
             
             Participer_Festival teteAffiche = DaoParticiper_Festival.getLaTeteAffiche(connection, idFestival);
             request.setAttribute("pTeteAffiche", teteAffiche);
@@ -138,15 +132,15 @@ public class ServletFestival extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         FormFestival form = new FormFestival();
+
         
         Festival leFestivalSaisi = form.ajouterFestival(request);
         
         request.setAttribute( "form", form );
         request.setAttribute( "pFestival", leFestivalSaisi );
         
-        if (form.getErreurs().equals("null")){
+        if (form.getErreurs().isEmpty()){
             Festival festivalAjoute = DaoFestival.ajouterFestival(connection, leFestivalSaisi);
             
             if (festivalAjoute != null ){

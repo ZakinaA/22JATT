@@ -13,6 +13,10 @@ public class Festival {
     private String nom;
     private String dateDebutFestival;
     private String dateFinFestival;
+    private Groupe teteAffiche;
+    private String teteAfficheDate;
+
+
 
     public Festival() {
     }
@@ -48,6 +52,24 @@ public class Festival {
     public void setDateFinFestival(String dateFinFestival) {
         this.dateFinFestival = dateFinFestival;
     }
+    
+    public Groupe getTeteAffiche() {
+        return teteAffiche;
+    }
+
+    public void setTeteAffiche(Groupe teteAffiche) {
+        this.teteAffiche = teteAffiche;
+    }
+    
+    
+    public String getTeteAfficheDate() {
+        return teteAfficheDate;
+    }
+
+    public void setTeteAfficheDate(String teteAfficheDate) {
+        this.teteAfficheDate = teteAfficheDate;
+    }
+
 
     
 }

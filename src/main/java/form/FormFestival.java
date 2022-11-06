@@ -9,27 +9,16 @@ import model.Groupe;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
-import model.Participer_Festival;
 /**
  *
  * @author sio2
  */
+
+
 public class FormFestival {
 
-    public Object getErreurs() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    public Festival ajouterFestival(HttpServletRequest request) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-
-
-public class FormGroupe {
-
     private String resultat;
-    private Map<String, String> erreurs      = new HashMap<String, String>();
+    private Map<String, String> erreurs = new HashMap<String, String>(); 
 
     public String getResultat() {
         return resultat;
@@ -86,10 +75,11 @@ public class FormGroupe {
         //récupération dans des variables des données saisies dans les champs de formulaire
         String nom = getDataForm( request, "nom" );
         String dateDebut = getDataForm( request, "dateDebut");
-        String dateFin = getDataForm( request, "dateFin");
-        int idGroupe = Integer.parseInt(getDataForm( request, "idGroupe" ));
+        String dateFin = getDataForm( request, "dateFin");        
         int teteAfficheID = Integer.parseInt(getDataForm( request, "teteAfficheID" ));
-        //int dispositifID = Integer.parseInt(getDataForm( request, "dispositifID" ));
+        String dateTeteAffiche = getDataForm( request, "dateTeteAffiche");
+
+        
         
         try {
             validationNom( nom );
@@ -110,30 +100,26 @@ public class FormGroupe {
         } catch ( Exception e ) {
             setErreur( "dateFin", e.getMessage() );
         }
-        unFestival.setDateFinFestival(dateFin);
+        unFestival.setDateFinFestival(dateFin);   
+        
+        unFestival.setTeteAfficheDate(dateTeteAffiche);
 
         if ( erreurs.isEmpty() ) {
             resultat = "Succès de l'ajout.";
         } else {
             resultat = "Échec de l'ajout.";
         }
-        System.out.println("resultat erreurs="+resultat);
 
         // hydratation de l'objet groupe avec les variables valorisées ci-dessus
 
         Groupe leGroupe = new Groupe();
-        leGroupe.setId(idGroupe);
-        Participer_Festival uneParticipation = new Participer_Festival();
-        uneParticipation.setTeteAffiche(leGroupe.getNom());
+        leGroupe.setId(teteAfficheID);
         
         
+        unFestival.setTeteAffiche(leGroupe);
         
-        uneParticipation.setUnFestival(unFestival);
-        teteAfficheID = uneParticipation.getUnFestival().getId();
-        if(teteAfficheID == -1) {
-            String groupeAjout = getDataForm(request, "groupeAjout");
-            uneParticipation.setTeteAffiche(groupeAjout);
-        }
+        
+
         //uneParticipation.setTeteAffiche(teteAffiche);
         
         /*Dispositif leDispositif = new Dispositif();
@@ -141,6 +127,5 @@ public class FormGroupe {
         unGroupe.setDispositifGroupe(leDispositif);*/
         return unFestival ;
     }
-    }
-
 }
+

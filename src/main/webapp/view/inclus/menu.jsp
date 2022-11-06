@@ -38,8 +38,9 @@
                     Accès organisation (<% out.print(NormanzikNomCompte); %>)
                   </button>
                   <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a href="<% out.print(getServletContext().getContextPath()); %>/ServletFestival/ajouter" class="dropdown-item">Créer un festival</a></li>
                     <!--<li><button class="dropdown-item" type="button">Management des concerts</button></li>
-                    <li><button class="dropdown-item" type="button">Management des festivales</button></li>
+                    
                     <li><button class="dropdown-item" type="button">Management des groupes</button></li>
                     <li><hr class="dropdown-divider"></li>-->
                     <li><a href="<% out.print(getServletContext().getContextPath()); %>/ServletMembre/consulter?idMembre=<% out.print(NormanzikAuthID); %>" class="dropdown-item">Mon profil</a></li>

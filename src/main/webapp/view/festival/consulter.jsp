@@ -24,8 +24,8 @@
 <%@ include file="../inclus/header.jsp" %>
 <%@ include file="../inclus/menu.jsp" %>
 <div class="container-fluid" style="width: 85%;bottom: 0;top: 1">
-        <div class="card card-body border-0 shadow-sm py-5 mt-4">
-            <h1 class="mb-0" style="margin-left: 3%;"><% out.println(unFestival.getNom());%></h1>
+        <div class="card card-body border-0 shadow-sm py-5 mt-4" style="background-color: #FD841F;">
+            <h1 class="mb-0" style="margin-left: 3%;"><% out.print(unFestival.getNom());%></h1>
         </div>
         <div class="card mt-4">
             <table class="table table-striped mb-0">
@@ -42,22 +42,36 @@
                 </tbody>
             </table>
         </div>
-        
-          <h4 class="mt-4"> Les Groupes</h4>
-        <table class="table table-striped">
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <div class="card card-body shadow-sm mb-3 border-0 fw-bold"  style="background-color: #FD841F;">
+                    <h4 class="mb-0 fw-bold">Les Groupes</h4>       
+                </div>
+            </div>
+            <div class="col-md-8">
+            </div>                  
+        </div> 
+
+        <table class="table table-striped bg-light">
              <thead class="bg-light">
              <th>Nom des groupes</th>
          </thead>
          <tbody>
             <%  for (Groupe unGroupe : lesGroupes) {
-                out.println("<tr><td><a href='../ServletMembre/consulter?idMembre="+unGroupe.getId()+"'>");
-                out.println(unGroupe.getNom());
-                out.println("</a></td></tr>");     
+                out.print("<tr><td><a href='../ServletMembre/consulter?idMembre="+unGroupe.getId()+"' class='text-decoration-none'>"+unGroupe.getNom()+"</a></td></tr>");
                 }
             %>
          </tbody>
         </table>   
-         <h4 class="mt-4"> Concerts</h4>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card card-body shadow-sm mb-3 border-0 fw-bold"  style="background-color: #FD841F;">
+                    <h4 class="mb-0 fw-bold">Concerts</h4>       
+                </div>
+            </div>
+            <div class="col-md-8">
+            </div>                  
+        </div> 
         <table class="table table-striped">
              <thead class="bg-light">
              <th>Heure du concert</th>

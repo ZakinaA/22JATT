@@ -6,12 +6,11 @@ import model.Groupe;
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
-import model.Dispositif;
 
 public class FormGroupe {
 
     private String resultat;
-    private Map<String, String> erreurs      = new HashMap<String, String>();
+    private Map<String, String> erreurs = new HashMap<String, String>(); 
 
     public String getResultat() {
         return resultat;

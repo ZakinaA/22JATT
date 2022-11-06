@@ -41,28 +41,11 @@
         <div class="col-md-3">
           <div class="card mt-4 testCard">
             <div class="card-body">
-                <img src="https://raw.githubusercontent.com/ZakinaA/22JATT/c5777d15cccd206839c4e50a09539670f7c48441/placeholder_default.png" class="rounded img-fluid">
                 <h4 class="mt-2">                  
                     <a href="" class="text-decoration-none text-dark fw-bold mb-0">
-                <% out.println(unGroupe.getNom()); %>
+                <% out.print(unGroupe.getNom()); %>
                     </a>
-                </h4>             
-                <div class="card bg-light mt-4 mb-2 shadow-none">
-                  <table class="table table-borderless mb-0 ">
-                    <tbody>
-                      <tr class="mb-0 align-middle">
-                        <td class="align-middle fw-bold" style="width: 60%">
-                         Identifiant 
-                        </td>
-                        <td class="align-middle fw-bold float-end text-end">
-                          <h6 class="mb-0">
-                              <% out.println(unGroupe.getId()); %>
-                          </h4>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
+                </h4>           
                 <div class="card bg-light mt-4 mb-2 shadow-none">
                   <table class="table table-borderless mb-0 ">
                     <tbody>
@@ -101,7 +84,11 @@
             </div>
         </div>  
              
-     <% cardOrder++; } %>
+     <% cardOrder++; }
+        if(cardOrder == 0) {
+            out.print("<div class='alert alert-primary mt-4' role='alert'>Aucun groupe n'est dans ce dispositif</div>");
+        }     
+     %>
            
         </div>
     </div>
