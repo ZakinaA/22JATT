@@ -9,7 +9,7 @@
 <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <footer class="text-center text-white bottom-0" style="background-color: #FD841F;">
     <div class="text-center p-3">
-        Copyright © Norman'Zik 2022 - <a href="" class="text-white">Mentions Légales et contact</a>
+        Copyright © Norman'Zik 2022 - <a href="<% out.print(getServletContext().getContextPath()); %>/RGPD/politique-confidentialite" class="text-white">Politique de protection des données</a>
     </div>
 </footer>
 <%

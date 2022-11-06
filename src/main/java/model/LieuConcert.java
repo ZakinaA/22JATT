@@ -15,7 +15,7 @@ public class LieuConcert {
     private int id;
     private String nom;
     private String ville;
-    private int cp;
+    private String cp;
     private String salleNom;
     private ArrayList<Concert> lieuConcertId;
     public LieuConcert() {
@@ -23,7 +23,7 @@ public class LieuConcert {
 
     
     
-    public LieuConcert(int id, String nom, String ville, int cp, String salleNom, ArrayList<Concert> lieuConcertId) {
+    public LieuConcert(int id, String nom, String ville, String cp, String salleNom, ArrayList<Concert> lieuConcertId) {
         this.id = id;
         this.nom = nom;
         this.ville = ville;
@@ -57,11 +57,11 @@ public class LieuConcert {
         this.ville = ville;
     }
 
-    public int getCp() {
+    public String getCp() {
         return cp;
     }
 
-    public void setCp(int cp) {
+    public void setCp(String cp) {
         this.cp = cp;
     }
 

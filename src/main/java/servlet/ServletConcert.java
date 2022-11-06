@@ -7,6 +7,7 @@ package servlet;
 import dao.DaoConcert;
 import dao.DaoGroupe;
 import dao.DaoLieuConcert;
+import form.FormConcert;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -15,14 +16,12 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import model.Concert;
 import model.Groupe;
 import model.LieuConcert;
-
 /**
  *
  * @author sio2
@@ -89,9 +88,6 @@ public class ServletConcert extends HttpServlet {
         
         
          String url = request.getRequestURI();
-        
-        System.out.println("servletconcert url="+url);
-
         //Affichage de tous les groupes (en indiquant le libellé du genre musical)
         if(url.equals(getServletContext().getContextPath()+"/ServletConcert/lister")){
             
@@ -130,7 +126,23 @@ public class ServletConcert extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+            FormConcert form = new FormConcert();
+            Concert leConcertSaisi = form.ajouterConcert(request);
+                        
+            request.setAttribute( "form", form );
+            request.setAttribute( "pConcert", leConcertSaisi );
+            
+
+            
+            if (form.getErreurs().isEmpty()){
+                System.out.println("no error ");
+                int concertInsere = (int) DaoConcert.ajouterConcert(connection, leConcertSaisi);
+                
+
+                ArrayList<Concert> lesConcert = DaoConcert.getLesConcerts(connection);
+                request.setAttribute("pLesConcert", lesConcert);
+                this.getServletContext().getRequestDispatcher("/view/concert/lister.jsp" ).forward( request, response );        
+            }
     }
 
     /**

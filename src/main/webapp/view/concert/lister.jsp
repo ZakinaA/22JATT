@@ -8,15 +8,26 @@
     String pageName = "Liste des Concerts";
     String pageID = "listesConcerts"; 
     ArrayList<Concert> lesConcerts = (ArrayList)request.getAttribute("pLesConcert");    
-    DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd/MM/yyyy");          
+    DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd/MM/yyyy");    
+
+
     %>
     <%@ include file="../inclus/head.jsp" %>
     <%@ include file="../inclus/header.jsp" %>
     <%@ include file="../inclus/menu.jsp" %>
     <div class="container-fluid" style="width: 85%;bottom: 0;top: 1">
-        <a class="btn btn-primary" href="<%out.print(getServletContext().getContextPath());%>/ServletConcert/ajouter">Ajouter un concert </a>
-   
-        <div class="card mt-4 shadow-sm mb-0"> 
+        <% 
+
+        if (NormanzikAuthID != null  && NormanzikAuthID != 0) {
+            if(NormanzikGradeID == 2) {
+        %>
+        <div class="mt-4">
+            <a class="btn float-end" style="background: #FD841F;text-transform: uppercase; text-align: center" href="<%out.print(getServletContext().getContextPath());%>/ServletConcert/ajouter">Ajouter un concert </a>
+        </div>
+        <div style="clear:both;"></div>
+        <% }} %>
+        
+        <div class="card shadow-sm mb-0 mt-2"> 
             <table class="table table-striped mb-0">
                 <thead>
                     <tr>
@@ -47,6 +58,7 @@
             </table>
         </div>
     </div>    
+<%@ include file="../inclus/footer.jsp" %>                
         
         
             

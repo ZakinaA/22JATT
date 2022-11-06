@@ -37,10 +37,11 @@ public class DaoLieuConcert {
             //On hydrate l'objet métier Groupe et sa relation Genre avec les résultats de la requête
             while ( rs.next() ) {
                 LieuConcert leLieuConcert = new LieuConcert();
-                leLieuConcert.setNom(rs.getString("lieuconcert.nom"));
-                leLieuConcert.setVille(rs.getString("lieuconcert.ville"));
-               leLieuConcert.setSalleNom(rs.getString("lieuconcert.salleNom"));
-               leLieuConcert.setCp(rs.getInt("lieuconcert.codePostal"));
+                leLieuConcert.setId(rs.getInt("id"));
+                leLieuConcert.setNom(rs.getString("nom"));
+                leLieuConcert.setVille(rs.getString("ville"));
+                leLieuConcert.setSalleNom(rs.getString("salleNom"));
+                leLieuConcert.setCp(rs.getString("codePostal"));
   
                 lesLieuConcerts.add(leLieuConcert);
 
@@ -59,6 +60,7 @@ public class DaoLieuConcert {
         int idGenere = -1;
         try
             {
+                System.out.print("Nom de la salle : " + unLieuConcert.getSalleNom());
             //preparation de la requete
             // gpe_id (clé primaire de la table groupe) est en auto_increment,donc on ne renseigne pas cette valeur
             // le paramètre RETURN_GENERATED_KEYS est ajouté à la requête afin de pouvoir récupérer l'id généré par la bdd (voir ci-dessous)
@@ -68,13 +70,10 @@ public class DaoLieuConcert {
             requete.setString(1, unLieuConcert.getNom());
             requete.setString(2, unLieuConcert.getVille());
             requete.setString(3, unLieuConcert.getSalleNom());
-            requete.setInt(4, unLieuConcert.getCp());
+            requete.setString(4, unLieuConcert.getCp());
 
-            System.out.println("requeteInsertion=" + requete);
             /* Exécution de la requête */
             int resultatRequete = requete.executeUpdate();
-            System.out.println("resultatrequete=" + resultatRequete);
-
             // Récupération de id auto-généré par la bdd dans la table groupe
             rs = requete.getGeneratedKeys();
             if ( rs.next() ) {

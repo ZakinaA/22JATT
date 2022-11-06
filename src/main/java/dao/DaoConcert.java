@@ -31,7 +31,6 @@ public class DaoConcert {
         {
             //preparation de la requete
             requete=connection.prepareStatement("select * from jouer_concert,lieuconcert,groupe WHERE jouer_concert.lieuConcertID=lieuconcert.id AND jouer_concert.groupeID = groupe.id");
-            System.out.println("Requete" + requete);
 
             //executer la requete
             rs=requete.executeQuery();
@@ -48,25 +47,16 @@ public class DaoConcert {
                 lieuConcertId.setId(rs.getInt("lieuconcert.id"));
                 lieuConcertId.setNom(rs.getString("lieuconcert.nom"));
                 lieuConcertId.setVille(rs.getString("lieuconcert.ville"));
-                lieuConcertId.setCp(rs.getInt("lieuconcert.codePostal"));
-                lieuConcertId.setSalleNom(rs.getString("lieuconcert.salleNom"));
-                
+                lieuConcertId.setCp(rs.getString("lieuconcert.codePostal"));
+                lieuConcertId.setSalleNom(rs.getString("lieuconcert.salleNom"));               
                 
                 Groupe GroupeConcertId = new Groupe();
-                GroupeConcertId.setNom(rs.getString("groupe.nom"));
-                
-
+                GroupeConcertId.setNom(rs.getString("groupe.nom"));        
                 
                 leConcert.setLieuConcertId(lieuConcertId);
                 leConcert.setGroupeConcertId(GroupeConcertId);
                 lesConcerts.add(leConcert);
-
-
-            }
-            
-          
-              
-                            
+            } 
         }
         catch (SQLException e)
         {
@@ -74,5 +64,45 @@ public class DaoConcert {
             //out.println("Erreur lors de l’établissement de la connexion");
         }
         return lesConcerts;
+    }
+    
+    public static int ajouterConcert(Connection connection, Concert unConcert){
+        int idGenere = -1;
+
+        try
+            {
+            
+                requete=connection.prepareStatement("INSERT INTO jouer_concert (groupeID, lieuConcertID, dateConcert, heureDebut, heureFin)\n" +
+                        "VALUES (?,?, ?, ?, ?)", requete.RETURN_GENERATED_KEYS );
+                requete.setInt(1, unConcert.getGroupeConcertId().getId());    
+                requete.setInt(2, unConcert.getLieuConcertId().getId());
+                requete.setString(3, unConcert.getDateConcert());       
+                requete.setString(4, unConcert.getHeureDebut());    
+                requete.setString(5, unConcert.getHeureFin());  
+                
+                System.out.println(unConcert.getLieuConcertId().getId()+ " " + unConcert.getLieuConcertId().getId() + " " + unConcert.getDateConcert());
+          
+                /* Exécution de la requête */
+                int resultatRequete = requete.executeUpdate();
+
+                // Récupération de id auto-généré par la bdd dans la table groupe
+                rs = requete.getGeneratedKeys();
+                if ( rs.next() ) {
+                    idGenere = rs.getInt( 1 );
+                }
+
+                // si le résultat de la requete est différent de 1, c'est que la requête a échoué.
+                // Dans ce cas, on remet l'objet groupe à null
+                if (resultatRequete != 1){
+                    idGenere= 0;
+                }
+            }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+            //out.println("Erreur lors de l’établissement de la connexion");
+            idGenere= 0;
+        }
+        return idGenere ;
     }
 }

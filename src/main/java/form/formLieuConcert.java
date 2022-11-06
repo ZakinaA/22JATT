@@ -82,7 +82,7 @@ public class formLieuConcert {
         String Nom = getDataForm( request, "Nom" );
         String Ville = getDataForm( request, "Ville");
         String Cp = getDataForm( request, "Cp");
-        String Salle = getDataForm( request, "Salle");
+        String Salle = getDataForm( request, "salle");
         try {
             validationNom( Nom );
         } catch ( Exception e ) {
@@ -107,15 +107,17 @@ public class formLieuConcert {
         } catch ( Exception e ) {
             setErreur( "Salle", e.getMessage() );
         }
-        unLieuConcert.setVille(Ville);
+
         
         if ( erreurs.isEmpty() ) {
             resultat = "Succès de l'ajout.";
         } else {
             resultat = "Échec de l'ajout.";
         }
-        System.out.println("resultat erreurs="+resultat);
 
+        unLieuConcert.setVille(Ville);
+        unLieuConcert.setSalleNom(Salle);
+        unLieuConcert.setCp(Cp);
         // hydratation de l'objet groupe avec les variables valorisées ci-dessus
 
 

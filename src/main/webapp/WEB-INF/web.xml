@@ -17,6 +17,10 @@
         <servlet-class>servlet.ServletIndex</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>ServletRGPD</servlet-name>
+        <servlet-class>servlet.ServletRGPD</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>ServletAdmin</servlet-name>
         <servlet-class>servlet.ServletAdmin</servlet-class>
     </servlet>
@@ -111,6 +115,10 @@
     <servlet-mapping>
         <servlet-name>ServletLieuConcert</servlet-name>
         <url-pattern>/ServletLieuConcert/ajouter</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ServletRGPD</servlet-name>
+        <url-pattern>/RGPD/politique-confidentialite</url-pattern>
     </servlet-mapping>
     <session-config>        
         <session-timeout>

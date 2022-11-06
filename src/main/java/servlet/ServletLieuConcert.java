@@ -4,16 +4,25 @@
  */
 package servlet;
 
+import dao.DaoConcert;
+import dao.DaoGroupe;
 import dao.DaoLieuConcert;
 import dao.Utilitaire;
 import form.formLieuConcert;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.Concert;
+import model.Groupe;
 import model.LieuConcert;
 import static test.ConnexionBdd.connection;
 
@@ -23,6 +32,18 @@ import static test.ConnexionBdd.connection;
  */
 @WebServlet(name = "ServletLieuConcert", urlPatterns = {"/ServletLieuConcert"})
 public class ServletLieuConcert extends HttpServlet {
+    
+    Connection connection ;
+    static PreparedStatement requete=null;
+    static ResultSet rs=null;
+    
+    @Override
+    public void init()
+    {
+        
+        ServletContext servletContext=getServletContext();
+        connection=(Connection)servletContext.getAttribute("connection");        
+    }
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -64,13 +85,10 @@ public class ServletLieuConcert extends HttpServlet {
             throws ServletException, IOException {
       
         
-         String url = request.getRequestURI();
-        
-        System.out.println("servletlieuconcert url="+url);
+        String url = request.getRequestURI(); 
 
         //Affichage de tous les groupes (en indiquant le libellé du genre musical)
-        if(url.equals(getServletContext().getContextPath()+"/ServletLieuConcert/ajouter")){
-            
+        if(url.equals(getServletContext().getContextPath()+"/ServletLieuConcert/ajouter")){            
             this.getServletContext().getRequestDispatcher("/view/lieuconcert/ajouter.jsp" ).forward( request, response );
         }
     }
@@ -88,8 +106,8 @@ public class ServletLieuConcert extends HttpServlet {
             throws ServletException, IOException {
             formLieuConcert form = new formLieuConcert();
         
-         LieuConcert leLieuConcertSaisi = form.ajouterLieuConcert(request);
-         request.setAttribute( "form", form );
+        LieuConcert leLieuConcertSaisi = form.ajouterLieuConcert(request);
+        request.setAttribute( "form", form );
         request.setAttribute( "pLieuConcert", leLieuConcertSaisi );
         
         if (form.getErreurs().isEmpty()){
@@ -98,13 +116,20 @@ public class ServletLieuConcert extends HttpServlet {
             LieuConcert lieuConcertAjoute = DaoLieuConcert.ajouterLieuConcert(connection, leLieuConcertSaisi);
 
             if (lieuConcertAjoute != null ){
-                request.setAttribute("pLieuConcert", lieuConcertAjoute);
-                this.getServletContext().getRequestDispatcher("/view/concert/lister.jsp" ).forward( request, response );
+                ArrayList<Concert> lesConcert = DaoConcert.getLesConcerts(connection);
+                request.setAttribute("pLesConcerts", lesConcert);
+
+                ArrayList<Groupe> lesGroupes = DaoGroupe.getLesGroupes(connection);
+                request.setAttribute("pLesGroupes", lesGroupes);
+
+                ArrayList<LieuConcert> lesLieuConcerts = DaoLieuConcert.getLesLieuConcerts(connection);
+                request.setAttribute("pLesLieuConcerts", lesLieuConcerts);
+                this.getServletContext().getRequestDispatcher("/view/concert/ajouter.jsp" ).forward( request, response );
             } 
-             else
+            else
             {
                 
-                this.getServletContext().getRequestDispatcher("/view/concert/lister.jsp" ).forward( request, response );
+                this.getServletContext().getRequestDispatcher("/view/lieuconcert/ajouter.jsp").forward( request, response );
             }
     }
    }

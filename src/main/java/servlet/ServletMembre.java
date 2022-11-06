@@ -5,11 +5,9 @@
 package servlet;
 
 import dao.DaoAdmin;
-import dao.DaoGroupe;
 import dao.DaoInstrument;
 import dao.DaoMembre;
 import dao.Utilitaire;
-import form.FormGroupe;
 import form.FormMembre;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -93,9 +91,6 @@ public class ServletMembre extends HttpServlet {
         
          // récupération de l url saisie dans le navigateur
         String url = request.getRequestURI();
-        
-        System.out.println("servlermembre url="+url);
-
         
         if(url.equals(getServletContext().getContextPath()+"/ServletMembre/lister"))
         {
@@ -220,10 +215,8 @@ public class ServletMembre extends HttpServlet {
                 }
                 
                 session.setAttribute("showNotifMessage", 1); // On met un '1' à l'attribut permettant d'afficher les notifications   
-                this.getServletContext().getRequestDispatcher("/view/membre/modifier.jsp" ).forward( request, response );
-            
+                this.getServletContext().getRequestDispatcher("/view/membre/modifier.jsp" ).forward( request, response );            
             }
-            System.out.println("lui");
         } else {
             Membre leMembreSaisi = form.ajouterMembre(request);
 

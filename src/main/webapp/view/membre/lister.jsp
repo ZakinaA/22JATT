@@ -23,7 +23,7 @@
                             <td class="align-middle"><% out.print(firstName); %> <% out.print(unMembre.getPrenom()); %></td>
                             <td class="align-middle"><% out.print(unMembre.getStatutMembre().getLibelleStatut()); %></td>
                             <td class="align-middle text-end">
-                                <a class="btn text-white btnHover rounded-pill btn-sm" href="<% out.print(getServletContext().getContextPath()); %>/ServletMembre/consulter?idMembre=<% out.print(unMembre.getId()); %>" style="background: #FD841F;text-transform: uppercase; text-align: center">VOIR LE PROFIL</a>
+                                <a class="btn text-white btnHover rounded-pill btn-sm border-0" href="<% out.print(getServletContext().getContextPath()); %>/ServletMembre/consulter?idMembre=<% out.print(unMembre.getId()); %>" style="background: #FD841F;text-transform: uppercase; text-align: center">VOIR LE PROFIL</a>
                                 <% 
                                 if (NormanzikAuthID != null  && NormanzikAuthID != 0) { 
                                     if(NormanzikGradeID == 2) {

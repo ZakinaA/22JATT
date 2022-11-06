@@ -25,6 +25,7 @@
                         <tr>
                             <th scope="col">Nom</th>
                             <th scope="col">Annee</th>
+                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>   
@@ -34,8 +35,11 @@
                                 String stringDateDispositif = dateDispositif.format(myFormatObj);  
                         %>
                         <tr>
-                            <td><% out.print("<a href='"+getServletContext().getContextPath()+"/ServletDispositif/lister-groupe?idDispositif="+unDispositif.getId()+"' class='text-decoration-none'>");%><% out.println(unDispositif.getLibelle()); %></td>
-                            <td><% out.print(stringDateDispositif); %></td>
+                            <td class="align-middle"><% out.print(unDispositif.getLibelle()); %></td>
+                            <td class="align-middle"><% out.print(stringDateDispositif); %></td>
+                            <td class="align-middle" style="width: 10%"> 
+                                <a class="btn text-white btnHover rounded-pill btn-sm float-end border-0" href="<% out.print(getServletContext().getContextPath()); %>/ServletDispositif/lister-groupe?idDispositif=<% out.print(unDispositif.getId()); %>" style="background: #FD841F;text-transform: uppercase; text-align: center">VOIR LE PROFIL</a>
+                            </td>
                         </tr>
                         <% }%>
                     </tbody>  
