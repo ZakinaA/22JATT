@@ -4,8 +4,8 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <title>Norman'Zik <% if(pageName != "") { out.println(": "+pageName); } %></title>
-      <link href="http://185.163.126.183/2JATT/libs/css/NormanZikStyle.css" rel="stylesheet">
-      <link href="http://185.163.126.183/2JATT/libs/css/bootstrap.css" rel="stylesheet">
+      <link href="https://simmanagementsystem.com/libs/2JATT/libs/css/NormanZikStyle.css" rel="stylesheet">
+      <link href="https://simmanagementsystem.com/libs/2JATT/libs/css/bootstrap.css" rel="stylesheet">
       <link rel="preconnect" href="https://fonts.googleapis.com">
       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
